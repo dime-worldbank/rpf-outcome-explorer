@@ -1,0 +1,149 @@
+// src/custom.scss
+
+// 1. Import Bootstrap's functions (required for some variables/mixins)
+@import "~bootstrap/scss/functions";
+
+// 2. Override Bootstrap's default variables
+// You can find a full list of variables in node_modules/bootstrap/scss/_variables.scss
+// Copy the variables you want to change here and set their new values.
+
+// Primary color (used for buttons, links, active states, etc.)
+// $primary: #4C9FD2; // A custom purple
+// $secondary: #C9E7F8;
+// $success: #C9E7F8;
+// $info: #17a2b8;
+// $warning: #ffc107;
+// $danger: #dc3545;
+// $light: #C9E7F8;
+// $dark: #343a40;
+
+// // You can also adjust grayscale colors
+// $gray-100: #f8f9fa;
+// $gray-200: #e9ecef;
+// // ...and so on up to $gray-900
+
+// // Body background and text color
+// $body-bg: #f5f5f5;
+// $body-color: #333;
+
+// // Link colors
+// $link-color: $primary;
+// $link-hover-color: darken($link-color, 15%); // Example: darken on hover
+
+// You can override countless other variables like:
+// $font-family-base: 'Roboto', sans-serif;
+// $border-radius: .5rem;
+// $enable-shadows: true;
+// $enable-gradients: true;
+
+
+// 3. Import the rest of Bootstrap's SCSS
+// Your overrides will take precedence because of the !default flag in Bootstrap's variables
+@import "~bootstrap/scss/bootstrap";
+
+// 4. Add any custom CSS classes or styles below this import
+// .my-custom-button {
+//   background-color: blue;
+//   color: white;
+// }
+
+// html, body {
+//     margin: 0;
+//     padding: 0;
+//     overflow: hidden; /* Prevent scrolling */
+//     height: 100%;
+// }
+
+.dropdown-menu {
+    width: 100%;
+}
+
+.highlighted {
+    text {
+        fill: black;
+        color: #fff;
+        text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #fff,
+        0 0 82px #fff,
+        0 0 92px #fff,
+        0 0 102px #fff,
+        0 0 151px #fff;
+    }
+}
+
+.page-wrapper {
+    height: calc(100vh - 70px);
+}
+$outcome: #306844; // dark green
+$result: #8B8000; //dark yellow
+$capability: #00008B;
+$bottleneck-color: #4d9fd2;
+$bottleneck-text-color: #00008B;
+$role-color: #f74b65;
+$role-text-color: #950606;
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "role": $role-color,
+    "bottleneck": $bottleneck-color,
+  )
+);
+
+.card-outcome {
+  color: $outcome !important;
+}
+
+.card-result {
+  color: $result !important;
+}
+
+.card-capability {
+  color: $capability !important;
+}
+
+.header-custom {
+  background-color: $bottleneck-color;
+}
+
+.container-role {
+  color: $role-text-color !important;
+  p {
+    color: $role-text-color !important;
+  }
+  button {
+    color: $role-text-color !important;
+  }
+}
+
+.container-bottleneck {
+  color: $bottleneck-color !important;
+  p {
+    color: $bottleneck-text-color !important;
+  }
+  button {
+    color: $bottleneck-text-color !important;
+  }
+}
+// Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap";
+
+
+.evidence-button {
+
+  background-color: white;
+  border: none;
+  padding: 5px;
+  z-index: 10;
+  &.bottleneck:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 5px 8px $bottleneck-color;
+  }
+  &.role:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 5px 8px $role-color;
+  }
+}

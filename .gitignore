@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+
+# Build output
+build/
+frontend/build/
+backend/build/
+backend/data
+
+# Dependency directories
+frontend/node_modules/
+
+# Python cache and environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+venv/
+.env
+
+# VS Code settings
+.vscode/
+
+# MacOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# Excel temp files
+~$*.xlsx
+
+# rsconnect-python
+backend/rsconnect-python/
+
+# Misc
+*.swp
+*.swo

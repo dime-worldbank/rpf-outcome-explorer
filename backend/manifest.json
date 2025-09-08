@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "locale": "en_US.UTF-8",
+  "metadata": {
+    "appmode": "python-api",
+    "entrypoint": "run:app"
+  },
+  "python": {
+    "version": "3.11.7",
+    "package_manager": {
+      "name": "pip",
+      "version": "23.3.1",
+      "package_file": "requirements.txt"
+    }
+  },
+  "files": {
+    "requirements.txt": {
+      "checksum": "1a5fdf8fe23d80942262bfd4b3fe31ec"
+    },
+    "api/__init__.py": {
+      "checksum": "b2bfa56be72f86303639e3f07459fbdb"
+    },
+    "api/routes.py": {
+      "checksum": "a78954312fdb7e938947d7cff43b5d21"
+    },
+    "build/asset-manifest.json": {
+      "checksum": "d78959aa61ee5ad66e713275b8aba61e"
+    },
+    "build/favicon.ico": {
+      "checksum": "c92b85a5b907c70211f4ec25e29a8c4a"
+    },
+    "build/index.html": {
+      "checksum": "52e538005c6c4ee7736911f3d724af16"
+    },
+    "build/logo192.png": {
+      "checksum": "33dbdd0177549353eeeb785d02c294af"
+    },
+    "build/logo512.png": {
+      "checksum": "917515db74ea8d1aee6a246cfbcc0b45"
+    },
+    "build/manifest.json": {
+      "checksum": "d9d975cebe2ec20b6c652e1e4c12ccf0"
+    },
+    "build/robots.txt": {
+      "checksum": "fa1ded1ed7c11438a9b0385b1e112850"
+    },
+    "build/static/css/main.6eccebc1.css": {
+      "checksum": "7fbb0e851b363ff11f42e9751314785a"
+    },
+    "build/static/css/main.6eccebc1.css.map": {
+      "checksum": "450cb22e4b471c6ce4be057030722bb9"
+    },
+    "build/static/js/main.e5bdca2a.js": {
+      "checksum": "bfc354be165c8e6fefe49299a877b2ca"
+    },
+    "build/static/js/main.e5bdca2a.js.LICENSE.txt": {
+      "checksum": "8c2ec56f3d3395318d05e64c61f1cc4e"
+    },
+    "build/static/js/main.e5bdca2a.js.map": {
+      "checksum": "ec808b9ce1f5b638f9d02848f001e7af"
+    },
+    "build/static/media/final.e5c1196f86523a300d8bf0c0686c8345.svg": {
+      "checksum": "69706a83a35086c24d13e1bb1d334bb6"
+    },
+    "build/static/media/framework.cc4b5c76f08a3855a0bb.jpg": {
+      "checksum": "389cc0d564f02e2752343a9e8a5e450a"
+    },
+    "build/static/media/icon-education.e335973c816664ce25df306e66755dfd.svg": {
+      "checksum": "55de38f34bc832d26b3cb46b2e28f99d"
+    },
+    "build/static/media/icon-energy.9e029bed93214e0c3348a78d5806e350.svg": {
+      "checksum": "dd97da4a37588157b71d64a4c68961bb"
+    },
+    "build/static/media/icon-gbv.491c9f7d6a627e4aecbd984ca41ebaf9.svg": {
+      "checksum": "6fdd90fa5febbcad01b9963b91e64b68"
+    },
+    "build/static/media/icon-health.c5b3bbfb09c360cc33fac10995d4ce9c.svg": {
+      "checksum": "9cf5d82338f4fb04cbdf4f419767ce86"
+    },
+    "build/static/media/icon-resilience.a7cb10f2407deba35d8a58eb4898ee11.svg": {
+      "checksum": "fa2db9cd1c45d41818cb209b405c4323"
+    },
+    "build/static/media/map.2bb3e6881804531d978df12ce000a392.svg": {
+      "checksum": "5823d458a0bc8b4ad2e0c807232e3a45"
+    },
+    "build/static/media/vertical-nav.42de472d9bafc2adb980.png": {
+      "checksum": "156789bd1bdf7191bd0a44bdadcb4c10"
+    },
+    "run.py": {
+      "checksum": "7ff1618e8e3acf22d976f6af62b36fa1"
+    }
+  }
+}
