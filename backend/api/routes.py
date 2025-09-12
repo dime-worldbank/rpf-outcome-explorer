@@ -92,7 +92,7 @@ def get_example_data():
     bottleneck_examples = read_excel('Bottlenecks - Examples')
     if isinstance(bottleneck_examples, tuple):
         return bottleneck_examples
-    filtered_bottleneck_data = bottleneck_examples[bottleneck_examples['Primary PFM Challenge'] == filter_value].dropna(subset=["Public Finance Bottleneck Group", "Public Finance Bottleneck"])
+    filtered_bottleneck_data = bottleneck_examples[bottleneck_examples['Development Outcome'] == filter_value].dropna(subset=["PFM Bottleneck", "Sub-Bottleneck"])
     import re
     data_dict = {}
     def extract_bottleneck_number(text):
@@ -100,9 +100,9 @@ def get_example_data():
         return match.group(1) if match else None
 
     for _, row in filtered_bottleneck_data.iterrows():
-        parent_name = str(row["Public Finance Bottleneck Group"]).strip()
-        child_name = str(row["Public Finance Bottleneck"]).strip()
-        grandchild_name = str(row["Outcome Bottleneck"]).strip()
+        parent_name = str(row["PFM Bottleneck"]).strip()
+        child_name = str(row["Sub-Bottleneck"]).strip()
+        grandchild_name = str(row["Outcome-Specific Sub-Bottlenecks"]).strip()
         parent_num = extract_bottleneck_number(parent_name)
         child_num = extract_bottleneck_number(child_name)
         parent_key = f"bottleneck_{parent_num}" if parent_num else parent_name
