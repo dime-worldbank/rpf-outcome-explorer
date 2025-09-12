@@ -10,6 +10,10 @@ import EconomicResilienceImg from '../assets/icon-economic.png';
 import GenderBasedViolenceImg from '../assets/icon-gender.png';
 import RenewableEnergyImg from '../assets/icon-energy.png';
 import UniversalHealthCareImg from '../assets/icon-health.png';
+import OutcomeCombinedImg from '../assets/icon-combined.png';
+
+import WaterImg from '../assets/icon-water.png';
+import RevenueImg from '../assets/icon-revenue.png';
 import "../custom.scss"
 
 const imageMap = {
@@ -17,7 +21,10 @@ const imageMap = {
   "Economic Resilience": EconomicResilienceImg,
   "Gender-Based Violence": GenderBasedViolenceImg,
   "The Energy Transition": RenewableEnergyImg,
-  "Universal Healthcare": UniversalHealthCareImg
+  "Universal Healthcare": UniversalHealthCareImg,
+  "Revenue": RevenueImg,
+  "Outcome Combined": OutcomeCombinedImg,
+  "Water": WaterImg
 };
 
 function OutcomePage({frameworkData}) {

@@ -48,7 +48,7 @@ function VerticalNavbarPermanent() {
     }, [selectedItem]);
 
     const handleVizClick = (event, defaultGroup='') => {
-        setTopDivHeight(45); // Shrink when CircleVisual is clicked
+        setTopDivHeight(35); // Shrink when CircleVisual is clicked
         if (!event){
           setSelectedItem(defaultGroup);
         }else{
@@ -63,7 +63,7 @@ function VerticalNavbarPermanent() {
         if (zone === 'outcome' || zone === 'results' || zone === 'policy'){
             setTopDivHeight(55); // Expand for top three zones
         } else {
-            setTopDivHeight(45); // Shrink for role and bottleneck zones
+            setTopDivHeight(35); // Shrink for role and bottleneck zones
         }
     };
 

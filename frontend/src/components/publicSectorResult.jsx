@@ -8,8 +8,8 @@ import { OUTCOMES } from "../constants";
 function PublicSectorResult({resultData, challengeData}) {
     const { outcome } = useContext(OutcomeContext);
     const outcome_name = OUTCOMES[outcome]
-    const publicSectorResult = resultData[outcome_name] || {};
-    const allChallenges = challengeData[outcome_name] || {};
+    const publicSectorResult = resultData[outcome_name] || undefined;
+    const allChallenges = challengeData[outcome_name] || undefined;
     return (
       <Container className="d-flex justify-content-center">
         <Card className="w-100 card-result" style={{ maxWidth: '900px' }}>
@@ -22,7 +22,7 @@ function PublicSectorResult({resultData, challengeData}) {
                     lineHeight: '1.8',
                     fontSize: '1.0rem',
                     textAlign: 'left' /* Align text to the left */
-                }}>{publicSectorResult['Public Sector Results']}</p>
+                }}>{publicSectorResult && publicSectorResult['Public Sector Results']}</p>
                 <p style={{
                     marginTop: '35px',
                     marginBottom: '25px',

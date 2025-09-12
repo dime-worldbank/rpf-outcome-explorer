@@ -78,7 +78,7 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       }}
     >
       <ArrowNav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-      {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} challengeData={frameworkData['Public Sector Challenges']} />}
+      {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && frameworkData['Public Sector Challenges'] && <PublicSectorResult resultData={frameworkData['outcome-results']} challengeData={frameworkData['Public Sector Challenges']} />}
       {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']}/>}
       {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} />}
       {selectedItem.startsWith('bottleneck') && bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData}/>}
