@@ -46,8 +46,8 @@
 
 .reveal-image .mask {
     position: absolute;
-    left: 22%;
-    width: 60%;
+    left: 35%;
+    width: 30%;
     right: 0;
     background: white;
     z-index: 2;
@@ -57,16 +57,16 @@
 
 /* Middle mask (covers 24%-44%) */
 .reveal-image .middle-mask {
-    top: 15%;
-    height: 28%;
+    top: 25%;
+    height: 15%;
     transform: scaleY(1);
     transition-delay: 0.1s;
 }
 
 /* Bottom mask (covers 62%-84%) */
 .reveal-image .bottom-mask {
-    top: 64%;
-    height: 35%;
+    top: 62%;
+    height: 20%;
     transform: scaleY(1);
     transition-delay: 0.3s;
 }
@@ -82,26 +82,46 @@
 /* Section hover zones */
 .reveal-image .hover-zone {
     position: absolute;
-    left: 25%;
+    left: 30%;
     right: 0;
-    width: 40%;
+    width: 35%;
     z-index: 3;
     cursor: pointer;
 }
 
 .reveal-image .top-zone {
-    top: 0;
-    height: 20%;
+    top: 5%;
+    height: 15%;
 }
 
 .reveal-image .middle-zone {
-    top: 43%;
-    height: 28%;
+    top: 28%;
+    height: 18%;
 }
 
 .reveal-image .bottom-zone {
-    top: 99%;
-    height: 15%;
+    top: 65%;
+    height: 10%;
+}
+
+.reveal-image .hover-buttons {
+  top: 80%;
+  height: 13%;
+  width: 100%;
+  position: absolute;
+  .left-button{
+      width: 40%;
+      height: 100%;
+      left: 0%;
+      position: absolute;
+  }
+  .right-button{
+      width: 40%;
+      height: 100%;
+      left: 60%;
+      position: absolute;
+  }
+
 }
 
 /* Glow effect for hovered sections */
@@ -120,6 +140,14 @@
     box-shadow: 5px 5px 10px lightblue;
 }
 
+.reveal-image .left-button:hover,
+.reveal-image .left-button.selected {
+    box-shadow: 5px 5px 10px red;
+}
+.reveal-image  .right-button:hover,
+.reveal-image .right-button.selected {
+    box-shadow: 5px 5px 10px lightblue;
+}
 .reveal-image:hover .middle-mask,
 .reveal-image:hover .bottom-mask {
     transform: scaleY(0);
