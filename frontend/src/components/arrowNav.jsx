@@ -28,12 +28,12 @@ function ArrowNav({ selectedItem, setSelectedItem }) {
     : null;
 
   return (
-    <div
-      style={{ width: "100%", height: "50px", position: "relative" }}
+    <div className="d-flex justify-content-between my-2"
+      style={{ width: "100%",  position: "relative" }}
     >
       {previousItem && (
         <div
-          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", position: 'absolute', left: "10px" }}
+          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", textAlign: 'left' }}
           onClick={() => setSelectedItem(previousItem)}
         >
           <BiSolidLeftArrow size={15} /> {navigationMap[previousItem]}
@@ -41,7 +41,7 @@ function ArrowNav({ selectedItem, setSelectedItem }) {
       )}
       {nextItem && (
         <div
-          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", position: 'absolute', right: "10px" }}
+          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", textAlign: 'right' }}
           onClick={() => setSelectedItem(nextItem)}
         >
           {navigationMap[nextItem]} <BiSolidRightArrow size={15} />
