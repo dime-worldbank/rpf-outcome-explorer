@@ -32,6 +32,7 @@
   /* stroke: #000;
   stroke-width: 2; */
   transition: filter 0.2s, stroke-width 0.2s;
+  cursor: pointer;
 }
 
 .clickable.outcome:hover,
