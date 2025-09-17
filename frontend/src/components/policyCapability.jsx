@@ -17,25 +17,17 @@ function PolicyCapability({frameworkData}) {
                     lineHeight: '1.8',
                     fontSize: '1.0rem',
                     textAlign: 'justify'
-                }}>Making significant progress to deliver the policy outcome and public sector results demands a combination of both feasible policy and delivery capabilities.</p>
+                }}>Making significant progress to deliver the policy outcome and public sector results demands a combination of both feasible policy and delivery capability.</p>
                 <p style={{
                     marginTop: '35px',
-                    marginBottom: '15px'
-                }}>Feasible Policy:</p>
-                <p style={{
-                    lineHeight: '1.8',
-                    fontSize: '1.0rem',
-                    textAlign: 'justify'
-                }}>{policyData["Feasible Policy"]}</p>
+                    marginBottom: '15px',
+                }}><b>Feasible Policy: </b> {policyData["Feasible Policy"]}</p>
+
                 <p style={{
                     marginTop: '35px',
-                    marginBottom: '15px'
-                }}>Delivery Capabilities:</p>
-                <p style={{
-                    lineHeight: '1.8',
-                    fontSize: '1.0rem',
-                    textAlign: 'justify'
-                }}>{policyData["Delivery Capability"]}</p>
+                    marginBottom: '15px',
+                }}><b>Delivery capability:</b> {policyData["Delivery Capability"]}</p>
+
           </Card.Body>
         </Card>
       </Container>

@@ -25,33 +25,30 @@ const HOVER_ZONES = [
 
 function VerticalNavbarPermanent() {
     const [selectedItem, setSelectedItem] = useState('outcome');
-    const [topDivHeight, setTopDivHeight] = useState(65);
+    const [topDivHeight, setTopDivHeight] = useState(55);
     const [isHovered, setIsHovered] = useState(false);
     const { outcome } = useContext(OutcomeContext);
     const contentRef = useRef();
 
-    useEffect(() => {
-        if (selectedItem){
-            if (contentRef.current) {
-                contentRef.current.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    }, [selectedItem]);
 
     const handleVizClick = (event, defaultGroup='') => {
-        setTopDivHeight(40); // Shrink when CircleVisual is clicked
-        if (!event){
-          setSelectedItem(defaultGroup);
-        }else{
+        setTopDivHeight(45); // Shrink when CircleVisual is clicked
+        if (event){
           const target = event.target.closest('g');
           if (!target) return;
           setSelectedItem(target.id);
+          contentRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
   const handleZoneClick = (event) => {
     const clickedId = event.target.id;
+    if (!clickedId) return;
+    
     setSelectedItem(clickedId);
+    if (contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
     // Add 'selected' class to the clicked zone, remove from others
     const svg = event.target.ownerSVGElement || event.target.closest('rect');
     if (svg) {
@@ -67,9 +64,9 @@ function VerticalNavbarPermanent() {
       });
     }
     if (clickedId === 'outcome' || clickedId === 'results' || clickedId === 'policy'){
-      setTopDivHeight(65); // Expand for top three zones
-    } else {
-      setTopDivHeight(40); // Shrink for role and bottleneck zones
+      setTopDivHeight(55); // Expand for top three zones
+    } else if(clickedId.startsWith('bottleneck') || clickedId.startsWith("role")) {
+      setTopDivHeight(45); // Shrink for role and bottleneck zones
     }
   };
 
@@ -79,13 +76,12 @@ function VerticalNavbarPermanent() {
                 {/* Sidebar Column */}
                 <Col xs={12} md={4} lg={4}
                     className="bg-paper d-flex flex-column h-100"
-                    style={{ padding: '10px 0' }}>
+                    >
                     <VerticalNavImg className={isHovered ? 'hovered' : ''} onClick={(event) => handleZoneClick(event)} onMouseOver={() => setIsHovered(true)} onMouseOut={() => setIsHovered(false)}
                                  style={{
                                     minWidth: '33vw',
                                      height: topDivHeight +  'vh',
                                      transition: 'all 0.3s ease-in-out',
-                                     paddingBottom: '20px',
                                     minWidth: window.innerWidth >= 768 ? '33vw' : '100%'
                                  }}
                     />  

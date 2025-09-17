@@ -61,21 +61,6 @@ const CircleVisual = ({ onClick, selectedItem }) => {
 
     return (
         <>
-        <div className="bg-paper d-flex justify-content-center" style={{ gap: '10px', padding: '10px' }}>
-        {/* {wheel_types.map((radio, idx) => (
-          <Button
-            key={idx}
-            id={`radio-${idx}`}
-            variant={idx % 2 ? 'outline-bottleneck' : 'outline-role'}
-            name="radio"
-            value={radio.value}
-            active={wheelType === radio.value}
-            onClick={(e) => handleButtonClick(e)}
-          >
-            {radio.name}
-          </Button>
-        ))} */}
-        </div>
         <div style={{
             flex: 1,
             minHeight: 0, // Important for flex children

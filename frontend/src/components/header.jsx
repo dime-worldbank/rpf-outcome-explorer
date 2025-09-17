@@ -8,6 +8,8 @@ import EconomicResilienceImg from '../assets/icon-economic.png';
 import GenderBasedViolenceImg from '../assets/icon-gender.png';
 import RenewableEnergyImg from '../assets/icon-energy.png';
 import UniversalHealthCareImg from '../assets/icon-health.png';
+import RevenueImg from '../assets/icon-revenue.png';
+import WaterImg from '../assets/icon-water.png';
 import RPF_logo from '../assets/rpf_logo.png';
 
 const imageMap = {
@@ -15,7 +17,9 @@ const imageMap = {
   "Economic Resilience": EconomicResilienceImg,
   "Gender-Based Violence": GenderBasedViolenceImg,
   "The Energy Transition": RenewableEnergyImg,
-  "Universal Healthcare": UniversalHealthCareImg
+  "Universal Healthcare": UniversalHealthCareImg,
+  "Revenue": RevenueImg,
+  "Water": WaterImg
 };
 
 function Header() {
