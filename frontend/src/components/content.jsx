@@ -36,7 +36,7 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
     }
 
     fetchData();
-  }, []);
+  }, [outcome]);
 
   const [frameworkData, setFrameworkData] = useState({});
 

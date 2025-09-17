@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { FaHome } from "react-icons/fa";
-import { Navbar, Container, Nav, Image } from 'react-bootstrap';
+import { Navbar, Container, Nav, Image, Dropdown } from 'react-bootstrap';
 import OutcomeContext from '../OutcomeContext';
 import EducationImg from '../assets/icon-education.png';
 import EconomicResilienceImg from '../assets/icon-economic.png';
@@ -9,6 +9,7 @@ import GenderBasedViolenceImg from '../assets/icon-gender.png';
 import RenewableEnergyImg from '../assets/icon-energy.png';
 import UniversalHealthCareImg from '../assets/icon-health.png';
 import RPF_logo from '../assets/rpf_logo.png';
+
 const imageMap = {
   "Education": EducationImg,
   "Economic Resilience": EconomicResilienceImg,
@@ -35,12 +36,33 @@ function Header() {
         {outcome && (
           <div className="d-flex justify-content-center align-items-center mx-auto">
             <div className="d-flex align-items-center">
-              <div
-                className="bg-white rounded-circle overflow-hidden me-3"
-                style={{ width: '40px', height: '40px', padding: '3px' }}>
-                <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
-              </div>
-              <span className="text-white fs-5">{outcome}</span>
+                                <div
+                    className="bg-white rounded-circle overflow-hidden me-3"
+                    style={{ width: '40px', height: '40px', padding: '3px' }}>
+                    <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
+                  </div>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="secondary"
+                  id="dropdown-basic"
+                  className="d-flex align-items-center bg-transparent border-0 p-0"
+                  style={{ boxShadow: 'none' }}
+                >
+                   <span className="text-white fs-5">{outcome}</span>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu style={{ minWidth: '200px', overflowY: 'auto' }}>
+                  {Object.keys(imageMap).map((key) => (
+                    <Dropdown.Item
+                      key={key}
+                      onClick={() => setOutcome(key)}
+                      className="d-flex"
+                    >
+                      <span>{key}</span>
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
           </div>
         )}
