@@ -43,7 +43,7 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                             <div style={{ fontWeight: 'bold', paddingBottom: '10px' }}>Examples: </div> 
                             {
                               item.map((example, index) => {
-                                const exampleText = example["Description of  Examples of Bottlenecks"];
+                                const exampleText = example["Description of  Examples of Sub-Bottlenecks"];
                                 const exampleRef = example["References"];
                                 const source = example["Source"];
                                 return (

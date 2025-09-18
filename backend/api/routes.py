@@ -7,7 +7,7 @@ import json
 
 # Blueprint setup
 api_bp = Blueprint('api', __name__)
-EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data.xlsx')
+EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data2.xlsx')
 
 # --- Utility Functions ---
 def read_excel(sheet_name):
@@ -124,25 +124,25 @@ def get_example_data():
         return roles_examples
     filtered_roles_data = roles_examples[roles_examples['Outcome'] == filter_value].dropna(subset="Role of Public Finance")
     dict_data_role = {}
-
-    
     for _, row in filtered_roles_data.iterrows():
         parent_name = str(row["Role of Public Finance"]).strip()
         child_name = str(row["Outcome Role"]).strip()
+        grandchild_name = str(row['Description of  Examples where Roles have been played']).strip()
         parent_num = extract_role_letter(parent_name)
         parent_key = f"role_{parent_num}" if parent_num else parent_name
-        # Exclude parent and child columns from the nested dict
-        nested = {c: str(row[c]) for c in filtered_roles_data.columns if c not in ["Role of Public Finance", "Outcome Role"]}
+        child_key = child_name
+        # Exclude parent, child, grandchild columns from the nested dict
+        nested = {c: str(row[c]) for c in filtered_roles_data.columns if c not in ["Role of Public Finance", "Outcome Role", "Description of Examples where Roles have been played"]}
         # Parent
         if parent_key not in dict_data_role:
-            dict_data_role[parent_key] = {"name": parent_name, "child": []}
-        # Find or create the child entry as a dict with 'name' and 'child' list
-        child_list = dict_data_role[parent_key]["child"]
-        child_entry = next((item for item in child_list if item["name"] == child_name), None)
-        if child_entry is None:
-            child_entry = {"name": child_name, "child": []}
-            child_list.append(child_entry)
-        child_entry["child"].append({**nested})
+            dict_data_role[parent_key] = {"name": parent_name}
+        # Child
+        if child_key not in dict_data_role[parent_key]:
+            dict_data_role[parent_key][child_key] = {"name": child_name}
+        # Grandchild
+        if grandchild_name not in dict_data_role[parent_key][child_key]:
+            dict_data_role[parent_key][child_key][grandchild_name] = []
+        dict_data_role[parent_key][child_key][grandchild_name].append({**nested})
     
     
     return safe_jsonify({

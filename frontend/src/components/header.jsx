@@ -27,7 +27,7 @@ function Header() {
   const { outcome, setOutcome } = useContext(OutcomeContext);
 
   return (
-    <Navbar expand="lg" className="px-4 header-custom" style={{ height: '8vh' }}>
+    <Navbar expand="lg" className="px-4 header-custom">
       <Container fluid>
         <Navbar.Brand 
           to="/" 
