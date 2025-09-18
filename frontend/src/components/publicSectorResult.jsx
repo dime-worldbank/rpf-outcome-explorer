@@ -12,15 +12,14 @@ function PublicSectorResult({resultData, challengeData}) {
     const allChallenges = challengeData[outcome_name] || undefined;
     return (
       <Container className="d-flex justify-content-center">
-        <Card className="w-100 card-result" style={{ maxWidth: '900px' }}>
-          <Card.Body className="text-left">
+        <Card className="w-100 h-50 card-result" >
+          <Card.Body className="text-left content-card">
                 <p style={{
                     textAlign: 'left', /* Align text to the left */
                     marginBottom: '20px'
                 }}>The <b>public sector results</b> which countries aim to deliver to achieve the outcome are: </p>
                 <p style={{
                     lineHeight: '1.8',
-                    fontSize: '1.0rem',
                     textAlign: 'left' /* Align text to the left */
                 }}>{publicSectorResult && publicSectorResult['Public Sector Results']}</p>
                 <p style={{
@@ -32,7 +31,6 @@ function PublicSectorResult({resultData, challengeData}) {
                     listStyleType: 'disc',
                     paddingLeft: '20px',
                     lineHeight: '1.8',
-                    fontSize: '1.0rem',
                     textAlign: 'left' /* Align text to the left */
                 }}>
                     {allChallenges && allChallenges.map((challenge, index) => (

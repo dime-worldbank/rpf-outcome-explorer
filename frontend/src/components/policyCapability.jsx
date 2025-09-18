@@ -11,11 +11,10 @@ function PolicyCapability({frameworkData}) {
     const policyData = frameworkData[outcome_name] || {};
     return (
       <Container className="d-flex justify-content-center">
-        <Card className="w-100 card-capability" style={{ maxWidth: '900px' }}>
-          <Card.Body className="text-start">
+        <Card className="w-100 card-capability">
+          <Card.Body className="text-start content-card">
                 <p style={{
                     lineHeight: '1.8',
-                    fontSize: '1.0rem',
                     textAlign: 'justify'
                 }}>Making significant progress to deliver the policy outcome and public sector results demands a combination of both feasible policy and delivery capability.</p>
                 <p style={{

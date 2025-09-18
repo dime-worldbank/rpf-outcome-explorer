@@ -71,7 +71,7 @@ function VerticalNavbarPermanent() {
   };
 
     return (
-        <Container fluid style={{ height: 'calc(100vh - 60px)', padding: 0 }}>
+        <Container fluid style={{ height: '92vh', padding: 0 }}>
             <Row className="h-100">
                 {/* Sidebar Column */}
                 <Col xs={12} md={4} lg={4}

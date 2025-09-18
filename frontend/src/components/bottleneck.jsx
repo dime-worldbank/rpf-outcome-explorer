@@ -13,7 +13,7 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
   return (
     <>
       {selectedItem && (
-        <div className="container p-4 mb-4 border rounded shadow bg-white text-start container-bottleneck" style={{ maxWidth: '900px' }}>
+        <div className="container p-4 mb-4 border rounded shadow bg-white text-start container-bottleneck" >
           <p className="mb-2">The outcome-led framework then identifies nine common groups of bottlenecks which undermine the potential role of public finance across development outcomes.</p>
           <p className="mb-1">You have selected:</p>
           <p className="fw-bold">{bottleneck_group}</p>
@@ -30,12 +30,12 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                 const bottleneck_name = data[bottleneckName]?.['name'] || '';
                 return (
                   <Accordion.Item eventKey={index.toString()} key={index}>
-                    <Accordion.Header>{bottleneck_name}</Accordion.Header>
+                    <Accordion.Header><p>{bottleneck_name}</p></Accordion.Header>
                     <Accordion.Body>
                       {Object.keys(bottleneckData).map((bottleneck_outcome, index) => {
                             const item = bottleneck_outcome !== 'name' ? bottleneckData[bottleneck_outcome] : [];
                         return (
-                          item.length > 0 && <div key={index} style={{ padding: '10px', lineHeight: '1.2', fontFamily: 'Arial, sans-serif', textAlign: 'left' }}>
+                          item.length > 0 && <div key={index} style={{ padding: '10px', textAlign: 'left' }}>
                             <div style={{ width:'100%'}}>
                                 <p><span>{bottleneck_outcome}</span></p>
                             </div>

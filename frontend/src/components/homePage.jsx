@@ -12,7 +12,7 @@ import UniversalHealthCareImg from '../assets/icon-health.png';
 import OutcomeCombinedImg from '../assets/icon-combined.png';
 import WaterImg from '../assets/icon-water.png';
 import RevenueImg from '../assets/icon-revenue.png';
-import frameworkImg from '../assets/framework.jpg';
+import frameworkImg from '../assets/vertical.svg';
 import horizontalImg from '../assets/horizontal.png'
 function HomePage() {
   const { setOutcome } = useContext(OutcomeContext);
@@ -28,20 +28,20 @@ function HomePage() {
     { title: 'Gender-Based Violence', icon: GenderBasedViolenceImg, path: '/GenderBasedViolence' },
     { title: 'The Energy Transition', icon: RenewableEnergyImg, path: '/RenewableEnergy' },
     { title: 'Universal Healthcare', icon: UniversalHealthCareImg, path: '/UniversalHealthCare' },
-    { title: 'Outcome Combined', icon: OutcomeCombinedImg, path: '/OutcomeCombined' },
-    { title: 'Water', icon: WaterImg, path: '/Water' },
+    // { title: 'Outcome Combined', icon: OutcomeCombinedImg, path: '/OutcomeCombined' },
+    // { title: 'Water', icon: WaterImg, path: '/Water' },
     { title: 'Revenue', icon: RevenueImg, path: '/Revenue' },
   ];
 
 
   return (
-    <Container fluid className="bg-light min-vh-100 d-flex flex-column align-items-center">
-      <Image src={frameworkImg} alt="framework" fluid className="w-75 mb-4 d-none d-md-block" />
-
-      <Card className="w-75 mb-4" style={{ maxWidth: '1200px' }}>
+    <Container fluid className="home-page bg-light  d-flex flex-row align-items-center" style={{minHeight: '92vh',overflowY: 'auto'}}>
+      <Image src={frameworkImg} alt="framework" fluid className="mb-4 d-none d-md-block" style={{maxWidth: '30%', maxHeight: '95vh'}} />
+      <Container className="d-flex flex-column align-items-center h-100">
+      <Card className="w-100  mb-4 mt-4">
         <Card.Body>
           <Card.Text className="text-justify">
-            The outcome-led framework starts by identifying the development outcomes governments seek and then works backward to determine how public finance can contribute effectively to these goals. This visualization allows you to explore the framework and evidence collected from outcome studies.
+            <p></p>The outcome-led framework starts by identifying the development outcomes governments seek and then works backward to determine how public finance can contribute effectively to these goals. This visualization allows you to explore the framework and evidence collected from outcome studies.
           </Card.Text>
 
           <Card.Text as="div">
@@ -75,11 +75,11 @@ function HomePage() {
         </Card.Body>
       </Card>
 
-      <p className="text-justify mb-3" style={{ maxWidth: '1200px' }}>
+      <p className="text-justify mb-3" >
         Select a development outcome below to start exploring:
       </p>
 
-      <Row className="justify-content-center mb-4" style={{ maxWidth: '1200px' }}>
+      <Row className="justify-content-center mb-4">
         {tiles.map((tile) => (
           <Col key={tile.title} xs={12} sm={6} md={4} lg={3} xl={2} className="mb-3">
             <Card
@@ -93,6 +93,7 @@ function HomePage() {
           </Col>
         ))}
       </Row>
+      </Container>
     </Container>
   );
 }

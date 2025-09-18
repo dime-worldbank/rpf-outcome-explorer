@@ -11,6 +11,7 @@ import UniversalHealthCareImg from '../assets/icon-health.png';
 import RevenueImg from '../assets/icon-revenue.png';
 import WaterImg from '../assets/icon-water.png';
 import RPF_logo from '../assets/rpf_logo.png';
+import '../custom.scss'
 
 const imageMap = {
   "Education": EducationImg,
@@ -19,19 +20,19 @@ const imageMap = {
   "The Energy Transition": RenewableEnergyImg,
   "Universal Healthcare": UniversalHealthCareImg,
   "Revenue": RevenueImg,
-  "Water": WaterImg
+  // "Water": WaterImg
 };
 
 function Header() {
   const { outcome, setOutcome } = useContext(OutcomeContext);
 
   return (
-    <Navbar expand="lg" className="px-4 header-custom">
+    <Navbar expand="lg" className="px-4 header-custom" style={{ height: '8vh' }}>
       <Container fluid>
         <Navbar.Brand 
           to="/" 
           onClick={() => setOutcome('')}
-          className="fw-bold fs-3 me-auto text-white text-decoration-none"
+          className="fw-bold me-auto text-white text-decoration-none"
         >
           <Image src={RPF_logo} alt="RPF Logo" height="40" className="me-4" />
           Outcome Explorer
@@ -52,10 +53,10 @@ function Header() {
                   className="d-flex align-items-center bg-transparent border-0 p-0"
                   style={{ boxShadow: 'none' }}
                 >
-                   <span className="text-white fs-5">{outcome}</span>
+                   <span className="text-white">{outcome}</span>
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu style={{ minWidth: '200px', overflowY: 'auto' }}>
+                <Dropdown.Menu style={{ minWidth: '300px', overflowY: 'auto' }}>
                   {Object.keys(imageMap).map((key) => (
                     <Dropdown.Item
                       key={key}

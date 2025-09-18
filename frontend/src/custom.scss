@@ -77,13 +77,13 @@
 .page-wrapper {
     height: calc(100vh - 70px);
 }
-$outcome: #306844; // dark green
-$result: #8B8000; //dark yellow
+$outcome: #006400; // dark green
+$result: #A0522D; //dark yellow
 $capability: #00008B;
 $bottleneck-color: #4d9fd2;
 $bottleneck-text-color: #00008B;
 $role-color: #f74b65;
-$role-text-color: #950606;
+$role-text-color: #8B0000;
 
 $theme-colors: map-merge(
   $theme-colors,
@@ -146,4 +146,23 @@ $theme-colors: map-merge(
     transform: translateY(-3px);
     box-shadow: 5px 5px 8px $role-color;
   }
+}
+
+
+
+.content,
+.home-page,
+.header-custom {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  p,
+  span {
+      line-height: 1.5;
+      font-size: 1.2rem;
+  }
+}
+
+.content-card {
+  max-height: 80vh;
+  overflow-y: auto;
 }

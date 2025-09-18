@@ -14,7 +14,6 @@ import OutcomeCombinedImg from '../assets/icon-combined.png';
 
 import WaterImg from '../assets/icon-water.png';
 import RevenueImg from '../assets/icon-revenue.png';
-import "../custom.scss"
 
 const imageMap = {
   "Education": EducationImg,
@@ -36,8 +35,8 @@ function OutcomePage({frameworkData}) {
   return (
     <Container className="d-flex justify-content-center">
       {outcome && (
-        <Card className="w-100 card-outcome" style={{ maxWidth: '900px' }}>
-          <Card.Body className="text-center ">
+        <Card className="w-100 card-outcome">
+          <Card.Body className="text-center content-card">
             <Card.Title as="h2" className="mb-4 fw-bold">
               {outcome}
             </Card.Title>
@@ -60,7 +59,7 @@ function OutcomePage({frameworkData}) {
               </Col>
             </Row>
 
-            <Card.Text className="text-start text-outcome lh-lg fs-5">
+            <Card.Text className="text-start text-outcome lh-lg">
               In {outcome}, the countries typically pursue the following development outcome:
               <p className="mt-3 " style={{ fontWeight: 'bold' }}>{developmentOutcome}</p>
             </Card.Text>

@@ -15,7 +15,7 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
   return (
     <>
       {selectedItem && (
-        <div className="container p-4 mb-4 border rounded shadow bg-white text-start  container-role" style={{ maxWidth: '900px' }}>
+        <div className="container p-4 mb-4 border rounded shadow bg-white text-start  container-role" >
           <p className="mb-2">The outcome-led framework identifies four broad roles that public finance plays in the achievement of public sector results as it interacts with broader public policy and public sector institutions.'</p>
           <p className="mb-1">You have selected:</p>
           <p className="fw-bold">{role_name}</p>
@@ -33,7 +33,7 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
                 const role_name = data[roleName]?.['name'] || '';
                 return (
                   <Accordion.Item  disabled eventKey={undefined}>
-                    <Accordion.Button disabled>{role_name}</Accordion.Button>
+                    <Accordion.Button disabled> <p>{role_name}</p></Accordion.Button>
                     {SHOW_EVIDENCE && <Accordion.Body>
                       {roleData.map((item, index) => {
                         const title = item['Outcome role'];
