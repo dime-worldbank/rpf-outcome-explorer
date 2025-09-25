@@ -12,6 +12,7 @@ import RevenueImg from '../assets/icon-revenue.png';
 import WaterImg from '../assets/icon-water.png';
 import RPF_logo from '../assets/rpf_logo.png';
 import '../custom.scss'
+import {LOGO_URL} from '../constants'
 
 const imageMap = {
   "Education": EducationImg,
@@ -34,7 +35,8 @@ function Header() {
           onClick={() => setOutcome('')}
           className="fw-bold me-auto text-white text-decoration-none"
         >
-          <Image src={RPF_logo} alt="RPF Logo" height="40" className="me-4" />
+          <a href={LOGO_URL}>
+          <Image src={RPF_logo} alt="RPF Logo" height="40" className="me-4" /></a>
           Outcome Explorer
         </Navbar.Brand>
 

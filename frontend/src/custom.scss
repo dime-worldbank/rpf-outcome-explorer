@@ -160,6 +160,10 @@ $theme-colors: map-merge(
       line-height: 1.5;
       font-size: 1.2rem;
   }
+  .disclaimer {
+    font-size: 1rem;
+    color: grey;
+  }
 }
 
 .content-card {

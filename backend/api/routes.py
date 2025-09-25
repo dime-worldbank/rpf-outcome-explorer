@@ -2,9 +2,7 @@ import re
 from flask import jsonify, Blueprint
 import os
 import pandas as pd
-import openpyxl
-import json
-
+import numpy as np
 # Blueprint setup
 api_bp = Blueprint('api', __name__)
 EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data2.xlsx')
@@ -35,8 +33,9 @@ def create_role_taxonomy(sheet_name):
     data_dict={}
     for _, row in df.iterrows():
         role_name = row["Role of Public Finance"]
+        if pd.isna(role_name): continue
         role_key = f"role_{extract_role_letter(role_name)}" if extract_role_letter(role_name) else role_name
-        data_dict[role_key] = {col: row[col] for col in df.columns if col != "Role of Public Finance"}
+        data_dict[role_key] = {col: row[col] for col in df.columns if col in ["Role Description: Public Finance"]}
     return data_dict
 
 
@@ -50,6 +49,7 @@ def create_outcome_results():
     children = ["Public Sector Results", "Feasible Policy", "Delivery Capability", "Source", "Development Outcome"]
     for _, row in df.iterrows():
         parent = row[parent_title]
+        if pd.isna(parent): continue
         data = {child: row[child] for child in children}
         data_dict[parent] = data
     return data_dict
@@ -63,6 +63,7 @@ def create_public_sector_challenges():
     parent_title = 'Outcome'
     children = ["Public Sector Challenge", "Description", "Source"]
     for _, row in df.iterrows():
+        if pd.isna(row[parent_title]): continue
         data = {child: row[child] for child in children}
         data_dict.setdefault(row[parent_title], []).append(data)
     return data_dict
@@ -101,6 +102,7 @@ def get_example_data():
 
     for _, row in filtered_bottleneck_data.iterrows():
         parent_name = str(row["PFM Bottleneck"]).strip()
+        if pd.isna(parent_name): continue
         child_name = str(row["Sub-Bottleneck"]).strip()
         grandchild_name = str(row["Outcome-Specific Sub-Bottlenecks"]).strip()
         parent_num = extract_bottleneck_number(parent_name)
@@ -126,6 +128,7 @@ def get_example_data():
     dict_data_role = {}
     for _, row in filtered_roles_data.iterrows():
         parent_name = str(row["Role of Public Finance"]).strip()
+        if pd.isna(parent_name): continue
         child_name = str(row["Outcome Role"]).strip()
         grandchild_name = str(row['Description of  Examples where Roles have been played']).strip()
         parent_num = extract_role_letter(parent_name)

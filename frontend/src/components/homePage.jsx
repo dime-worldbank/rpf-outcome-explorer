@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Container, Card, Image, Row, Col } from 'react-bootstrap';
 import OutcomeContext from '../OutcomeContext';
+import {LOGO_URL, FEEDBACK_URL} from '../constants'
 
 // Import images
 import EducationImg from '../assets/icon-education.png';
@@ -13,7 +14,8 @@ import OutcomeCombinedImg from '../assets/icon-combined.png';
 import WaterImg from '../assets/icon-water.png';
 import RevenueImg from '../assets/icon-revenue.png';
 import frameworkImg from '../assets/vertical.svg';
-import horizontalImg from '../assets/horizontal.png'
+import RPF_logo_black from '../assets/rpf_logo_black.png';
+
 function HomePage() {
   const { setOutcome } = useContext(OutcomeContext);
 
@@ -38,6 +40,7 @@ function HomePage() {
     <Container fluid className="home-page bg-light  d-flex flex-row align-items-center" style={{minHeight: '92vh',overflowY: 'auto'}}>
       <Image src={frameworkImg} alt="framework" fluid className="mb-4 d-none d-md-block" style={{maxWidth: '30%', maxHeight: '95vh'}} />
       <Container className="d-flex flex-column align-items-center h-100">
+        <h2> <a href={LOGO_URL}><Image src={RPF_logo_black} alt="RPF Logo" height="80" className="me-4" /></a> Welcome to the Outcome Explorer</h2>
       <Card className="w-100  mb-4 mt-4">
         <Card.Body>
           <Card.Text className="text-justify">
@@ -71,6 +74,10 @@ function HomePage() {
                 Explore each of the nine public finance bottlenecks identified and country examples of these roles in practice.
               </li>
             </ul>
+          </Card.Text>
+          <Card.Text>
+            <p className="disclaimer">Disclaimer: The information presented in the outcome explorer here is preliminary and presented to illustrate the approach.
+              Consultations are underway and we welcome your feedback on the framework and roles and bottlenecks – you can provide feedback <a href={FEEDBACK_URL}>here</a></p>
           </Card.Text>
         </Card.Body>
       </Card>

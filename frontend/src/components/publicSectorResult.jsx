@@ -37,7 +37,6 @@ function PublicSectorResult({resultData, challengeData}) {
                         <li key={index} style={{ marginBottom: '15px' }}>
                             <strong >{challenge['Public Sector Challenge']}</strong> <br/>{challenge["Description"]}
                             <br />
-                            <em>Source: {challenge.source}</em>
                         </li>
                     ))}
                 </ul>
