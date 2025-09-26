@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 # Blueprint setup
 api_bp = Blueprint('api', __name__)
-EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data2.xlsx')
+EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data.xlsx')
 
 # --- Utility Functions ---
 def read_excel(sheet_name):
@@ -104,7 +104,7 @@ def get_example_data():
         parent_name = str(row["PFM Bottleneck"]).strip()
         if pd.isna(parent_name): continue
         child_name = str(row["Sub-Bottleneck"]).strip()
-        grandchild_name = str(row["Outcome-Specific Sub-Bottlenecks"]).strip()
+        grandchild_name = str(row["Outcome-Specific Sub-Bottleneck"]).strip()
         parent_num = extract_bottleneck_number(parent_name)
         child_num = extract_bottleneck_number(child_name)
         parent_key = f"bottleneck_{parent_num}" if parent_num else parent_name
