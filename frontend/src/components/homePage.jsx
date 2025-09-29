@@ -40,7 +40,7 @@ function HomePage() {
     <Container fluid className="home-page bg-light  d-flex flex-row align-items-center" style={{minHeight: '92vh',overflowY: 'auto'}}>
       <Image src={frameworkImg} alt="framework" fluid className="mb-4 d-none d-md-block" style={{maxWidth: '30%', maxHeight: '95vh'}} />
       <Container className="d-flex flex-column align-items-center h-100">
-        <h2> <a href={LOGO_URL}><Image src={RPF_logo_black} alt="RPF Logo" height="80" className="me-4" /></a> Welcome to the Outcome Explorer</h2>
+        <div className='d-flex align-items-center mt-2'><a href={LOGO_URL}><Image src={RPF_logo_black} alt="RPF Logo" height="80" className="me-4" /></a><h2 className='d-none d-md-block'>  Welcome to the Outcome Explorer</h2></div>
       <Card className="w-100  mb-4 mt-4">
         <Card.Body>
           <Card.Text className="text-justify">
