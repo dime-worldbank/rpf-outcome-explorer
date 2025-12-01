@@ -90,7 +90,7 @@ def get_example_data():
     if not filter_value:
         return jsonify({"error": "Missing 'filter' query parameter"}), 400
 
-    bottleneck_examples = read_excel('Bottlenecks')
+    bottleneck_examples = read_excel('Bottlenecks - Examples')
     if isinstance(bottleneck_examples, tuple):
         return bottleneck_examples
     filtered_bottleneck_data = bottleneck_examples[bottleneck_examples['Development Outcome'] == filter_value].dropna(subset=["PFM Bottleneck", "Sub-Bottleneck"])
@@ -121,7 +121,7 @@ def get_example_data():
             data_dict[parent_key][child_key][grandchild_name] = []
         data_dict[parent_key][child_key][grandchild_name].append({**nested})
 
-    roles_examples = read_excel('Roles')
+    roles_examples = read_excel('Roles - Examples')
     if isinstance(roles_examples, tuple):
         return roles_examples
     filtered_roles_data = roles_examples[roles_examples['Outcome'] == filter_value].dropna(subset="Role of Public Finance")
@@ -143,9 +143,9 @@ def get_example_data():
         if child_key not in dict_data_role[parent_key]:
             dict_data_role[parent_key][child_key] = {"name": child_name}
         # Grandchild
-        # if grandchild_name not in dict_data_role[parent_key][child_key]:
-        #     dict_data_role[parent_key][child_key][grandchild_name] = []
-        # dict_data_role[parent_key][child_key][grandchild_name].append({**nested})
+        if grandchild_name not in dict_data_role[parent_key][child_key]:
+            dict_data_role[parent_key][child_key][grandchild_name] = []
+        dict_data_role[parent_key][child_key][grandchild_name].append({**nested})
     
     
     return safe_jsonify({

@@ -8,7 +8,8 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
 
   const data = bottleneckData[selectedItem] || [];
   const bottleneck_group = bottleneckData[selectedItem]?.name || '';
-  const SHOW_EVIDENCE = process.env.REACT_APP_SHOW_EXAMPLES === 'True';
+  const SHOW_EVIDENCE = true;
+
   const defaultActiveKey = Array.from({ length: 21 }, (_, i) => i.toString());
   return (
     <>
@@ -40,7 +41,6 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                                 <p><span>{bottleneck_outcome}</span></p>
                             </div>
                             {SHOW_EVIDENCE && <>
-                            <div style={{ fontWeight: 'bold', paddingBottom: '10px' }}>Examples: </div> 
                             {
                               item.map((example, index) => {
                                 const exampleText = example["Description of  Examples of Sub-Bottlenecks"];
