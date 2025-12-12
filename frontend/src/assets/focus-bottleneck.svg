@@ -1,71 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_3_copy" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 936 936">
-  <!-- Generator: Adobe Illustrator 29.7.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 8)  -->
+<svg id="Layer_3_copy" data-name="Layer 3 copy" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 936 936">
   <defs>
     <style>
-      .st0 { fill: none; }
-      .st1 { fill: #cae3f6; }
-      .st2 { font-family: Arial-BoldMT, Arial; font-size: 26.77px; font-weight: 700; }
-      .st2, .st3 { fill: #f4f4f4; }
-      .st4 { fill: #fff; }
-      .st5 { fill: #397fab; }
-      .st5, .st3 { font-family: Arial-BoldMT, Arial; font-size: 25px; font-weight: 500; }
-      .st6 { fill: #529fd3; }
-      .st7 { fill: #d84c65; }
-      .st8 { fill: #e6838b; }
-      .st9 { fill: #b3dcf5; }
-      .st10 { clip-path: url(#clippath); }
+      .bcls-1 {
+        fill: none;
+      }
+
+      .bcls-2 {
+        fill: #cae3f6;
+      }
+
+      .bcls-3, .bcls-4 {
+        font-family: Arial-BoldMT;
+        font-size: 25px;
+        font-weight: 500;
+      }
+
+      .bcls-3, .bcls-5 {
+        fill: #f4f5f6;
+      }
+
+      .bcls-4 {
+        fill: #3a80ac;
+      }
+
+      .bcls-6 {
+        clip-path: url(#clippath-1);
+      }
+
+      .bcls-7 {
+        fill: #fff;
+      }
+
+      .bcls-8 {
+        fill: #529fd3;
+      }
+
+      .bcls-5 {
+        font-family: Arial-BoldMT;
+        font-size: 26.77px;
+        font-weight: 700;
+      }
+
+      .bcls-9 {
+        fill: #d84c65;
+      }
+
+      .bcls-10 {
+        fill: #e6838b;
+      }
+
+      .bcls-11 {
+        fill: #b3dcf5;
+      }
+
+      .bcls-12 {
+        clip-path: url(#clippath);
+      }
     </style>
     <clipPath id="clippath">
-      <path class="st0" d="M529.28,4.03c256.24,33.84,436.54,269,402.69,525.25-33.84,256.24-269,436.54-525.25,402.69C150.48,898.13-29.81,662.97,4.03,406.72,37.87,150.48,273.03-29.81,529.28,4.03ZM335.31,450.48c-9.68,73.28,41.88,140.54,115.17,150.22,73.28,9.68,140.54-41.88,150.22-115.17,9.68-73.28-41.88-140.54-115.17-150.22-73.28-9.68-140.54,41.88-150.22,115.17Z"/>
+      <path class="bcls-1" d="M936,468c0,258.47-209.53,468-468,468S0,726.47,0,468,209.53,0,468,0s468,209.53,468,468ZM468,325.8c-78.53,0-142.2,63.67-142.2,142.2s63.67,142.2,142.2,142.2,142.2-63.67,142.2-142.2-63.67-142.2-142.2-142.2Z"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <path class="bcls-1" d="M275.86,45.48C42.51,151.6-60.64,426.79,45.48,660.14c106.12,233.35,381.31,336.49,614.66,230.38,233.35-106.12,336.49-381.31,230.38-614.66C784.4,42.51,509.21-60.64,275.86,45.48Z"/>
     </clipPath>
   </defs>
-
-  <g class="st10">
+  <g id='role_A'>
+    <g>
+      <g>
+        <path class="bcls-9" d="M611.37,487.97s-47.2-75.22-118.71-71.81c-71.51,3.42,3.22,101.19-52.44,101.19-75.19,0-112.79-74.66-112.79-74.66l.09.18c.21-1.22.44-2.43.68-3.64,13.14-65.87,71.28-115.51,141.02-115.51,79.42,0,143.8,64.38,143.8,143.8,0,6.95-.49,13.78-1.45,20.47l-.19-.03Z"/>
+        <path class="bcls-10" d="M327.41,442.69c-1.59,8.55-2.41,17.37-2.41,26.38,0,79.42,64.38,143.8,143.8,143.8,69.73,0,127.87-49.64,141.02-115.51.62-3.1,1.14-6.23,1.55-9.39,0,0-47.2-75.22-118.71-71.81-71.51,3.42,3.22,101.19-52.44,101.19-75.19,0-112.79-74.66-112.79-74.66Z"/>
+      </g>
+      <circle class="bcls-7" cx="469" cy="468.29" r="55.49"/>
+    </g>
+    <path class="bcls-9" d="M501.79,454.23l-36.64,36.36c-2.16,2.16-5.6,2.3-7.9.14l-19.4-17.67c-2.3-2.16-2.44-5.75-.43-8.05,2.16-2.3,5.75-2.44,8.05-.29l15.38,14.08,32.76-32.76c2.3-2.3,5.89-2.3,8.19,0,2.3,2.3,2.3,5.89,0,8.19Z"/>
+    <text class="bcls-5" transform="translate(420.85 365.07)"><tspan x="0" y="0">FISCAL</tspan><tspan x="-2.01" y="32.13">POLICY</tspan></text>
+    <text class="bcls-5" transform="translate(440.02 574.04)"><tspan x="0" y="0">PFM</tspan></text>
+  </g>
+  <g class="bcls-12">
     <g id="bottleneck_1">
-      <path class="st6" d="M14.8,581.41s4.46-81.33,110.08-102.96c105.62-21.63,226.72,43.46,226.72,43.46l-11.92-70.87s-68.64-119.12-169.81-156.38c-101.17-37.26-147.8,29.52-147.8,29.52l-19.49,18.89-17.31,131.09,29.54,107.23Z"/>
-      <text class="st3" transform="translate(148.76 347.92)"><tspan x="0" y="0">1.</tspan><tspan x="-63.15" y="30">Insufficient</tspan><tspan x="-77.74" y="60">Commitment</tspan><tspan x="-90.51" y="90">to Policy Action</tspan></text>
+      <path class="bcls-8" d="M37.65,284.18c158.92-7.91,313.48,55.54,421.05,173.6l9.31,10.21-13.8-.64c-159.55-7.42-313.7,57-420.48,174.96-48.07-119.66-43.18-247.83,3.93-358.14Z"/>
+      <text class="bcls-3" transform="translate(162.33 350.85)"><tspan x="0" y="0">1.</tspan><tspan x="-63.21" y="29">Insufficient</tspan><tspan x="-66.64" y="58">stakeholder</tspan><tspan x="-91.89" y="87">commitment to</tspan><tspan x="-72.52" y="116">policy action</tspan></text>
     </g>
     <g id="bottleneck_2">
-      <path class="st9" d="M339.68,451.05s-68.64-119.12-169.81-156.38c-101.17-37.26-147.8,29.52-147.8,29.52l1.57-65.96,122.08-160.21,44.58-6.77s76.81-27.09,137.31,62.14c60.5,89.24,46.86,226.04,46.86,226.04l-34.79,71.62Z"/>
-      <text class="st5" transform="translate(219.72 185.73)"><tspan x="0" y="0">2.</tspan><tspan x="-67.88" y="30">Incoherence</tspan><tspan x="-108.41" y="60">and fragmentation</tspan><tspan x="-42.91" y="90">of policy</tspan></text>
-    </g>
-    <g id="bottleneck_4">
-      <path class="st6" d="M550.92,370.98s137.46-2.36,219.06-72.83c81.6-70.47,45.75-143.61,45.75-143.61l-46.01-82.61L572.67-6.66,508.47,1.94s76.74,27.31,67.57,134.73c-9.17,107.42-105.88,205.13-105.88,205.13l80.76,29.18Z"/>
-      <text class="st3" transform="translate(667.11 142.79)"><tspan x="0" y="0">4.</tspan><tspan x="-79.3" y="30">Unsustainable</tspan><tspan x="-82.23" y="60">fiscal positions</tspan><tspan x="-88.46" y="90">of governments</tspan><tspan x="-102.4" y="120">and organizations</tspan></text>
-    </g>
-    <g id="bottleneck_7">
-      <path class="st6" d="M854.75,732.13s-61.74,53.12-150.51-8.07c-88.76-61.19-125.71-193.62-125.71-193.62l-56.39,54.74s-66.06,120.57-45.27,226.36c20.78,105.79,102.07,110.9,102.07,110.9l23.9,3.21,201.67-60.15,50.24-133.37Z"/>
-      <text class="st3" transform="translate(585.68 688.51)"><tspan x="0" y="0">7.</tspan><tspan x="-53.91" y="30">Inefficient</tspan><tspan x="-66.8" y="60">deployment</tspan><tspan x="-102.74" y="90">and management</tspan><tspan x="-65.5" y="120">of resources</tspan><tspan x="-57.19" y="150">and inputs</tspan></text>
-    </g>
-    <g id="bottleneck_5">
-      <path class="st9" d="M934.87,438.53s-19.41,79.11-127.21,80.84c-107.8,1.73-214.78-84.62-214.78-84.62l-41.96-63.78s137.46-2.36,219.06-72.83c81.6-70.47,45.75-143.61,45.75-143.61l32.46-2.73,111.37,235.13-24.69,51.6Z"/>
-      <text class="st5" transform="translate(762.34 351.8)"><tspan x="0" y="0">5.</tspan><tspan x="-61.6" y="30">Inadequate</tspan><tspan x="-88.73" y="60">and inequitable</tspan><tspan x="-115.65" y="90">resources mobilized</tspan><tspan x="-75.55" y="120">and deployed</tspan></text>
-    </g>
-    <g id="bottleneck_6">
-      <path class="st1" d="M854.75,732.13s-61.74,53.12-150.51-8.07c-88.76-61.19-125.71-193.62-125.71-193.62l14.34-95.69s106.98,86.35,214.78,84.62c107.8-1.73,127.21-80.84,127.21-80.84l24.27,9.38-59.62,258.32-44.76,25.89Z"/>
-      <text class="st5" transform="translate(750.66 555.27)"><tspan x="0" y="0">6.</tspan><tspan x="-109.61" y="30">Unreliable, delayed</tspan><tspan x="-91.44" y="60">and fragmented</tspan><tspan x="-114.82" y="90" xml:space="preserve"> funding for delivery</tspan></text>
-    </g>
-    <g id="bottleneck_8">
-      <path class="st9" d="M578.94,922.44s-81.29-5.11-102.07-110.9c-20.78-105.79,45.27-226.36,45.27-226.36l-97.26,4.18s-130.18,44.21-186.37,136.23.27,150.72.27,150.72l39,43.4,188.86,30.59,106.26-8.57,6.04-19.29Z"/>
-      <text class="st5" transform="translate(349.37 673.01)"><tspan x="0" y="0">8.</tspan><tspan x="-60.86" y="30">Regulation,</tspan><tspan x="-74.86" y="60">oversight and</tspan><tspan x="-82.31" y="90" xml:space="preserve"> accountability</tspan><tspan x="-89.38" y="120">does not enable</tspan><tspan x="-86.31" y="150">and encourage </tspan><tspan x="-70.85" y="180">performance</tspan></text>
-    </g>
-    <g id="bottleneck_9">
-      <path class="st1" d="M238.79,876.31s-56.46-58.71-.27-150.72,186.37-136.23,186.37-136.23l-73.28-67.45s-121.1-65.09-226.72-43.46c-105.62,21.63-110.08,102.96-110.08,102.96l-.68,83.82,130.86,175.53,93.8,35.55Z"/>
-      <text class="st5" transform="translate(152.13 503.68)"><tspan x="0" y="0">9.</tspan><tspan x="-64.52" y="30">Inadequate </tspan><tspan x="-104.32" y="60">use of fragmented</tspan><tspan x="-112.27" y="90">sector and financial</tspan><tspan x="-91.39" y="120">data in decision </tspan><tspan x="-64.54" y="150">making and</tspan><tspan x="-79.26" y="180">accountability</tspan></text>
+      <path class="bcls-11" d="M468.64,454.2l-.64,13.8-9.31-10.21c-107.57-118.06-262.12-181.51-421.05-173.6,46.04-107.83,132.38-198.59,249.01-247.61,2.34-.98,4.68-1.91,7.02-2.85,117.96,106.78,182.38,260.93,174.96,420.48Z"/>
+      <text class="bcls-4" transform="translate(256.94 161.2)"><tspan x="0" y="0">2.</tspan><tspan x="-67.4" y="29">Incoherence</tspan><tspan x="-124.67" y="58">between policy goals,</tspan><tspan x="-125.94" y="87">context, and available</tspan><tspan x="-49.6" y="116">resources</tspan></text>
     </g>
     <g id="bottleneck_3">
-      <path class="st1" d="M470.16,341.8s96.72-97.71,105.88-205.13C585.21,29.25,508.47,1.94,508.47,1.94l-130.76-17.27-157.54,50.28-29.88,56.3s76.81-27.09,137.31,62.14c60.5,89.24,46.86,226.04,46.86,226.04l95.69-37.63Z"/>
-      <text class="st5" transform="translate(446.56 81.79)"><tspan x="0" y="0">3.</tspan><tspan x="-52.21" y="30">Mismatch</tspan><tspan x="-86" y="60">between policy</tspan><tspan x="-90.51" y="90">goals, capability</tspan><tspan x="-77.1" y="120">and resources</tspan></text>
+      <path class="bcls-2" d="M478.21,458.69l-10.21,9.31.64-13.8c7.42-159.55-57-313.7-174.96-420.48,119.66-48.07,247.83-43.18,358.14,3.93,7.91,158.92-55.54,313.48-173.6,421.05Z"/>
+      <text class="bcls-4" transform="translate(512.31 69.96)"><tspan x="0" y="0">3.</tspan><tspan x="-79.39" y="29">Unsustainable</tspan><tspan x="-91.45" y="58">fiscal position of</tspan><tspan x="-99.9" y="87">governments and</tspan><tspan x="-75.07" y="116">organizations</tspan></text>
     </g>
-  </g>
-
-  <g id='role_A'>
-     <path class="st7" d="M611.37,487.97s-47.2-75.22-118.71-71.81c-71.51,3.42,3.22,101.19-52.44,101.19-75.19,0-112.79-74.66-112.79-74.66l.09.18c.21-1.22.44-2.43.68-3.64,13.14-65.87,71.28-115.51,141.02-115.51,79.42,0,143.8,64.38,143.8,143.8,0,6.95-.49,13.78-1.45,20.47l-.19-.03Z"/>
-    <path class="st8" d="M327.41,442.69c-1.59,8.55-2.41,17.37-2.41,26.38,0,79.42,64.38,143.8,143.8,143.8,69.73,0,127.87-49.64,141.02-115.51.62-3.1,1.14-6.23,1.55-9.39,0,0-47.2-75.22-118.71-71.81-71.51,3.42,3.22,101.19-52.44,101.19-75.19,0-112.79-74.66-112.79-74.66Z"/>
-    <circle class="st4" cx="469" cy="468.29" r="55.49"/>
-    <path class="st7" d="M501.79,454.23l-36.64,36.36c-2.16,2.16-5.6,2.3-7.9.14l-19.4-17.67c-2.3-2.16-2.44-5.75-.43-8.05,2.16-2.3,5.75-2.44,8.05-.29l15.38,14.08,32.76-32.76c2.3-2.3,5.89-2.3,8.19,0,2.3,2.3,2.3,5.89,0,8.19Z"/>
-    <text class="st2" transform="translate(420.74 365.07)"><tspan x="0" y="0">FISCAL</tspan><tspan x="-1.9" y="32.13">POLICY</tspan></text>
-    <text class="st2" transform="translate(440.02 574.04)"><tspan x="0" y="0">PFM</tspan></text>
+    <g id="bottleneck_4">
+      <path class="bcls-8" d="M481.8,468.64l-13.8-.64,10.21-9.31c118.06-107.57,181.51-262.13,173.6-421.05,107.83,46.04,198.59,132.38,247.61,249.01.98,2.34,1.91,4.68,2.85,7.02-106.78,117.96-260.93,182.38-420.48,174.96Z"/>
+      <text class="bcls-3" transform="translate(733.23 216.75)"><tspan x="0" y="0">4.</tspan><tspan x="-61.79" y="29">Inadequate</tspan><tspan x="-88.98" y="58">and inequitable</tspan><tspan x="-115.6" y="87">resources mobilized</tspan><tspan x="-78.39" y="116">and deployed </tspan></text>
+    </g>
+    <g id="bottleneck_5">
+      <path class="bcls-11" d="M477.31,478.21l-9.31-10.21,13.8.64c159.55,7.42,313.7-57,420.48-174.96,48.07,119.66,43.18,247.83-3.93,358.14-158.92,7.91-313.48-55.54-421.05-173.6Z"/>
+      <text class="bcls-4" transform="translate(760.22 478.1)"><tspan x="0" y="0">5.</tspan><tspan x="-109.36" y="29">Unreliable, delayed</tspan><tspan x="-91.3" y="58">and fragmented</tspan><tspan x="-108.95" y="87">fundingfor delivery</tspan></text>
+    </g>
+    <g id="bottleneck_6">
+      <path class="bcls-2" d="M467.36,481.8h0c.24-5.09,6.51-7.36,9.95-3.59h0c107.57,118.06,262.13,181.51,421.05,173.6-46.04,107.83-132.38,198.59-249.01,247.61-2.34.98-4.68,1.91-7.02,2.85-117.96-106.78-182.38-260.93-174.96-420.48Z"/>
+      <text class="bcls-4" transform="translate(662.81 670.69)"><tspan x="0" y="0">6.</tspan><tspan x="-132.86" y="29">Inefficient deployment</tspan><tspan x="-117.41" y="58">and management of</tspan><tspan x="-119.31" y="87">resources and inputs</tspan></text>
+    </g>
+    <g id="bottleneck_7">
+      <path class="bcls-8" d="M457.79,477.31l10.21-9.31-.64,13.8c-7.42,159.55,57,313.7,174.96,420.48-119.66,48.07-247.83,43.18-358.14-3.93-7.91-158.92,55.54-313.47,173.6-421.05Z"/>
+      <text class="bcls-3" transform="translate(403.42 670.58)"><tspan x="0" y="0">7.</tspan><tspan x="-48.16" y="29">Resource</tspan><tspan x="-75.84" y="58">management</tspan><tspan x="-75.5" y="87">and oversight</tspan><tspan x="-61.62" y="116">institutions</tspan><tspan x="-59.06" y="145">discourage</tspan><tspan x="-71.6" y="174">performance</tspan></text>
+    </g>
+    <g id="bottleneck_8">
+      <path class="bcls-11" d="M454.2,467.36h0c5.09.24,7.36,6.51,3.59,9.95h0c-118.06,107.57-181.51,262.13-173.6,421.05-107.83-46.04-198.59-132.38-247.61-249.01-.98-2.34-1.91-4.68-2.85-7.02,106.78-117.96,260.93-182.38,420.48-174.96Z"/>
+      <text class="bcls-4" transform="translate(184.64 558.71)"><tspan x="0" y="0">8.</tspan><tspan x="-61.39" y="29">Inadequate</tspan><tspan x="-67.86" y="58">use of sector</tspan><tspan x="-102.19" y="87">and financial data</tspan><tspan x="-107.77" y="116">in decision making</tspan><tspan x="-99.27" y="145">and accountabilit</tspan></text>
+    </g>
   </g>
 </svg>

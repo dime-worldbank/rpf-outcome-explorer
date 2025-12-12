@@ -7,8 +7,8 @@ function ArrowNav({ selectedItem, setSelectedItem }) {
   // navigationOrder except for group, which can be group-1, group-2, ... or group-A, group-B, ...
   const baseOrder = ["outcome", "results", "policy"];
   const navigationMap = {"outcome": "Development Outcome", "results": "Public Sector Results", "policy": "Delivery Capability and Feasible Policy", "group": "Evidence"};
-  const bottleneckKeys =  Array.from({ length: 9 }, (_, i) => 'bottleneck_' + (i+ 1).toString());
-  for (let i = 1; i <= 9; i++) {
+  const bottleneckKeys =  Array.from({ length: 8 }, (_, i) => 'bottleneck_' + (i+ 1).toString());
+  for (let i = 1; i <= 8; i++) {
     navigationMap['bottleneck_' + i.toString()] =   ' Bottleneck Group - ' + i.toString() ;
   }
 
