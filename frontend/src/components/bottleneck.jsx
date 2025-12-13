@@ -33,27 +33,37 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                   <Accordion.Item eventKey={index.toString()} key={index}>
                     <Accordion.Header><p>{bottleneck_name}</p></Accordion.Header>
                     <Accordion.Body>
-                      {Object.keys(bottleneckData).map((bottleneck_outcome, index) => {
-                            const item = bottleneck_outcome !== 'name' ? bottleneckData[bottleneck_outcome] : [];
-                        return (
-                          item.length > 0 && <div key={index} style={{ padding: '10px', textAlign: 'left' }}>
-                            <div style={{ width:'100%'}}>
-                                <p><span>{bottleneck_outcome}</span></p>
-                            </div>
-                            {SHOW_EVIDENCE && <>
-                            {
-                              item.map((example, index) => {
-                                const exampleText = example["Description of  Examples of Sub-Bottlenecks"];
-                                const exampleRef = example["References"];
-                                const source = example["Source"];
-                                return (
-                                  <ContentText example={exampleText} exampleRef={exampleRef} source={source} key={index} />
-                                );
-                              })
-                            }</>}
-                                                      </div>
-                        );
-                      })}
+                      {(() => {
+                        const dataItems = Object.keys(bottleneckData)
+                          .filter(key => key !== 'name')
+                          .map((bottleneck_outcome, index) => {
+                            const item = bottleneckData[bottleneck_outcome] || [];
+                            
+                            if (item.length === 0) return null;
+                            
+                            return (
+                              <div key={index} style={{ padding: '10px', textAlign: 'left' }}>
+                                <div style={{ width:'100%'}}>
+                                    <p><span>{bottleneck_outcome}</span></p>
+                                </div>
+                                {SHOW_EVIDENCE && <>
+                                {
+                                  item.map((example, index) => {
+                                    const exampleText = example["Description of  Examples of Sub-Bottlenecks"];
+                                    const exampleRef = example["References"];
+                                    const source = example["Source"];
+                                    return (
+                                      <ContentText example={exampleText} exampleRef={exampleRef} source={source} key={index} />
+                                    );
+                                  })
+                                }</>}
+                              </div>
+                            );
+                          })
+                          .filter(item => item !== null);
+                        
+                        return dataItems.length === 0 ? 'No Data To Display' : dataItems;
+                      })()}
                     </Accordion.Body>
                   </Accordion.Item>
                 );

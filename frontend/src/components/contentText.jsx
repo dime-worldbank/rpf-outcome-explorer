@@ -19,7 +19,7 @@ const createText = (example, exampleRef, source) => {
                 {example && (
                     <p  style={{ fontSize: '16px', marginLeft:'20px'}}>
                        {anonymizeCountry(example)}
-                        {exampleRef && <span style={{ fontStyle: 'italic',fontSize: '12px' }}><br/> Reference:  {anonymizeCountry(exampleRef)}, Source: {anonymizeCountry(source)}</span>}
+                        {exampleRef && <span style={{ fontStyle: 'italic',fontSize: '12px', overflowWrap: 'anywhere' }}><br/> Reference:  {anonymizeCountry(exampleRef)}, Source: {anonymizeCountry(source)}</span>}
                    </p>
                 )}
             </div>

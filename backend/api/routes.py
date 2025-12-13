@@ -100,7 +100,7 @@ def get_example_data():
         match = re.match(r"(\d+(?:\.\d+)*)", text)
         return match.group(1) if match else None
 
-    for _, row in filtered_bottleneck_data.iterrows():
+    for _, row in bottleneck_examples.iterrows():
         parent_name = str(row["PFM Bottleneck"]).strip()
         if pd.isna(parent_name): continue
         child_name = str(row["Sub-Bottleneck"]).strip()
@@ -110,7 +110,7 @@ def get_example_data():
         parent_key = f"bottleneck_{parent_num}" if parent_num else parent_name
         child_key = f"bottleneck_{child_num.replace('.', '_')}" if child_num else child_name
         # Exclude parent and child columns from the nested dict
-        nested = {c: str(row[c]) for c in filtered_bottleneck_data.columns if c not in ["Public Finance Bottleneck Group", "Public Finance Bottleneck"]}
+        nested = {c: str(row[c]) for c in bottleneck_examples.columns if c not in ["Public Finance Bottleneck Group", "Public Finance Bottleneck"]}
         # Parent
         if parent_key not in data_dict:
             data_dict[parent_key] = {"name": parent_name}
@@ -119,7 +119,8 @@ def get_example_data():
             data_dict[parent_key][child_key] = {"name": child_name}
         if grandchild_name not in data_dict[parent_key][child_key]:
             data_dict[parent_key][child_key][grandchild_name] = []
-        data_dict[parent_key][child_key][grandchild_name].append({**nested})
+        if row['Development Outcome'] == filter_value:
+            data_dict[parent_key][child_key][grandchild_name].append({**nested})
 
     roles_examples = read_excel('Roles - Examples')
     if isinstance(roles_examples, tuple):
