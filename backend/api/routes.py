@@ -100,7 +100,7 @@ def get_example_data():
         match = re.match(r"(\d+(?:\.\d+)*)", text)
         return match.group(1) if match else None
 
-    for _, row in bottleneck_examples.iterrows():
+    for _, row in filtered_bottleneck_data.iterrows():
         parent_name = str(row["PFM Bottleneck"]).strip()
         if pd.isna(parent_name): continue
         child_name = str(row["Sub-Bottleneck"]).strip()
@@ -116,11 +116,11 @@ def get_example_data():
             data_dict[parent_key] = {"name": parent_name}
         # Group all examples for the same child_key under an object with 'name' and 'child' list
         if child_key not in data_dict[parent_key]:
-            data_dict[parent_key][child_key] = {"name": child_name}
+            outcome_bottleneck = re.sub(r'^[\d.]+\s+', '', grandchild_name)
+            data_dict[parent_key][child_key] = {"name": outcome_bottleneck}
         if grandchild_name not in data_dict[parent_key][child_key]:
             data_dict[parent_key][child_key][grandchild_name] = []
-        if row['Development Outcome'] == filter_value:
-            data_dict[parent_key][child_key][grandchild_name].append({**nested})
+        data_dict[parent_key][child_key][grandchild_name].append({**nested})
 
     roles_examples = read_excel('Roles - Examples')
     if isinstance(roles_examples, tuple):

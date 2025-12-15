@@ -36,6 +36,9 @@ function VerticalNavbarPermanent() {
         if (event){
           const target = event.target.closest('g');
           if (!target) return;
+          if (target.id === 'group0'){
+            return;
+          }
           setSelectedItem(target.id);
           contentRef.current.scrollIntoView({ behavior: 'smooth' });
         }

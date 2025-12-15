@@ -9,9 +9,6 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
   const data = rolesData[selectedItem] || [];
   const role_name = rolesData[selectedItem]?.name || '';
   const SHOW_EVIDENCE = true; // currently the posit variable addition is not working. Make this configurable as that is resolved
-    const handleClick = (event) =>  {
-    event.stopPropagation();
-    }
   return (
     <>
       {selectedItem && (
@@ -32,7 +29,7 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
                 const roleData = data[roleName] || [];
                 const role_name = data[roleName]?.['name'] || '';
                 return (
-                  <Accordion.Item >
+                  <Accordion.Item eventKey={index.toString()} key={index} >
                     <Accordion.Button > <p>{role_name}</p></Accordion.Button>
                     {SHOW_EVIDENCE && <Accordion.Body>
                       {Object.keys(roleData).map((key, index) => {

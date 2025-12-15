@@ -10,7 +10,6 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
   const bottleneck_group = bottleneckData[selectedItem]?.name || '';
   const SHOW_EVIDENCE = true;
 
-  const defaultActiveKey = Array.from({ length: 21 }, (_, i) => i.toString());
   return (
     <>
       {selectedItem && (
@@ -21,10 +20,10 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
         </div>
       )}
 
-      <div className="pt-4">
+      <div className="pt-4" key={selectedItem}>
         <div className="container text-start container-bottleneck">
-          <p className="ps-2">Within this, the following bottlenecks contribute to public sector challenges and constrain the achievement of public sector results:</p>
-            <Accordion alwaysOpen defaultActiveKey={defaultActiveKey} className="mb-4">
+          <p className="ps-2">{Object.keys(data).length > 0 ? "Within this, the following bottlenecks contribute to public sector challenges and constrain the achievement of public sector results. (Click for country examples.)" :  "No relevant examples to display."}</p>
+            <Accordion className="mb-4">
               {Object.keys(data).map((bottleneckName, index) => {
                 if (bottleneckName === 'name') return null; // Skip the 'name' key
                 const bottleneckData = data[bottleneckName] || [];
@@ -43,9 +42,6 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                             
                             return (
                               <div key={index} style={{ padding: '10px', textAlign: 'left' }}>
-                                <div style={{ width:'100%'}}>
-                                    <p><span>{bottleneck_outcome}</span></p>
-                                </div>
                                 {SHOW_EVIDENCE && <>
                                 {
                                   item.map((example, index) => {
@@ -53,7 +49,7 @@ function Bottlenecks({ selectedItem, bottleneckData }) {
                                     const exampleRef = example["References"];
                                     const source = example["Source"];
                                     return (
-                                      <ContentText example={exampleText} exampleRef={exampleRef} source={source} key={index} />
+                                      <ContentText example={exampleText} exampleRef={exampleRef} source={source} key={index} bottleneckName={bottleneck_outcome} />
                                     );
                                   })
                                 }</>}
