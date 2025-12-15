@@ -19,7 +19,7 @@ const imageMap = {
   "Economic Resilience": EconomicResilienceImg,
   "Gender-Based Violence": GenderBasedViolenceImg,
   "The Energy Transition": RenewableEnergyImg,
-  "Universal Healthcare": UniversalHealthCareImg,
+  "Healthy Lives": UniversalHealthCareImg,
   "Revenue": RevenueImg,
   // "Water": WaterImg
 };

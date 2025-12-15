@@ -40,7 +40,7 @@ const CircleVisual = ({ onClick, selectedItem }) => {
         }else{
             setWheelType('');
         }
-    }, [selectedItem]);
+    }, [selectedItem, wheelType]);
 
     useEffect(() => {
         if (wheelType == '1') {

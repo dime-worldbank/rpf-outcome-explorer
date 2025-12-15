@@ -29,7 +29,7 @@ function HomePage() {
     { title: 'Economic Resilience', icon: EconomicResilienceImg, path: '/EconomicResilience' },
     { title: 'Gender-Based Violence', icon: GenderBasedViolenceImg, path: '/GenderBasedViolence' },
     { title: 'The Energy Transition', icon: RenewableEnergyImg, path: '/RenewableEnergy' },
-    { title: 'Universal Healthcare', icon: UniversalHealthCareImg, path: '/UniversalHealthCare' },
+    { title: 'Healthy Lives', icon: UniversalHealthCareImg, path: '/UniversalHealthCare' },
     // { title: 'Outcome Combined', icon: OutcomeCombinedImg, path: '/OutcomeCombined' },
     // { title: 'Water', icon: WaterImg, path: '/Water' },
     { title: 'Revenue', icon: RevenueImg, path: '/Revenue' },
