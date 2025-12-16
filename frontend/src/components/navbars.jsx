@@ -44,6 +44,15 @@ function VerticalNavbarPermanent() {
         }
     };
 
+  useEffect(() => {
+      const outcomeReact = document.getElementsByClassName('clickable outcome');
+      if (!outcomeReact) return;
+      for (let elem of outcomeReact){
+          elem.classList.add('selected');
+      }
+
+  }, []);
+
   const handleZoneClick = (event) => {
     const clickedId = event.target.id;
     if (!clickedId) return;

@@ -28,7 +28,6 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
         }
         const result = await response.json();
         setData(result);
-        console.log(result);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -51,7 +50,6 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
     }
     const result = await response.json();
     setFrameworkData(result);
-    console.log(result);
 
   } catch (error) {
     console.error('Error fetching data:', error);
