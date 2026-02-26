@@ -1,51 +1,57 @@
-
 import React from "react";
 import { BiSolidRightArrow, BiSolidLeftArrow } from "react-icons/bi";
 import PropTypes from "prop-types";
 
+const bottleneckOrder = Array.from({ length: 8 }, (_, i) => 'bottleneck_' + (i + 1));
+const roleOrder = Array.from({ length: 4 }, (_, i) => 'role_' + String.fromCharCode(65 + i));
+
+const navigationMap = {
+  "outcome": "Development Outcome",
+  "results": "Public Sector Results",
+  "policy": "Delivery Capability & Feasible Policy",
+};
+for (let i = 1; i <= 8; i++) navigationMap['bottleneck_' + i] = 'Bottleneck Group ' + i;
+for (let i = 0; i < 4; i++) navigationMap['role_' + String.fromCharCode(65 + i)] = 'Role ' + String.fromCharCode(65 + i);
+
+const btnStyle = {
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
+  color: '#4d9fd2',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
+  padding: '6px 10px',
+  borderRadius: '6px',
+  fontSize: '0.9rem',
+  fontWeight: '500',
+  transition: 'background 0.15s',
+};
+
 function ArrowNav({ selectedItem, setSelectedItem }) {
-  // navigationOrder except for group, which can be group-1, group-2, ... or group-A, group-B, ...
-  const baseOrder = ["outcome", "results", "policy"];
-  const navigationMap = {"outcome": "Development Outcome", "results": "Public Sector Results", "policy": "Delivery Capability and Feasible Policy", "group": "Evidence"};
-  const bottleneckKeys =  Array.from({ length: 8 }, (_, i) => 'bottleneck_' + (i+ 1).toString());
-  for (let i = 1; i <= 8; i++) {
-    navigationMap['bottleneck_' + i.toString()] =   ' Bottleneck Group - ' + i.toString() ;
-  }
+  const isRole = selectedItem.startsWith('role');
+  const isBottleneck = selectedItem.startsWith('bottleneck');
+  if (!isRole && !isBottleneck) return null;
 
-  const roleKeys =  Array.from({ length: 4 }, (_, i) => "role_" + String.fromCharCode(65 + i));
-  for (let i = 0; i < 4; i++) {
-    navigationMap['role_' + String.fromCharCode(65 + i)] =  "Role - " + String.fromCharCode(65 + i);
-  }
-  let navigationOrder = [...baseOrder, ...bottleneckKeys, ...roleKeys];
-
-
-  const selectedIndex = navigationOrder.indexOf(selectedItem);
-  const previousItem = navigationOrder.length > 0
-    ? navigationOrder[(selectedIndex - 1 + navigationOrder.length) % navigationOrder.length]
-    : null;
-  const nextItem = navigationOrder.length > 0
-    ? navigationOrder[(selectedIndex + 1) % navigationOrder.length]
-    : null;
+  const group = isRole ? roleOrder : bottleneckOrder;
+  const idx = group.indexOf(selectedItem);
+  const prevItem = idx > 0 ? group[idx - 1] : null;
+  const nextItem = idx < group.length - 1 ? group[idx + 1] : null;
 
   return (
-    <div className="d-flex justify-content-between my-2"
-      style={{ width: "100%",  position: "relative" }}
-    >
-      {previousItem && (
-        <div
-          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", textAlign: 'left' }}
-          onClick={() => setSelectedItem(previousItem)}
-        >
-          <BiSolidLeftArrow size={15} /> {navigationMap[previousItem]}
-        </div>
-      )}
+    <div className="d-flex justify-content-between align-items-center mb-3">
+      {prevItem ? (
+        <button style={btnStyle} onClick={() => setSelectedItem(prevItem)}>
+          <BiSolidLeftArrow size={14} />
+          {navigationMap[prevItem]}
+        </button>
+      ) : <div />}
+
       {nextItem && (
-        <div
-          style={{ padding: "10px", color: "blue", textDecoration: "underline", cursor: "pointer", textAlign: 'right' }}
-          onClick={() => setSelectedItem(nextItem)}
-        >
-          {navigationMap[nextItem]} <BiSolidRightArrow size={15} />
-        </div>
+        <button style={btnStyle} onClick={() => setSelectedItem(nextItem)}>
+          {navigationMap[nextItem]}
+          <BiSolidRightArrow size={14} />
+        </button>
       )}
     </div>
   );

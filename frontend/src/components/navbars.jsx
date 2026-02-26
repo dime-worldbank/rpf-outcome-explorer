@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import OutcomeContext from '../OutcomeContext';
 import Content from './content';
 import CircleVisual from './circleVisual';
+import ProgressIndicator from './progressIndicator';
 import {ReactComponent as VerticalNavImg} from '../assets/framework2.svg';
 
 
@@ -83,11 +84,13 @@ function VerticalNavbarPermanent() {
   };
 
     return (
-        <Container fluid style={{ height: '92vh', padding: 0 }}>
-            <Row className="h-100">
+        <Container fluid style={{ height: '92vh', padding: 0 }} className="d-flex flex-column">
+            <ProgressIndicator selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+            <Row className="flex-grow-1" style={{ minHeight: 0 }}>
                 {/* Sidebar Column */}
                 <Col xs={12} md={4} lg={4}
-                    className="bg-paper d-flex flex-column h-100"
+                    className="bg-paper d-flex flex-column"
+                    style={{ height: '100%' }}
                     >
                     <VerticalNavImg className={isHovered ? 'hovered' : ''} onClick={(event) => handleZoneClick(event)} onMouseOver={() => setIsHovered(true)} onMouseOut={() => setIsHovered(false)}
                                  style={{
@@ -101,7 +104,7 @@ function VerticalNavbarPermanent() {
                   
                     <CircleVisual onClick={handleVizClick} selectedItem={selectedItem} />
                 </Col>
-                <Col xs={12} md={8} lg={8} className="h-100" style={{ overflowY: 'auto' }}>
+                <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
                   <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
                 </Col>
             </Row>

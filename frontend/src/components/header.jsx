@@ -29,25 +29,31 @@ function Header() {
 
   return (
     <Navbar expand="lg" className="px-4 header-custom">
-      <Container fluid>
-        <Navbar.Brand 
-          to="/" 
-          onClick={() => setOutcome('')}
-          className="fw-bold me-auto text-white text-decoration-none"
-        >
-          <a href={LOGO_URL}>
-          <Image src={RPF_logo} alt="RPF Logo" height="40" className="me-4" /></a>
-          Outcome Explorer
-        </Navbar.Brand>
+      <Container fluid className="position-relative">
 
-        {outcome && (
-          <div className="d-flex justify-content-center align-items-center mx-auto">
+        {/* Home icon — always on the left */}
+        <Nav.Link
+          onClick={() => setOutcome('')}
+          className="text-white p-0 me-3"
+          style={{ cursor: 'pointer', zIndex: 1 }}
+          title="Go to home"
+        >
+          <FaHome size={28} />
+        </Nav.Link>
+
+        {/* Centred title or outcome dropdown */}
+        <div
+          className="position-absolute start-50 translate-middle-x d-flex justify-content-center align-items-center"
+          style={{ pointerEvents: 'auto' }}
+        >
+          {outcome ? (
             <div className="d-flex align-items-center">
-                                <div
-                    className="bg-white rounded-circle overflow-hidden me-3"
-                    style={{ width: '40px', height: '40px', padding: '3px' }}>
-                    <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
-                  </div>
+              <div
+                className="bg-white rounded-circle overflow-hidden me-2"
+                style={{ width: '36px', height: '36px', padding: '3px', flexShrink: 0 }}
+              >
+                <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
+              </div>
               <Dropdown>
                 <Dropdown.Toggle
                   variant="secondary"
@@ -55,36 +61,24 @@ function Header() {
                   className="d-flex align-items-center bg-transparent border-0 p-0"
                   style={{ boxShadow: 'none' }}
                 >
-                   <span className="text-white">{outcome}</span>
+                  <span className="text-white fw-bold fs-5">{outcome}</span>
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu style={{ minWidth: '300px', overflowY: 'auto' }}>
                   {Object.keys(imageMap).map((key) => (
-                    <Dropdown.Item
-                      key={key}
-                      onClick={() => setOutcome(key)}
-                      className="d-flex"
-                    >
+                    <Dropdown.Item key={key} onClick={() => setOutcome(key)} className="d-flex">
                       <span>{key}</span>
                     </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
             </div>
-          </div>
-        )}
-
-        <Nav className="ms-auto">
-          {outcome !== "" && (
-            <Nav.Link
-              to="/"
-              onClick={() => setOutcome('')}
-              className="text-white p-0"
-            >
-              <FaHome size={24} />
-            </Nav.Link>
+          ) : (
+            <span className="fw-bold text-white fs-5">Outcome Explorer</span>
           )}
-        </Nav>
+        </div>
+
+        {/* Right spacer to balance the home icon */}
+        <div className="ms-auto" style={{ width: '28px' }} />
       </Container>
     </Navbar>
   );
