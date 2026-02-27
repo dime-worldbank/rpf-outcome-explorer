@@ -58,8 +58,8 @@ function VerticalNavbarPermanent() {
     outcome:    ['development-outcomes'],
     results:    ['public-sector-results', 'challenges'],
     policy:     ['public-policy', 'fiscal-policy-pfm', 'institutions'],
-    role:       ['left-question', 'public-policy', 'fiscal-policy-pfm', 'institutions'],
-    bottleneck: ['right-question', 'fiscal-policy-pfm'],
+    role:       ['left-question'],
+    bottleneck: ['right-question'],
   };
 
   const ALL_COMPONENTS = [
@@ -68,7 +68,10 @@ function VerticalNavbarPermanent() {
     'left-question', 'right-question',
   ];
 
-  // Keep SVG highlighting and sidebar height in sync with selectedItem
+  // Policy area in the framework diagram: hidden when focus overlay is active
+  const POLICY_COMPONENTS = ['fiscal-policy-pfm', 'institutions'];
+
+// Keep SVG highlighting and sidebar height in sync with selectedItem
   useEffect(() => {
     // Update sidebar height
     if (selectedItem === 'outcome' || selectedItem === 'results' || selectedItem === 'policy') {
@@ -96,6 +99,14 @@ function VerticalNavbarPermanent() {
         el.classList.remove('highlighted');
       }
     });
+
+    // Hide policy components in the framework when role/bottleneck is active
+    // (CircleVisual shows the wheel for those steps instead)
+    const showFocusWheel = key === 'role' || key === 'bottleneck';
+    POLICY_COMPONENTS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.visibility = showFocusWheel ? 'hidden' : '';
+    });
   }, [selectedItem]);
 
   const handleZoneClick = (event) => {
@@ -117,15 +128,17 @@ function VerticalNavbarPermanent() {
                     style={{ height: '100%' }}
                     >
                     <VerticalNavImg
-                                 style={{
-                                     height: topDivHeight + 'vh',
-                                     transition: 'height 0.3s ease-in-out',
-                                     width: '100%',
-                                 }}
+                      style={{
+                        height: topDivHeight + 'vh',
+                        transition: 'height 0.3s ease-in-out',
+                        width: '100%',
+                      }}
                     />
 
                   
-                    <CircleVisual onClick={handleVizClick} selectedItem={selectedItem} />
+                    {(selectedItem.startsWith('role') || selectedItem.startsWith('bottleneck')) && (
+                      <CircleVisual onClick={handleVizClick} selectedItem={selectedItem} />
+                    )}
                 </Col>
                 <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
                   <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
