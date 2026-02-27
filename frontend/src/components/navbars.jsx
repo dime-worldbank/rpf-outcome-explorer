@@ -5,7 +5,7 @@ import OutcomeContext from '../OutcomeContext';
 import Content from './content';
 import CircleVisual from './circleVisual';
 import ProgressIndicator from './progressIndicator';
-import {ReactComponent as VerticalNavImg} from '../assets/framework2.svg';
+import {ReactComponent as VerticalNavImg} from '../assets/vertical-version1.svg';
 
 
 
@@ -51,35 +51,59 @@ function VerticalNavbarPermanent() {
       for (let elem of outcomeReact){
           elem.classList.add('selected');
       }
-
   }, []);
+
+  // Step → SVG component IDs to highlight
+  const STEP_HIGHLIGHTS = {
+    outcome:    ['development-outcomes'],
+    results:    ['public-sector-results', 'challenges'],
+    policy:     ['public-policy', 'fiscal-policy-pfm', 'institutions'],
+    role:       ['left-question', 'public-policy', 'fiscal-policy-pfm', 'institutions'],
+    bottleneck: ['right-question', 'fiscal-policy-pfm'],
+  };
+
+  const ALL_COMPONENTS = [
+    'development-outcomes', 'public-sector-results', 'challenges',
+    'public-policy', 'fiscal-policy-pfm', 'institutions',
+    'left-question', 'right-question',
+  ];
+
+  // Keep SVG highlighting and sidebar height in sync with selectedItem
+  useEffect(() => {
+    // Update sidebar height
+    if (selectedItem === 'outcome' || selectedItem === 'results' || selectedItem === 'policy') {
+      setTopDivHeight(55);
+    } else if (selectedItem.startsWith('bottleneck') || selectedItem.startsWith('role')) {
+      setTopDivHeight(45);
+    }
+
+    // Resolve step key
+    const key = selectedItem.startsWith('role') ? 'role'
+              : selectedItem.startsWith('bottleneck') ? 'bottleneck'
+              : selectedItem;
+
+    const toHighlight = STEP_HIGHLIGHTS[key] || [];
+
+    // Apply highlighted / dimmed classes to each component
+    ALL_COMPONENTS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (toHighlight.includes(id)) {
+        el.classList.add('highlighted');
+        el.classList.remove('dimmed');
+      } else {
+        el.classList.add('dimmed');
+        el.classList.remove('highlighted');
+      }
+    });
+  }, [selectedItem]);
 
   const handleZoneClick = (event) => {
     const clickedId = event.target.id;
     if (!clickedId) return;
-    
-    setSelectedItem(clickedId);
+    setSelectedItem(clickedId); // useEffect handles SVG sync and height
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-    // Add 'selected' class to the clicked zone, remove from others
-    const svg = event.target.ownerSVGElement || event.target.closest('rect');
-    if (svg) {
-      ['outcome', 'results', 'policy', 'role_A', 'bottleneck_1'].forEach(zoneId => {
-        const el = svg.getElementById(zoneId);
-        if (el) {
-          if (zoneId === clickedId) {
-            el.classList.add('selected');
-          } else {
-            el.classList.remove('selected');
-          }
-        }
-      });
-    }
-    if (clickedId === 'outcome' || clickedId === 'results' || clickedId === 'policy'){
-      setTopDivHeight(55); // Expand for top three zones
-    } else if(clickedId.startsWith('bottleneck') || clickedId.startsWith("role")) {
-      setTopDivHeight(45); // Shrink for role and bottleneck zones
     }
   };
 
@@ -92,14 +116,13 @@ function VerticalNavbarPermanent() {
                     className="bg-paper d-flex flex-column"
                     style={{ height: '100%' }}
                     >
-                    <VerticalNavImg className={isHovered ? 'hovered' : ''} onClick={(event) => handleZoneClick(event)} onMouseOver={() => setIsHovered(true)} onMouseOut={() => setIsHovered(false)}
+                    <VerticalNavImg
                                  style={{
-                                    minWidth: '33vw',
-                                     height: topDivHeight +  'vh',
-                                     transition: 'all 0.3s ease-in-out',
-                                    minWidth: window.innerWidth >= 768 ? '33vw' : '100%'
+                                     height: topDivHeight + 'vh',
+                                     transition: 'height 0.3s ease-in-out',
+                                     width: '100%',
                                  }}
-                    />  
+                    />
 
                   
                     <CircleVisual onClick={handleVizClick} selectedItem={selectedItem} />

@@ -170,3 +170,16 @@ $theme-colors: map-merge(
   max-height: 80vh;
   overflow-y: auto;
 }
+
+// SVG component highlighting for vertical-version1.svg
+.component {
+  transition: opacity 0.35s ease;
+}
+
+.component.dimmed {
+  opacity: 0.2;
+}
+
+.component.highlighted {
+  opacity: 1;
+}
