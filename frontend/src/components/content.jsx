@@ -8,7 +8,7 @@ import OutcomeContext from '../OutcomeContext';
 import Bottlenecks from './bottleneck';
 import Roles from './role';
 import {OUTCOMES} from "../constants"
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const BASE_URL = 'http://localhost:8000';
 
 function Content({selectedItem, setSelectedItem, contentRef}) {
     const { outcome } = useContext(OutcomeContext);

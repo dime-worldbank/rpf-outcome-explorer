@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 # Blueprint setup
 api_bp = Blueprint('api', __name__)
-EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data1.xlsx')
+EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data.xlsx')
 
 # --- Utility Functions ---
 def read_excel(sheet_name):
@@ -46,7 +46,7 @@ def create_outcome_results():
         return df
     data_dict = {}
     parent_title = 'Outcome'
-    children = ["Public Sector Results", "Feasible Policy", "Delivery Capability", "Source", "Development Outcome"]
+    children = ["Public Sector Results", "Feasible Policy", "Delivery Capability", "Source", "Outcome Description"]
     for _, row in df.iterrows():
         parent = row[parent_title]
         if pd.isna(parent): continue
@@ -76,7 +76,7 @@ def get_all_data():
     data = {
         'outcome-results': create_outcome_results(),
         'Public Sector Challenges': create_public_sector_challenges(),
-        'taxonomy-roles': create_role_taxonomy('Taxonomy-roles'),
+        'taxonomy-roles': create_role_taxonomy('taxonomy-roles'),
 
     }
     return safe_jsonify(data)
@@ -90,10 +90,10 @@ def get_example_data():
     if not filter_value:
         return jsonify({"error": "Missing 'filter' query parameter"}), 400
 
-    bottleneck_examples = read_excel('Bottlenecks - Examples')
+    bottleneck_examples = read_excel('Sub Bottlenecks - Examples')
     if isinstance(bottleneck_examples, tuple):
         return bottleneck_examples
-    filtered_bottleneck_data = bottleneck_examples[bottleneck_examples['Development Outcome'] == filter_value].dropna(subset=["PFM Bottleneck", "Sub-Bottleneck"])
+    filtered_bottleneck_data = bottleneck_examples[bottleneck_examples['Policy Area'] == filter_value].dropna(subset=["PFM Bottleneck", "Sub-Bottleneck"])
     import re
     data_dict = {}
     def extract_bottleneck_number(text):
@@ -125,7 +125,7 @@ def get_example_data():
     roles_examples = read_excel('Roles - Examples')
     if isinstance(roles_examples, tuple):
         return roles_examples
-    filtered_roles_data = roles_examples[roles_examples['Outcome'] == filter_value].dropna(subset="Role of Public Finance")
+    filtered_roles_data = roles_examples[roles_examples['Policy Area'] == filter_value].dropna(subset="Role of Public Finance")
     dict_data_role = {}
     for _, row in filtered_roles_data.iterrows():
         parent_name = str(row["Role of Public Finance"]).strip()

@@ -18,11 +18,8 @@ import fivestepImg from '../assets/framwork.png';
 import RPF_logo_black from '../assets/rpf_logo_black.png';
 
 function HomePage() {
-  const { setOutcome } = useContext(OutcomeContext);
+  const { setShowExplorer } = useContext(OutcomeContext);
 
-  const handleNavigation = (newOutcome, path) => {
-    setOutcome(newOutcome);
-  };
 
 
   const tiles = [
@@ -64,7 +61,7 @@ function HomePage() {
               {/* Get Started button — top of card */}
               <div className="d-flex justify-content-end mb-3">
                 <button
-                  onClick={() => setOutcome('Education')}
+                  onClick={() => setShowExplorer(true)}
                   style={{
                     backgroundColor: '#2d7aaa',
                     color: '#ffffff',

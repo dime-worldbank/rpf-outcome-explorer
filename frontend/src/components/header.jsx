@@ -25,7 +25,7 @@ const imageMap = {
 };
 
 function Header() {
-  const { outcome, setOutcome } = useContext(OutcomeContext);
+  const { outcome, setOutcome, setShowExplorer } = useContext(OutcomeContext);
 
   return (
     <Navbar expand="lg" className="px-4 header-custom">
@@ -33,7 +33,7 @@ function Header() {
 
         {/* Home icon — always on the left */}
         <Nav.Link
-          onClick={() => setOutcome('')}
+          onClick={() => { setOutcome(''); setShowExplorer(false); }}
           className="text-white p-0 me-3"
           style={{ cursor: 'pointer', zIndex: 1 }}
           title="Go to home"

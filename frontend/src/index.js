@@ -17,7 +17,7 @@ const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 
 export default function App() {
-  const { outcome } = useContext(OutcomeContext);
+  const { outcome, showExplorer } = useContext(OutcomeContext);
 
 
   
@@ -45,8 +45,8 @@ const pageTransition = {
   return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}> {/* Ensure full viewport height and no scrolling */}
           <Header /> {/* Include the Header component */}
-         {!outcome && <HomePage />}
-         {outcome && <VerticalNavbarPermanent />}
+         {!showExplorer && <HomePage />}
+         {showExplorer && <VerticalNavbarPermanent />}
         </div>
   );
 }
