@@ -6,6 +6,7 @@ import Content from './content';
 import CircleVisual from './circleVisual';
 import ProgressIndicator from './progressIndicator';
 import {ReactComponent as VerticalNavImg} from '../assets/vertical-version1.svg';
+import ClosureTrianglePng from '../assets/closure-triangle.png';
 import focusRolesSvg from '../assets/focus-roles.svg';
 import focusBottleneckSvg from '../assets/focus-bottleneck.svg';
 
@@ -127,7 +128,7 @@ function VerticalNavbarPermanent() {
             // Both focus SVGs are 936×936; scale uniformly, then apply tweaks
             const svgSize = 936;
             const SIZE_MULTIPLIER = 1.3;   // wheel size relative to bbox fit
-            const VERTICAL_SHIFT  = 3500;  // extra downward nudge in SVG units
+            const VERTICAL_SHIFT  = 3300;  // extra downward nudge in SVG units
 
             const targetW = parseInt(POLICY_BBOX.width);
             const targetH = parseInt(POLICY_BBOX.height);
@@ -190,14 +191,6 @@ function VerticalNavbarPermanent() {
     return () => { cancelled = true; };
   }, [selectedItem]);
 
-  const handleZoneClick = (event) => {
-    const clickedId = event.target.id;
-    if (!clickedId) return;
-    setSelectedItem(clickedId); // useEffect handles SVG sync and height
-    if (contentRef.current) {
-      contentRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
     return (
         <Container fluid style={{ height: '92vh', padding: 0 }} className="d-flex flex-column">
@@ -208,17 +201,26 @@ function VerticalNavbarPermanent() {
                     className="bg-paper d-flex flex-column"
                     style={{ height: '100%' }}
                     >
-                    <VerticalNavImg
-                      style={{
-                        flex: 1,
-                        minHeight: 0,
-                        width: '100%',
-                        display: 'block',
-                      }}
-                    />
+                    {selectedItem === 'closure' ? (
+                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+                        <img
+                          src={ClosureTrianglePng}
+                          alt="Reform triangle diagram"
+                          style={{ width: '100%', objectFit: 'contain' }}
+                        />
+                      </div>
+                    ) : (
+                      <VerticalNavImg
+                        style={{
+                          flex: 1,
+                          width: '100%',
+                          display: 'block',
+                        }}
+                      />
+                    )}
 
                 </Col>
-                <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
+                <Col xs={12} md={8} lg={8} style={{ overflowY: 'auto' }}>
                   <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
                 </Col>
             </Row>

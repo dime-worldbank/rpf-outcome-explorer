@@ -44,7 +44,7 @@ function Header() {
         {/* Centred title or outcome dropdown */}
         <div
           className="position-absolute start-50 translate-middle-x d-flex justify-content-center align-items-center"
-          style={{ pointerEvents: 'auto' }}
+          style={{ pointerEvents: 'auto' , position:'sticky'}}
         >
           {outcome ? (
             <div className="d-flex align-items-center">

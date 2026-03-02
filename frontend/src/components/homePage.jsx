@@ -35,7 +35,7 @@ function HomePage() {
 
 
   return (
-    <Container fluid className="home-page bg-light d-flex flex-column" style={{ minHeight: '92vh', overflowY: 'auto' }}>
+    <Container fluid className="home-page bg-light d-flex flex-column" style={{ overflowY: 'auto' }}>
 
       {/* Page title */}
       <h2 className="text-center mt-4 mb-0 px-3">Welcome to the Outcome Explorer</h2>
@@ -54,7 +54,7 @@ function HomePage() {
         </Col>
 
         {/* Right: intro content card */}
-        <Col xs={12} md={8} lg={7} className="d-flex flex-column justify-content-start py-3 pe-md-4">
+        <Col xs={12} md={8} lg={8} className="d-flex flex-column justify-content-start py-3 pe-md-4">
           <Card className="shadow-sm border h-100">
             <Card.Body className="d-flex flex-column">
 

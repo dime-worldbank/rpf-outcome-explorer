@@ -68,6 +68,25 @@ def create_public_sector_challenges():
         data_dict.setdefault(row[parent_title], []).append(data)
     return data_dict
 
+def create_taxonomy_bottlenecks():
+    """Read taxonomy-botlenecks sheet and return a dict keyed by bottleneck_N."""
+    df = read_excel('taxonomy-botlenecks')
+    if isinstance(df, tuple):
+        return df
+    result = {}
+    for _, row in df.iterrows():
+        name = row.get('PFM Bottleneck')
+        description = row.get('Bottlenecks Description')
+        if pd.isna(name): continue
+        name = str(name).strip()
+        match = re.match(r"(\d+(?:\.\d+)*)", name)
+        key = f"bottleneck_{match.group(1)}" if match else name
+        result[key] = {
+            'name': name,
+            'description': str(description).strip() if not pd.isna(description) else ''
+        }
+    return result
+
 def create_taxonomy_general():
     """Read the taxonomy-general sheet and return a list of {Term, Description} objects."""
     df = read_excel('taxonomy-general')
@@ -94,6 +113,7 @@ def get_all_data():
         'Public Sector Challenges': create_public_sector_challenges(),
         'taxonomy-roles': create_role_taxonomy('taxonomy-roles'),
         'taxonomy-general': create_taxonomy_general(),
+        'taxonomy-bottlenecks': create_taxonomy_bottlenecks(),
     }
     return safe_jsonify(data)
 
@@ -129,7 +149,7 @@ def get_example_data():
         nested = {c: str(row[c]) for c in bottleneck_examples.columns if c not in ["Public Finance Bottleneck Group", "Public Finance Bottleneck"]}
         # Parent
         if parent_key not in data_dict:
-            data_dict[parent_key] = {"name": parent_name}
+            data_dict[parent_key] = {"name": parent_name, "lessons": []}
         # Group all examples for the same child_key under an object with 'name' and 'child' list
         if child_key not in data_dict[parent_key]:
             outcome_bottleneck = re.sub(r'^[\d.]+\s+', '', grandchild_name)
@@ -137,6 +157,23 @@ def get_example_data():
         if grandchild_name not in data_dict[parent_key][child_key]:
             data_dict[parent_key][child_key][grandchild_name] = []
         data_dict[parent_key][child_key][grandchild_name].append({**nested})
+
+    # Read lessons from the dedicated "Bottlenecks - Lessons" sheet and join at the bottleneck group level
+    bottleneck_lessons = read_excel('Bottlenecks - Lessons')
+    if not isinstance(bottleneck_lessons, tuple):
+        BN_LESSONS_COL = "Lessons from Outcome-Based Research"
+        filtered_bn_lessons = bottleneck_lessons[bottleneck_lessons['Development Outcome'] == filter_value]
+        for _, row in filtered_bn_lessons.iterrows():
+            bn_name = row.get("PFM Bottleneck", "")
+            if pd.isna(bn_name): continue
+            bn_name = str(bn_name).strip()
+            lesson_val = row.get(BN_LESSONS_COL, "")
+            lesson_val = str(lesson_val).strip() if not pd.isna(lesson_val) else ""
+            bn_num = extract_bottleneck_number(bn_name)
+            parent_key = f"bottleneck_{bn_num}" if bn_num else bn_name
+            if parent_key in data_dict and lesson_val and lesson_val.lower() != "nan":
+                if lesson_val not in data_dict[parent_key]["lessons"]:
+                    data_dict[parent_key]["lessons"].append(lesson_val)
 
     roles_examples = read_excel('Roles - Examples')
     if isinstance(roles_examples, tuple):

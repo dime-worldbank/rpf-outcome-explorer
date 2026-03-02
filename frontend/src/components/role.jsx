@@ -99,7 +99,7 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
               padding: '12px 16px',
             }}>
               <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
-                Lessons from Outcome-Based Research
+                The following lessons were learned from the research:
               </p>
               {data.lessons.map((lesson, li) => (
                 <p key={li} style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: li < data.lessons.length - 1 ? '0 0 8px 0' : 0 }}>

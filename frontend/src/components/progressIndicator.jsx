@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi';
 
-const STEPPER_ORDER = ['outcome', 'results', 'policy', 'challenges', 'role', 'bottleneck'];
+const STEPPER_ORDER = ['outcome', 'results', 'policy', 'challenges', 'role', 'bottleneck', 'closure'];
 const STEPPER_FIRST_ITEM = { role: 'role_A', bottleneck: 'bottleneck_1' };
 
 const GROUP1_STEPS = [
@@ -36,7 +36,6 @@ function isStepActive(stepId, selectedItem) {
 function handleNavigate(stepId, setSelectedItem) {
   if (stepId === 'role')       return setSelectedItem('role_A');
   if (stepId === 'bottleneck') return setSelectedItem('bottleneck_1');
-  if (stepId === 'closure')    return;
   setSelectedItem(stepId);
 }
 
@@ -46,7 +45,7 @@ function StepItem({ step, active, setSelectedItem }) {
       onClick={() => handleNavigate(step.id, setSelectedItem)}
       style={{
         flex: 1,
-        cursor: step.id === 'closure' ? 'default' : 'pointer',
+        cursor: 'pointer',
         borderRadius: '6px',
         backgroundColor: active ? STEP_ACTIVE_BG : 'transparent',
         padding: '5px 6px',
@@ -89,6 +88,7 @@ function StepGroup({ phaseNum, phaseLabel, steps, selectedItem, setSelectedItem 
       overflow: 'hidden',
       border: `1px solid ${PHASE_RED_BORDER}`,
       boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+      backgroundColor: 'white',
     }}>
       {/* Reddish phase header */}
       <div style={{

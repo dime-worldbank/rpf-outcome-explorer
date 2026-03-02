@@ -8,6 +8,8 @@ import ArrowNav from './arrowNav';
 import OutcomeContext from '../OutcomeContext';
 import Bottlenecks from './bottleneck';
 import Roles from './role';
+import Closure from './closure';
+import NoOutcomePrompt from './noOutcomePrompt';
 import {OUTCOMES} from "../constants"
 const BASE_URL = 'http://localhost:8000';
 
@@ -70,7 +72,6 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       className="content"
       style={{
         height:'100%',
-        minHeight: 0,
         background:'rgb(240, 240, 240)',
         padding:'0 20px',
         overflow: 'auto',
@@ -81,8 +82,9 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} setSelectedItem={setSelectedItem} />}
       {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']}/>}
       {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
-      {selectedItem.startsWith('bottleneck') && bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData}/>}
-      {selectedItem.startsWith('role') && frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} />}
+      {selectedItem.startsWith('bottleneck') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData} taxonomyBottlenecks={frameworkData?.['taxonomy-bottlenecks'] || {}}/>)}
+      {selectedItem.startsWith('role') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} />)}
+      {selectedItem === 'closure' && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : <Closure />)}
 
     </div>
   );
