@@ -6,6 +6,8 @@ import Content from './content';
 import CircleVisual from './circleVisual';
 import ProgressIndicator from './progressIndicator';
 import {ReactComponent as VerticalNavImg} from '../assets/vertical-version1.svg';
+import focusRolesSvg from '../assets/focus-roles.svg';
+import focusBottleneckSvg from '../assets/focus-bottleneck.svg';
 
 
 
@@ -26,24 +28,10 @@ const HOVER_ZONES = [
 
 function VerticalNavbarPermanent() {
     const [selectedItem, setSelectedItem] = useState('outcome');
-    const [topDivHeight, setTopDivHeight] = useState(55);
-    const [isHovered, setIsHovered] = useState(false);
     const { outcome } = useContext(OutcomeContext);
     const contentRef = useRef();
 
 
-    const handleVizClick = (event, defaultGroup='') => {
-        setTopDivHeight(45); // Shrink when CircleVisual is clicked
-        if (event){
-          const target = event.target.closest('g');
-          if (!target) return;
-          if (target.id === 'group0'){
-            return;
-          }
-          setSelectedItem(target.id);
-          contentRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
   useEffect(() => {
       const outcomeReact = document.getElementsByClassName('clickable outcome');
@@ -68,18 +56,14 @@ function VerticalNavbarPermanent() {
     'left-question', 'right-question',
   ];
 
-  // Policy area in the framework diagram: hidden when focus overlay is active
-  const POLICY_COMPONENTS = ['fiscal-policy-pfm', 'institutions'];
+  // All three elements that make up the public-policy zone
+  const POLICY_COMPONENTS = ['public-policy', 'fiscal-policy-pfm', 'institutions'];
+  // Their collective bounding box in the SVG viewBox (0 0 19050 33867)
+  const POLICY_BBOX = { x: '4165', y: '16218', width: '10205', height: '11804' };
+  const FOCUS_OVERLAY_ID = 'focus-policy-overlay';
 
-// Keep SVG highlighting and sidebar height in sync with selectedItem
+  // Keep SVG highlighting in sync with selectedItem
   useEffect(() => {
-    // Update sidebar height
-    if (selectedItem === 'outcome' || selectedItem === 'results' || selectedItem === 'policy') {
-      setTopDivHeight(55);
-    } else if (selectedItem.startsWith('bottleneck') || selectedItem.startsWith('role')) {
-      setTopDivHeight(45);
-    }
-
     // Resolve step key
     const key = selectedItem.startsWith('role') ? 'role'
               : selectedItem.startsWith('bottleneck') ? 'bottleneck'
@@ -100,13 +84,109 @@ function VerticalNavbarPermanent() {
       }
     });
 
-    // Hide policy components in the framework when role/bottleneck is active
-    // (CircleVisual shows the wheel for those steps instead)
-    const showFocusWheel = key === 'role' || key === 'bottleneck';
-    POLICY_COMPONENTS.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.style.visibility = showFocusWheel ? 'hidden' : '';
-    });
+    // Inject or restore the focus SVG in the public-policy area
+    const focusSrc = key === 'role' ? focusRolesSvg
+                   : key === 'bottleneck' ? focusBottleneckSvg
+                   : null;
+
+    const svgEl = document.getElementById('outcome-explorer-slide1');
+    let cancelled = false;
+
+    if (focusSrc && svgEl) {
+      // Hide the original policy components
+      POLICY_COMPONENTS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.visibility = 'hidden';
+      });
+
+      const existingOverlay = document.getElementById(FOCUS_OVERLAY_ID);
+
+      // Highlight the active sub-step inside whichever overlay is showing
+      if (existingOverlay) {
+        existingOverlay.querySelectorAll('g[id]').forEach(g => {
+          if (!g.id.startsWith('role_') && !g.id.startsWith('bottleneck_')) return;
+          g.style.opacity = g.id === selectedItem ? '1' : '0.35';
+        });
+      }
+
+      // Skip re-fetching if the same source is already injected
+      if (!existingOverlay || existingOverlay.dataset.src !== focusSrc) {
+        if (existingOverlay) existingOverlay.remove();
+
+        fetch(focusSrc)
+          .then(r => r.text())
+          .then(svgText => {
+            if (cancelled) return;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(svgText, 'image/svg+xml');
+            const innerSvg = doc.querySelector('svg');
+            const host = document.getElementById('outcome-explorer-slide1');
+            if (!innerSvg || !host) return;
+
+            // Both focus SVGs are 936×936; scale uniformly, then apply tweaks
+            const svgSize = 936;
+            const SIZE_MULTIPLIER = 1.3;   // wheel size relative to bbox fit
+            const VERTICAL_SHIFT  = 3500;  // extra downward nudge in SVG units
+
+            const targetW = parseInt(POLICY_BBOX.width);
+            const targetH = parseInt(POLICY_BBOX.height);
+            const baseScale  = Math.min(targetW / svgSize, targetH / svgSize);
+            const scale      = baseScale * SIZE_MULTIPLIER;
+            const scaledSize = Math.round(svgSize * scale);
+
+            // Centre horizontally and vertically within the bbox, then shift down
+            const tx = parseInt(POLICY_BBOX.x) + Math.round((targetW - scaledSize) / 2);
+            const ty = parseInt(POLICY_BBOX.y) + Math.round((targetH - scaledSize) / 2) + VERTICAL_SHIFT;
+
+            // Create a nested <svg> — it has its own viewport and scoped defs
+            const nestedSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            nestedSvg.setAttribute('id', FOCUS_OVERLAY_ID);
+            nestedSvg.dataset.src = focusSrc;
+            nestedSvg.setAttribute('x', String(tx));
+            nestedSvg.setAttribute('y', String(ty));
+            nestedSvg.setAttribute('width', String(scaledSize));
+            nestedSvg.setAttribute('height', String(scaledSize));
+            nestedSvg.setAttribute('viewBox', '0 0 936 936');
+
+            // Inline all children (defs + shapes) from the parsed SVG
+            Array.from(innerSvg.childNodes).forEach(child => {
+              nestedSvg.appendChild(child.cloneNode(true));
+            });
+
+            host.appendChild(nestedSvg);
+
+            // Apply initial highlight for the active sub-step
+            nestedSvg.querySelectorAll('g[id]').forEach(g => {
+              if (!g.id.startsWith('role_') && !g.id.startsWith('bottleneck_')) return;
+              g.style.opacity = g.id === selectedItem ? '1' : '0.35';
+            });
+
+            // Make role_* / bottleneck_* groups clickable
+            nestedSvg.style.cursor = 'pointer';
+            nestedSvg.addEventListener('click', (e) => {
+              const target = e.target.closest('g[id]');
+              if (!target) return;
+              const id = target.id;
+              if (id.startsWith('role_') || id.startsWith('bottleneck_')) {
+                setSelectedItem(id);
+                if (contentRef.current) {
+                  contentRef.current.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            });
+          });
+      }
+    } else {
+      // Restore original policy components and remove any overlay
+      POLICY_COMPONENTS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.visibility = '';
+      });
+      const existingOverlay = document.getElementById(FOCUS_OVERLAY_ID);
+      if (existingOverlay) existingOverlay.remove();
+    }
+
+    return () => { cancelled = true; };
   }, [selectedItem]);
 
   const handleZoneClick = (event) => {
@@ -129,16 +209,13 @@ function VerticalNavbarPermanent() {
                     >
                     <VerticalNavImg
                       style={{
-                        height: topDivHeight + 'vh',
-                        transition: 'height 0.3s ease-in-out',
+                        flex: 1,
+                        minHeight: 0,
                         width: '100%',
+                        display: 'block',
                       }}
                     />
 
-                  
-                    {(selectedItem.startsWith('role') || selectedItem.startsWith('bottleneck')) && (
-                      <CircleVisual onClick={handleVizClick} selectedItem={selectedItem} />
-                    )}
                 </Col>
                 <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
                   <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
