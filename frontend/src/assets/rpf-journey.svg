@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <!-- Arrowhead for dashed connecting lines -->
+    <marker id="arrowTip" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#5ec8e0"/>
+    </marker>
+    <!-- Soft glow on the outer blob -->
+    <filter id="blobGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Drop shadow on step circles -->
+    <filter id="circleShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- ── Background ── -->
+  <rect width="800" height="800" fill="#0b0d18"/>
+
+  <!-- ── Outer teal blob (background glow) ── -->
+  <ellipse cx="400" cy="392" rx="272" ry="258" fill="#0f2e40" filter="url(#blobGlow)"/>
+  <ellipse cx="392" cy="385" rx="215" ry="206" fill="#153a50" opacity="0.85"/>
+
+  <!-- ── Large dashed arc connecting steps 1 → 2 → 3 → 4 → back ──
+       Quadratic bezier curves routed around the outside of the blob -->
+  <path
+    d="M 265 100
+       Q 520  10  620 245
+       Q 720 460  500 640
+       Q 390 730  105 520
+       Q  30 320  175 118"
+    fill="none"
+    stroke="#5ec8e0"
+    stroke-width="2.2"
+    stroke-dasharray="9,6"
+    marker-end="url(#arrowTip)"
+  />
+
+  <!-- ── Inner dashed arrows: outer steps → centre ── -->
+  <!-- step 1 → centre -->
+  <line x1="278" y1="215" x2="342" y2="322" stroke="#5ec8e0" stroke-width="1.8" stroke-dasharray="6,5" marker-end="url(#arrowTip)"/>
+  <!-- step 2 → centre -->
+  <line x1="548" y1="286" x2="458" y2="348" stroke="#5ec8e0" stroke-width="1.8" stroke-dasharray="6,5" marker-end="url(#arrowTip)"/>
+  <!-- centre → step 3 -->
+  <line x1="435" y1="455" x2="475" y2="530" stroke="#5ec8e0" stroke-width="1.8" stroke-dasharray="6,5" marker-end="url(#arrowTip)"/>
+  <!-- step 4 → centre -->
+  <line x1="212" y1="436" x2="318" y2="393" stroke="#5ec8e0" stroke-width="1.8" stroke-dasharray="6,5" marker-end="url(#arrowTip)"/>
+
+  <!-- ── Step 5 — centre concentric rings ── -->
+  <circle cx="398" cy="388" r="168" fill="#1e5470" opacity="0.45"/>
+  <circle cx="398" cy="388" r="133" fill="#b83558" opacity="0.50"/>
+  <circle cx="398" cy="388" r="100" fill="#c94060" opacity="0.80"/>
+  <circle cx="398" cy="388" r="68"  fill="#44b8d4" filter="url(#circleShadow)"/>
+
+  <!-- ── Step circles 1-4 (pink) ── -->
+  <!-- 1 · top-left -->
+  <circle cx="205" cy="155" r="90" fill="#c04060" filter="url(#circleShadow)"/>
+  <!-- 2 · right -->
+  <circle cx="615" cy="255" r="84" fill="#c04060" filter="url(#circleShadow)"/>
+  <!-- 3 · bottom -->
+  <circle cx="505" cy="600" r="84" fill="#c04060" filter="url(#circleShadow)"/>
+  <!-- 4 · left -->
+  <circle cx="118" cy="478" r="90" fill="#c04060" filter="url(#circleShadow)"/>
+
+  <!-- ════════════════════════════════════════
+       TEXT
+       ════════════════════════════════════════ -->
+
+  <!-- Step 5 · centre -->
+  <text x="398" y="358" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#ffffff">5.</text>
+  <text x="398" y="377" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Drive action,</text>
+  <text x="398" y="393" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10.5" fill="#e8f0f4">build coalitions of</text>
+  <text x="398" y="407" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10.5" fill="#e8f0f4">support, learn, refine</text>
+  <text x="398" y="421" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10.5" fill="#e8f0f4">solutions and</text>
+  <text x="398" y="439" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">achieve results</text>
+
+  <!-- Step 1 · top-left -->
+  <text x="205" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">1.</text>
+  <text x="205" y="140" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Select outcomes</text>
+  <text x="205" y="157" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">and the public sector</text>
+  <text x="205" y="170" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">results to focus on and</text>
+  <text x="205" y="183" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">identify public sector</text>
+  <text x="205" y="196" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">challenges</text>
+
+  <!-- Step 2 · right -->
+  <text x="615" y="220" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">2.</text>
+  <text x="615" y="240" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Identify the role</text>
+  <text x="615" y="256" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">of public finance</text>
+  <text x="615" y="271" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">and</text>
+  <text x="615" y="286" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">PFM bottlenecks</text>
+  <text x="615" y="301" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">and prioritize them</text>
+
+  <!-- Step 3 · bottom -->
+  <text x="505" y="568" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">3.</text>
+  <text x="505" y="588" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff">Plan</text>
+  <text x="505" y="606" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">in teams</text>
+  <text x="505" y="622" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">to resolve bottlenecks</text>
+  <text x="505" y="635" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">and obtain</text>
+  <text x="505" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">authorization.</text>
+
+  <!-- Step 4 · left -->
+  <text x="118" y="450" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">4.</text>
+  <text x="118" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Co-create</text>
+  <text x="118" y="486" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#f0d8de">user-centric</text>
+  <text x="118" y="502" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">solutions</text>
+</svg>
