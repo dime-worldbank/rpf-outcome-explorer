@@ -68,6 +68,22 @@ def create_public_sector_challenges():
         data_dict.setdefault(row[parent_title], []).append(data)
     return data_dict
 
+def create_taxonomy_general():
+    """Read the taxonomy-general sheet and return a list of {Term, Description} objects."""
+    df = read_excel('taxonomy-general')
+    if isinstance(df, tuple):
+        return df
+    result = []
+    for _, row in df.iterrows():
+        term = row.get('Term')
+        description = row.get('Description')
+        if pd.isna(term): continue
+        result.append({
+            'Term': str(term).strip(),
+            'Description': str(description).strip() if not pd.isna(description) else ''
+        })
+    return result
+
 
 # --- API Route ---
 @api_bp.route('/framework', methods=['GET'])
@@ -77,7 +93,7 @@ def get_all_data():
         'outcome-results': create_outcome_results(),
         'Public Sector Challenges': create_public_sector_challenges(),
         'taxonomy-roles': create_role_taxonomy('taxonomy-roles'),
-
+        'taxonomy-general': create_taxonomy_general(),
     }
     return safe_jsonify(data)
 
@@ -127,26 +143,41 @@ def get_example_data():
         return roles_examples
     filtered_roles_data = roles_examples[roles_examples['Policy Area'] == filter_value].dropna(subset="Role of Public Finance")
     dict_data_role = {}
+    EXAMPLE_EXCLUDE = ["Role of Public Finance", "Outcome Role"]
     for _, row in filtered_roles_data.iterrows():
         parent_name = str(row["Role of Public Finance"]).strip()
         if pd.isna(parent_name): continue
         child_name = str(row["Outcome Role"]).strip()
-        # grandchild_name = str(row['Description of  Examples where Roles have been played']).strip()
         parent_num = extract_role_letter(parent_name)
         parent_key = f"role_{parent_num}" if parent_num else parent_name
         child_key = child_name
-        # Exclude parent, child, grandchild columns from the nested dict
-        nested = {c: str(row[c]) for c in filtered_roles_data.columns if c not in ["Role of Public Finance", "Outcome Role", "Description of Examples where Roles have been played"]}
+        # Example columns: everything except the structural nesting keys
+        example_row = {c: str(row[c]) for c in filtered_roles_data.columns if c not in EXAMPLE_EXCLUDE}
         # Parent
         if parent_key not in dict_data_role:
-            dict_data_role[parent_key] = {"name": parent_name}
+            dict_data_role[parent_key] = {"name": parent_name, "lessons": []}
         # Child
         if child_key not in dict_data_role[parent_key]:
-            dict_data_role[parent_key][child_key] = {"name": child_name}
-        # Grandchild
-        if grandchild_name not in dict_data_role[parent_key][child_key]:
-            dict_data_role[parent_key][child_key][grandchild_name] = []
-        dict_data_role[parent_key][child_key][grandchild_name].append({**nested})
+            dict_data_role[parent_key][child_key] = {"name": child_name, "examples": []}
+        # Append example row
+        dict_data_role[parent_key][child_key]["examples"].append({**example_row})
+
+    # Read lessons from the dedicated "Roles - Lessons" sheet and join at the role level
+    roles_lessons = read_excel('Roles - Lessons')
+    if not isinstance(roles_lessons, tuple):
+        LESSONS_COL = "Lessons from Outcome-Based Research"
+        filtered_lessons = roles_lessons[roles_lessons['Outcome'] == filter_value]
+        for _, row in filtered_lessons.iterrows():
+            role_name = row.get("Role of Public Finance", "")
+            if pd.isna(role_name): continue
+            role_name = str(role_name).strip()
+            lesson_val = row.get(LESSONS_COL, "")
+            lesson_val = str(lesson_val).strip() if not pd.isna(lesson_val) else ""
+            parent_num = extract_role_letter(role_name)
+            parent_key = f"role_{parent_num}" if parent_num else role_name
+            if parent_key in dict_data_role and lesson_val and lesson_val.lower() != "nan":
+                if lesson_val not in dict_data_role[parent_key]["lessons"]:
+                    dict_data_role[parent_key]["lessons"].append(lesson_val)
     
     
     return safe_jsonify({

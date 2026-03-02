@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import OutcomePage from './outcomePage';
 import PublicSectorResult from './publicSectorResult';
+import PublicSectorChallenge from './publicSectorChallenge';
 import PolicyCapability from './policyCapability';
 import ArrowNav from './arrowNav';
 import OutcomeContext from '../OutcomeContext';
@@ -76,9 +77,10 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       }}
     >
       <ArrowNav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-      {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && frameworkData['Public Sector Challenges'] && <PublicSectorResult resultData={frameworkData['outcome-results']} challengeData={frameworkData['Public Sector Challenges']} />}
+      {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} setSelectedItem={setSelectedItem} />}
+      {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} setSelectedItem={setSelectedItem} />}
       {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']}/>}
-      {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} />}
+      {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
       {selectedItem.startsWith('bottleneck') && bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData}/>}
       {selectedItem.startsWith('role') && frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} />}
 

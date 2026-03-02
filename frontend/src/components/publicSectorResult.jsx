@@ -4,50 +4,55 @@ import { useContext } from "react";
 import { Container, Card } from 'react-bootstrap';
 import OutcomeContext from "../OutcomeContext";
 import { OUTCOMES } from "../constants";
+import NoOutcomePrompt from "./noOutcomePrompt";
 
-function PublicSectorResult({resultData, challengeData}) {
+function PublicSectorResult({resultData, setSelectedItem}) {
     const { outcome } = useContext(OutcomeContext);
-    const outcome_name = OUTCOMES[outcome]
-    const publicSectorResult = resultData[outcome_name] || undefined;
-    const allChallenges = challengeData[outcome_name] || undefined;
+    const outcome_name = OUTCOMES[outcome];
+    const publicSectorResult = (outcome_name && resultData[outcome_name]) || undefined;
+
+    if (!outcome) return <NoOutcomePrompt setSelectedItem={setSelectedItem} />;
+
     return (
-      <Container className="d-flex justify-content-center">
-        <Card className="w-100 h-50 card-result" >
-          <Card.Body className="text-left content-card">
-                <p style={{
-                    textAlign: 'left', /* Align text to the left */
-                    marginBottom: '20px'
-                }}>The <b>public sector results</b> which countries aim to deliver to achieve the outcome are: </p>
-                <p style={{
-                    lineHeight: '1.8',
-                    textAlign: 'left' /* Align text to the left */
-                }}>{publicSectorResult && publicSectorResult['Public Sector Results']}</p>
-                <p style={{
-                    marginTop: '35px',
-                    marginBottom: '25px',
-                    textAlign: 'left' /* Align text to the left */
-                }}>The main <b>public sector challenges</b> in delivering these public sector results typically include:</p>
-                <ul style={{
-                    listStyleType: 'disc',
-                    paddingLeft: '20px',
-                    lineHeight: '1.8',
-                    textAlign: 'left' /* Align text to the left */
-                }}>
-                    {allChallenges && allChallenges.map((challenge, index) => (
-                        <li key={index} style={{ marginBottom: '15px' }}>
-                            <strong >{challenge['Public Sector Challenge']}</strong> <br/>{challenge["Description"]}
-                            <br />
-                        </li>
-                    ))}
-                </ul>
-          </Card.Body>
-        </Card>
-    </Container>
+      <Container className="d-flex flex-column align-items-center py-4">
+
+        {/* Step instruction text */}
+        <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
+          <div style={{
+            borderLeft: '4px solid #2d7aaa',
+            background: 'rgba(45,122,170,0.06)',
+            borderRadius: '0 8px 8px 0',
+            padding: '16px 20px',
+          }}>
+            <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
+              1.2 Identify development outcomes and specific public sector results of focus in the chosen policy areas.
+            </p>
+            <p style={{ margin: 0, marginBottom: '0', color: '#1a3a52', fontSize: '14px', lineHeight: 1.7 }}>
+              For the chosen policy area(s), next identify a development outcome and a subset of specific and key public sector results which contribute to it. The aim is to agree a scope which is both impactful and makes the reform diagnosis, design and implementation manageable and practical.
+            </p>
+          </div>
+        </div>
+
+        {/* Content card */}
+        <div className="w-100" style={{ maxWidth: '720px' }}>
+          <Card className="w-100 card-result">
+            <Card.Body className="content-card">
+              <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '12px' }}>
+                The <strong style={{ color: '#0d2d4a' }}>public sector results</strong> which countries aim to deliver to achieve the outcome are:
+              </p>
+              <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '0' }}>
+                {publicSectorResult && publicSectorResult['Public Sector Results']}
+              </p>
+            </Card.Body>
+          </Card>
+        </div>
+
+      </Container>
   );
 }
 PublicSectorResult.propTypes = {
     resultData: PropTypes.any,
-    challengeData: PropTypes.any
+    setSelectedItem: PropTypes.func,
 }
 
 export default PublicSectorResult;

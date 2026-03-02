@@ -44,7 +44,8 @@ function VerticalNavbarPermanent() {
   // Step → SVG component IDs to highlight
   const STEP_HIGHLIGHTS = {
     outcome:    ['development-outcomes'],
-    results:    ['public-sector-results', 'challenges'],
+    results:    ['public-sector-results'],
+    challenges: ['challenges'],
     policy:     ['public-policy', 'fiscal-policy-pfm', 'institutions'],
     role:       ['left-question'],
     bottleneck: ['right-question'],
@@ -67,7 +68,7 @@ function VerticalNavbarPermanent() {
     // Resolve step key
     const key = selectedItem.startsWith('role') ? 'role'
               : selectedItem.startsWith('bottleneck') ? 'bottleneck'
-              : selectedItem;
+              : selectedItem; // handles 'outcome', 'results', 'challenges', 'policy' directly
 
     const toHighlight = STEP_HIGHLIGHTS[key] || [];
 

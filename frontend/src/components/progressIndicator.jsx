@@ -1,13 +1,14 @@
 import React from 'react';
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi';
 
-const STEPPER_ORDER = ['outcome', 'results', 'policy', 'role', 'bottleneck'];
+const STEPPER_ORDER = ['outcome', 'results', 'policy', 'challenges', 'role', 'bottleneck'];
 const STEPPER_FIRST_ITEM = { role: 'role_A', bottleneck: 'bottleneck_1' };
 
 const GROUP1_STEPS = [
-  { id: 'outcome',  num: '1.1', label: 'Select outcome' },
-  { id: 'results',  num: '1.2', label: 'Select public sector result' },
-  { id: 'policy',   num: '1.3', label: 'Assess delivery capability' },
+  { id: 'outcome',    num: '1.1', label: 'Select outcome' },
+  { id: 'results',    num: '1.2', label: 'Public sector results' },
+  { id: 'policy',     num: '1.3', label: 'Map context & delivery capability' },
+  { id: 'challenges', num: '1.4', label: 'Public sector challenges' },
 ];
 
 const GROUP2_STEPS = [
