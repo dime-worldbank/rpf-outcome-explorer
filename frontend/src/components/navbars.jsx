@@ -6,7 +6,7 @@ import Content from './content';
 import CircleVisual from './circleVisual';
 import ProgressIndicator from './progressIndicator';
 import {ReactComponent as VerticalNavImg} from '../assets/vertical-version1.svg';
-import ClosureTrianglePng from '../assets/closure-triangle.png';
+import ClosureTrianglePng from '../assets/closure-triangle.jpg';
 import focusRolesSvg from '../assets/focus-roles.svg';
 import focusBottleneckSvg from '../assets/focus-bottleneck.svg';
 

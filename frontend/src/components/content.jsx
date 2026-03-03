@@ -11,7 +11,7 @@ import Roles from './role';
 import Closure from './closure';
 import NoOutcomePrompt from './noOutcomePrompt';
 import {OUTCOMES} from "../constants"
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'http://localhost:5000';
 
 function Content({selectedItem, setSelectedItem, contentRef}) {
     const { outcome } = useContext(OutcomeContext);
