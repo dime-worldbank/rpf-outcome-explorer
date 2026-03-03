@@ -2,13 +2,17 @@ import React from "react";
 import PropTypes from 'prop-types';
 import ContentText from "./contentText";
 import Accordion from 'react-bootstrap/Accordion';
+import { OUTCOMES } from "../constants";
 
-function Roles({ selectedItem, rolesData, rolesDescription }) {
+const COMBINED_KEY = 'Outcome Combined';
+const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
 
+function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
 
   const data = rolesData[selectedItem] || [];
   const role_name = rolesData[selectedItem]?.name || '';
-  const SHOW_EVIDENCE = true; // currently the posit variable addition is not working. Make this configurable as that is resolved
+  const SHOW_EVIDENCE = true;
+
   return (
     <div className="d-flex flex-column align-items-center py-4">
 
@@ -38,78 +42,205 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
         </div>
       </div>
 
-      {/* Selected role card */}
-      {role_name && (
-        <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
-          <div style={{
-            background: '#fff',
-            border: '1px solid #b8d9ee',
-            borderRadius: '8px',
-            padding: '14px 18px',
-          }}>
-            <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
-              You have selected
-            </p>
-            <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{role_name}</p>
-            <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
-              {rolesDescription[selectedItem]?.["Role Description: Public Finance"]}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Accordion examples */}
-      {role_name && (
-        <div className="w-100" style={{ maxWidth: '720px' }}>
-          <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
-              This role contributes to public sector results and outcomes as follows (Click for country examples):          </p>
-          <Accordion className="mb-3">
-            {Object.keys(data).map((roleName, index) => {
-              if (roleName === 'name' || roleName === 'lessons') return null;
-              const roleData = data[roleName] || [];
-              const outcomeRoleName = data[roleName]?.['name'] || '';
-              return (
-                <Accordion.Item eventKey={index.toString()} key={index}>
-                  <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a' }}>
-                    {outcomeRoleName}
-                  </Accordion.Button>
-                  {SHOW_EVIDENCE && (
-                    <Accordion.Body style={{ padding: '12px 16px' }}>
-                      {(roleData.examples || []).map((item, i) => {
-                        const example = item["Description of  Examples where Roles have been played"];
-                        const exampleRef = item["References"];
-                        const source = item["Source"];
-                        return (
-                          <ContentText example={example} exampleRef={exampleRef} source={source} key={i} />
-                        );
-                      })}
-                    </Accordion.Body>
-                  )}
-                </Accordion.Item>
-              );
-            })}
-          </Accordion>
-
-          {/* Lessons from Outcome-Based Research — at the role level, below the accordion */}
-          {data.lessons && data.lessons.length > 0 && (
-            <div className="mb-4" style={{
-              background: 'rgba(45,122,170,0.06)',
-              borderLeft: '3px solid #2d7aaa',
-              borderRadius: '0 6px 6px 0',
-              padding: '12px 16px',
-            }}>
-              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
-                The following lessons were learned from the research:
-              </p>
-              {data.lessons.map((lesson, li) => (
-                <p key={li} style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: li < data.lessons.length - 1 ? '0 0 8px 0' : 0 }}>
-                  {lesson}
+      {/* ── SINGLE OUTCOME VIEW ── */}
+      {!isCombined && (
+        <>
+          {/* Selected role card */}
+          {role_name && (
+            <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
+              <div style={{
+                background: '#fff',
+                border: '1px solid #b8d9ee',
+                borderRadius: '8px',
+                padding: '14px 18px',
+              }}>
+                <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
+                  You have selected
                 </p>
-              ))}
+                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{role_name}</p>
+                <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
+                  {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
+                </p>
+              </div>
             </div>
           )}
-        </div>
+
+          {/* Accordion examples */}
+          {role_name && (
+            <div className="w-100" style={{ maxWidth: '720px' }}>
+              <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
+                  This role contributes to public sector results and outcomes as follows (Click for country examples):
+              </p>
+              <Accordion className="mb-3">
+                {Object.keys(data).map((roleName, index) => {
+                  if (roleName === 'name' || roleName === 'lessons') return null;
+                  const roleData = data[roleName] || [];
+                  const outcomeRoleName = data[roleName]?.['name'] || '';
+                  return (
+                    <Accordion.Item eventKey={index.toString()} key={index}>
+                      <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a' }}>
+                        {outcomeRoleName}
+                      </Accordion.Button>
+                      {SHOW_EVIDENCE && (
+                        <Accordion.Body style={{ padding: '12px 16px' }}>
+                          {(roleData.examples || []).map((item, i) => {
+                            const example = item["Description of  Examples where Roles have been played"];
+                            const exampleRef = item["References"];
+                            const source = item["Source"];
+                            return (
+                              <ContentText example={example} exampleRef={exampleRef} source={source} key={i} />
+                            );
+                          })}
+                        </Accordion.Body>
+                      )}
+                    </Accordion.Item>
+                  );
+                })}
+              </Accordion>
+
+              {/* Lessons from Outcome-Based Research — at the role level, below the accordion */}
+              {data.lessons && data.lessons.length > 0 && (
+                <div className="mb-4" style={{
+                  background: 'rgba(45,122,170,0.06)',
+                  borderLeft: '3px solid #2d7aaa',
+                  borderRadius: '0 6px 6px 0',
+                  padding: '12px 16px',
+                }}>
+                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
+                    The following lessons were learned from the research:
+                  </p>
+                  {data.lessons.map((lesson, li) => (
+                    <p key={li} style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: li < data.lessons.length - 1 ? '0 0 8px 0' : 0 }}>
+                      {lesson}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </>
       )}
+
+      {/* ── COMBINED VIEW: same structure as single, examples/lessons tagged by outcome ── */}
+      {isCombined && (() => {
+        // Find role name from first outcome that has data for this selectedItem
+        let roleName = '';
+        for (const [, fullName] of SINGLE_OUTCOMES) {
+          const n = rolesData[fullName]?.[selectedItem]?.name;
+          if (n) { roleName = n; break; }
+        }
+
+        // Union of all sub-role keys across all outcomes
+        const allSubKeys = [...new Set(
+          SINGLE_OUTCOMES.flatMap(([, fullName]) =>
+            Object.keys(rolesData[fullName]?.[selectedItem] || {}).filter(k => k !== 'name' && k !== 'lessons')
+          )
+        )];
+
+        return (
+          <div className="w-100" style={{ maxWidth: '720px' }}>
+            {/* Selected role card — same as single */}
+            {roleName && (
+              <div className="w-100 mb-3">
+                <div style={{ background: '#fff', border: '1px solid #b8d9ee', borderRadius: '8px', padding: '14px 18px' }}>
+                  <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
+                    You have selected
+                  </p>
+                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{roleName}</p>
+                  <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
+                    {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {roleName && (
+              <>
+                <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
+                  This role contributes to public sector results and outcomes as follows (Click for country examples):
+                </p>
+                <Accordion className="mb-3">
+                  {allSubKeys.map((roleKey, index) => {
+                    // Sub-role name + which outcome owns this key
+                    let subRoleName = roleKey;
+                    let ownerOutcome = '';
+                    for (const [shortName, fullName] of SINGLE_OUTCOMES) {
+                      const n = rolesData[fullName]?.[selectedItem]?.[roleKey]?.name;
+                      if (n) { subRoleName = n; ownerOutcome = shortName; break; }
+                    }
+
+                    const allExamples = SINGLE_OUTCOMES.flatMap(([, fullName]) => {
+                      return rolesData[fullName]?.[selectedItem]?.[roleKey]?.examples || [];
+                    });
+
+                    if (allExamples.length === 0) return null;
+
+                    return (
+                      <Accordion.Item eventKey={index.toString()} key={roleKey}>
+                        <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                          {ownerOutcome && (
+                            <span style={{
+                              display: 'inline-block', fontSize: '10px', fontWeight: '700',
+                              color: '#fff', background: '#2d7aaa', borderRadius: '3px',
+                              padding: '2px 7px', letterSpacing: '0.04em',
+                            }}>
+                              {ownerOutcome}
+                            </span>
+                          )}
+                          {subRoleName}
+                        </Accordion.Button>
+                        {SHOW_EVIDENCE && (
+                          <Accordion.Body style={{ padding: '12px 16px' }}>
+                            {allExamples.map((item, i) => {
+                              const example = item["Description of  Examples where Roles have been played"];
+                              const exampleRef = item["References"];
+                              const source = item["Source"];
+                              return <ContentText key={i} example={example} exampleRef={exampleRef} source={source} />;
+                            })}
+                          </Accordion.Body>
+                        )}
+                      </Accordion.Item>
+                    );
+                  }).filter(Boolean)}
+                </Accordion>
+
+                {/* Lessons — flat list with outcome label, same style as single */}
+                {(() => {
+                  const allLessons = SINGLE_OUTCOMES.flatMap(([shortName, fullName]) => {
+                    const lessons = rolesData[fullName]?.[selectedItem]?.lessons || [];
+                    return lessons.map(lesson => ({ lesson, outcomeName: shortName }));
+                  });
+                  if (allLessons.length === 0) return null;
+                  return (
+                    <div className="mb-4" style={{
+                      background: 'rgba(45,122,170,0.06)',
+                      borderLeft: '3px solid #2d7aaa',
+                      borderRadius: '0 6px 6px 0',
+                      padding: '12px 16px',
+                    }}>
+                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
+                        The following lessons were learned from the research:
+                      </p>
+                      {allLessons.map(({ lesson, outcomeName }, i) => (
+                        <div key={i} style={{ marginBottom: i < allLessons.length - 1 ? '10px' : 0 }}>
+                          <span style={{
+                            display: 'inline-block', fontSize: '10px', fontWeight: '700',
+                            color: '#fff', background: '#2d7aaa', borderRadius: '3px',
+                            padding: '2px 7px', marginBottom: '4px', letterSpacing: '0.04em',
+                          }}>
+                            {outcomeName}
+                          </span>
+                          <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>{lesson}</p>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </>
+            )}
+          </div>
+        );
+      })()}
 
     </div>
   );
@@ -118,7 +249,8 @@ function Roles({ selectedItem, rolesData, rolesDescription }) {
 Roles.propTypes = {
   selectedItem: PropTypes.string.isRequired,
   rolesData: PropTypes.any,
-  rolesDescription: PropTypes.any
+  rolesDescription: PropTypes.any,
+  isCombined: PropTypes.bool,
 };
 
 export default Roles;

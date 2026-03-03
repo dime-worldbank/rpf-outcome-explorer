@@ -12,6 +12,7 @@ import Closure from './closure';
 import NoOutcomePrompt from './noOutcomePrompt';
 import {OUTCOMES} from "../constants"
 const BASE_URL = 'http://localhost:5000';
+const COMBINED_KEY = 'Outcome Combined';
 
 function Content({selectedItem, setSelectedItem, contentRef}) {
     const { outcome } = useContext(OutcomeContext);
@@ -21,8 +22,8 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       async function fetchData() {
       try {
         const url = new URL(`${BASE_URL}/api/data`);
-        const outcome_name = OUTCOMES[outcome]
-        const params = {filter: outcome_name}
+        const filter_value = outcome === COMBINED_KEY ? '__all__' : OUTCOMES[outcome];
+        const params = {filter: filter_value}
         url.search = new URLSearchParams(params).toString();
 
         const response = await fetch(url);
@@ -64,6 +65,7 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
 
   const bottleneckData = data?.['Bottlenecks']
   const rolesData = data?.['Roles'];
+  const isCombined = outcome === COMBINED_KEY;
 
 
   return (
@@ -71,10 +73,9 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       ref={contentRef}
       className="content"
       style={{
-        height:'100%',
-        background:'rgb(240, 240, 240)',
-        padding:'0 20px',
-        overflow: 'auto',
+        background: 'rgb(240, 240, 240)',
+        padding: '0 20px',
+        minHeight: '100%',
       }}
     >
       <ArrowNav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
@@ -82,8 +83,8 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} setSelectedItem={setSelectedItem} />}
       {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']}/>}
       {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
-      {selectedItem.startsWith('bottleneck') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData} taxonomyBottlenecks={frameworkData?.['taxonomy-bottlenecks'] || {}}/>)}
-      {selectedItem.startsWith('role') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} />)}
+      {selectedItem.startsWith('bottleneck') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData} taxonomyBottlenecks={frameworkData?.['taxonomy-bottlenecks'] || {}} isCombined={isCombined}/>)}
+      {selectedItem.startsWith('role') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} isCombined={isCombined}/>)}
       {selectedItem === 'closure' && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : <Closure />)}
 
     </div>

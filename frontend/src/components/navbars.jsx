@@ -193,13 +193,13 @@ function VerticalNavbarPermanent() {
 
 
     return (
-        <Container fluid style={{ height: '92vh', padding: 0 }} className="d-flex flex-column">
+        <Container fluid style={{ flex: 1, minHeight: 0, padding: 0, overflow: 'hidden' }} className="d-flex flex-column">
             <ProgressIndicator selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
-            <Row className="flex-grow-1" style={{ minHeight: 0 }}>
+            <Row className="flex-grow-1" style={{ minHeight: 0, height: '100%' }}>
                 {/* Sidebar Column */}
                 <Col xs={12} md={4} lg={4}
                     className="bg-paper d-flex flex-column"
-                    style={{ height: '100%' }}
+                    style={{ height: '100%', overflow: 'hidden' }}
                     >
                     {selectedItem === 'closure' ? (
                       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
@@ -220,7 +220,7 @@ function VerticalNavbarPermanent() {
                     )}
 
                 </Col>
-                <Col xs={12} md={8} lg={8} style={{ overflowY: 'auto' }}>
+                <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
                   <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
                 </Col>
             </Row>

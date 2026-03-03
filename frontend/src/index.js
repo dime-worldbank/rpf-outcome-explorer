@@ -43,10 +43,10 @@ const pageTransition = {
   duration: 0.5    // Defines the duration of the animation in seconds.
 };
   return (
-        <div style={{display: 'flex', flexDirection: 'column' }}> {/* Ensure full viewport height and no scrolling */}
-          <Header /> {/* Include the Header component */}
-         {!showExplorer && <HomePage />}
-         {showExplorer && <VerticalNavbarPermanent />}
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+          <Header />
+          {!showExplorer && <HomePage />}
+          {showExplorer && <VerticalNavbarPermanent />}
         </div>
   );
 }

@@ -25,6 +25,8 @@ const imageMap = {
   "Water": WaterImg
 };
 
+const COMBINED_KEY = 'Outcome Combined';
+
 const outcomeList = [
   { title: 'Education', icon: EducationImg },
   { title: 'Economic Resilience', icon: EconomicResilienceImg },
@@ -32,13 +34,18 @@ const outcomeList = [
   { title: 'The Energy Transition', icon: RenewableEnergyImg },
   { title: 'Healthy Lives', icon: UniversalHealthCareImg },
   { title: 'Revenue', icon: RevenueImg },
+  { title: COMBINED_KEY, icon: OutcomeCombinedImg },
 ];
 
 function OutcomePage({frameworkData}) {
   const { outcome, setOutcome } = useContext(OutcomeContext);
+  const isCombined = outcome === COMBINED_KEY;
   const outcome_name = OUTCOMES[outcome];
   const outcomeData = frameworkData[outcome_name] || {};
   const developmentOutcome = outcomeData['Development Outcome'] || '';
+
+  // For combined view: build list of all single outcomes with their dev outcome text
+  const singleOutcomes = outcomeList.filter(o => o.title !== COMBINED_KEY);
 
   return (
     <Container className="d-flex flex-column align-items-center py-4">
@@ -132,7 +139,12 @@ function OutcomePage({frameworkData}) {
       </Row>
 
       {/* Detail panel — visible only when an outcome is selected */}
-      {outcome && (
+      <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '8px 0 4px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
+        {isCombined
+          ? 'To illustrate, the following development outcomes, which governments often pursue, were selected for investigation:'
+          : 'To illustrate, the following development outcome, which governments often pursue, was selected for investigation:'}
+      </p>
+      {outcome && !isCombined && (
         <div className="w-100 mt-4" style={{ maxWidth: '720px' }}>
           <Card className="w-100 card-outcome">
             <Card.Body className="d-flex align-items-start gap-4 content-card">
@@ -156,6 +168,69 @@ function OutcomePage({frameworkData}) {
               </div>
             </Card.Body>
           </Card>
+        </div>
+      )}
+
+      {/* Combined detail panel — visible when Outcome Combined is selected */}
+      {isCombined && (
+        <div className="w-100 mt-4" style={{ maxWidth: '720px' }}>
+          <div style={{
+            background: '#fff',
+            border: '1px solid #b8d9ee',
+            borderRadius: '8px',
+            padding: '16px 20px',
+            marginBottom: '12px',
+          }}>
+            <div className="d-flex align-items-center gap-3 mb-3">
+              <Image
+                src={OutcomeCombinedImg}
+                alt="Combined"
+                style={{ width: '56px', height: '56px', objectFit: 'contain', flexShrink: 0 }}
+              />
+              <div>
+                <h5 className="fw-bold mb-1" style={{ fontSize: '16px', color: '#0d2d4a' }}>
+                  All Outcomes Combined
+                </h5>
+                <p className="mb-0" style={{ fontSize: '13px', color: '#444', lineHeight: 1.5 }}>
+                  Viewing all policy areas together. Subsequent steps will show data grouped by outcome.
+                </p>
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {singleOutcomes.map(({ title, icon }) => {
+                const name = OUTCOMES[title];
+                const outcomeEntry = frameworkData[name] || {};
+                const devOutcome = outcomeEntry['Development Outcome'] || '';
+                const outcomeDesc = outcomeEntry['Outcome Description'] || '';
+                return (
+                  <div key={title} style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    padding: '10px 12px',
+                    background: 'rgba(45,122,170,0.04)',
+                    borderRadius: '6px',
+                    border: '1px solid #dce8f2',
+                  }}>
+                    <Image
+                      src={icon}
+                      alt={title}
+                      style={{ width: '36px', height: '36px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }}
+                    />
+                    <div>
+                      <p style={{ margin: 0, fontSize: '13px', fontWeight: '700', color: '#0d2d4a' }}>{title}</p>
+                      {outcomeDesc && (
+                        <p style={{ margin: '3px 0 0 0', fontSize: '12px', color: '#1a3a52', lineHeight: 1.5 }}>{outcomeDesc}</p>
+                      )}
+                      {devOutcome && (
+                        <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#444', lineHeight: 1.5 }}>{devOutcome}</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       )}
 
