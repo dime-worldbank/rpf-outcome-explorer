@@ -6,6 +6,9 @@ import Accordion from 'react-bootstrap/Accordion';
 import OutcomeContext from "../OutcomeContext";
 import { OUTCOMES } from "../constants";
 import NoOutcomePrompt from "./noOutcomePrompt";
+import { card } from "../theme";
+import DefinitionBox from "./DefinitionBox";
+import SectionLabel from "./SectionLabel";
 
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
@@ -26,12 +29,7 @@ function PublicSectorResult({resultData, taxonomyGeneral, setSelectedItem}) {
 
         {/* Step instruction text */}
         <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
-          <div style={{
-            borderLeft: '4px solid #2d7aaa',
-            background: 'rgba(45,122,170,0.06)',
-            borderRadius: '0 8px 8px 0',
-            padding: '16px 20px',
-          }}>
+          <div style={card.instruction}>
             <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
               1.2 Identify development outcomes and specific public sector results of focus in the chosen policy areas.
             </p>
@@ -44,13 +42,8 @@ function PublicSectorResult({resultData, taxonomyGeneral, setSelectedItem}) {
         {/* Definition box — combined view only; single view shows it inside the card */}
         {isCombined && publicSectorResultsDef && (
           <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
-            <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Public Sector Results
-            </p>
-            <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
-              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-              <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{publicSectorResultsDef}</p>
-            </div>
+            <SectionLabel text="Public Sector Results" style={{ margin: '0 0 6px 0' }} />
+            <DefinitionBox definition={publicSectorResultsDef} />
           </div>
         )}
 
@@ -66,18 +59,11 @@ function PublicSectorResult({resultData, taxonomyGeneral, setSelectedItem}) {
           <div className="w-100" style={{ maxWidth: '720px' }}>
             <Card className="w-100 card-result">
               <Card.Body className="content-card">
-                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Public Sector Results
-                </p>
+                <SectionLabel text="Public Sector Results" style={{ margin: '0 0 6px 0' }} />
                 {publicSectorResultsDef && (
-                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '12px' }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{publicSectorResultsDef}</p>
-                  </div>
+                  <DefinitionBox definition={publicSectorResultsDef} style={{ marginBottom: '12px' }} />
                 )}
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
-                  Example
-                </p>
+                <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
                 <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '0' }}>
                   {publicSectorResult && publicSectorResult['Public Sector Results']}
                 </p>
@@ -98,9 +84,7 @@ function PublicSectorResult({resultData, taxonomyGeneral, setSelectedItem}) {
                       {shortName}
                     </Accordion.Button>
                     <Accordion.Body style={{ padding: '12px 16px' }}>
-                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
-                        Example
-                      </p>
+                      <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
                       <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                         {outcomeResult?.['Public Sector Results'] || 'No data available.'}
                       </p>

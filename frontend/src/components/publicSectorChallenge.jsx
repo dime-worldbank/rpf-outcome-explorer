@@ -6,6 +6,10 @@ import Accordion from 'react-bootstrap/Accordion';
 import OutcomeContext from "../OutcomeContext";
 import { OUTCOMES } from "../constants";
 import NoOutcomePrompt from "./noOutcomePrompt";
+import { card } from "../theme";
+import DefinitionBox from "./DefinitionBox";
+import OutcomeBadge from "./OutcomeBadge";
+import SectionLabel from "./SectionLabel";
 
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
@@ -23,12 +27,7 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
 
       {/* Step instruction text */}
       <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
-        <div style={{
-          borderLeft: '4px solid #2d7aaa',
-          background: 'rgba(45,122,170,0.06)',
-          borderRadius: '0 8px 8px 0',
-          padding: '16px 20px',
-        }}>
+        <div style={card.instruction}>
           <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
             1.4 Set out the existing (or potential) public sector challenges.
           </p>
@@ -46,13 +45,8 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
         const challengeDef = taxonomyGeneral?.find(r => r['Term'] === 'Public Sector Challenges')?.['Description'];
         return challengeDef ? (
           <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
-            <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              Public Sector Challenges
-            </p>
-            <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
-              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-              <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{challengeDef}</p>
-            </div>
+            <SectionLabel text="Public Sector Challenges" style={{ margin: '0 0 6px 0' }} />
+            <DefinitionBox definition={challengeDef} />
           </div>
         ) : null;
       })()}
@@ -71,18 +65,11 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
           <div className="w-100" style={{ maxWidth: '720px' }}>
             <Card className="w-100 card-result">
               <Card.Body className="content-card">
-                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Public Sector Challenges
-                </p>
+                <SectionLabel text="Public Sector Challenges" style={{ margin: '0 0 6px 0' }} />
                 {challengeDef && (
-                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '12px' }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{challengeDef}</p>
-                  </div>
+                  <DefinitionBox definition={challengeDef} style={{ marginBottom: '12px' }} />
                 )}
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
-                  Examples
-                </p>
+                <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
                 <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
                   {allChallenges && allChallenges.map((challenge, index) => (
                     <li key={index} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
@@ -125,24 +112,13 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
                   </Accordion.Button>
                   <Accordion.Body style={{ padding: '12px 16px' }}>
                     {typeDef && (
-                      <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '14px' }}>
-                        <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                        <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{typeDef}</p>
-                      </div>
+                      <DefinitionBox definition={typeDef} style={{ marginBottom: '14px' }} />
                     )}
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
-                      Examples
-                    </p>
+                    <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
                       {challenges.map((challenge, i) => (
                         <li key={i} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
-                          <span style={{
-                            display: 'inline-block', fontSize: '10px', fontWeight: '700',
-                            color: '#fff', background: '#2d7aaa', borderRadius: '3px',
-                            padding: '2px 7px', marginBottom: '4px', letterSpacing: '0.04em',
-                          }}>
-                            {challenge._outcomeName}
-                          </span>
+                          <OutcomeBadge label={challenge._outcomeName} style={{ marginBottom: '4px' }} />
                           <br />
                           <strong style={{ color: '#0d2d4a' }}>{challenge['Public Sector Challenge']}</strong>
                           <br />

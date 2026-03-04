@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import OutcomeContext from '../OutcomeContext';
 import { useContext } from 'react';
 import { Container, Card, Image, Row, Col } from 'react-bootstrap';
+import { card } from '../theme';
 
 import { OUTCOMES } from '../constants';
 import EducationImg from '../assets/icon-education.png';
@@ -52,12 +53,7 @@ function OutcomePage({frameworkData}) {
 
       {/* Step instruction text */}
       <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
-        <div style={{
-          borderLeft: '4px solid #2d7aaa',
-          background: 'rgba(45,122,170,0.06)',
-          borderRadius: '0 8px 8px 0',
-          padding: '16px 20px',
-        }}>
+        <div style={card.instruction}>
           <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
             1.1 Select policy areas of focus and identify the reform authorizers and conveners required to secure the reform space and coordinate the reform process.
           </p>
@@ -174,13 +170,7 @@ function OutcomePage({frameworkData}) {
       {/* Combined detail panel — visible when Outcome Combined is selected */}
       {isCombined && (
         <div className="w-100 mt-4" style={{ maxWidth: '720px' }}>
-          <div style={{
-            background: '#fff',
-            border: '1px solid #b8d9ee',
-            borderRadius: '8px',
-            padding: '16px 20px',
-            marginBottom: '12px',
-          }}>
+          <div style={{ ...card.base, marginBottom: '12px' }}>
             <div className="d-flex align-items-center gap-3 mb-3">
               <Image
                 src={OutcomeCombinedImg}

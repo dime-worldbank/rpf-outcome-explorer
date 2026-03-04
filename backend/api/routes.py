@@ -1,8 +1,7 @@
 import re
-from flask import jsonify, Blueprint
 import os
 import pandas as pd
-import numpy as np
+from flask import jsonify, Blueprint, request
 # Blueprint setup
 api_bp = Blueprint('api', __name__)
 EXCEL_FILE_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'PFM_data.xlsx')
@@ -226,7 +225,6 @@ def get_all_data():
     }
     return safe_jsonify(data)
 
-from flask import request
 
 @api_bp.route('/data', methods=['GET'])
 def get_example_data():
@@ -256,7 +254,6 @@ def get_example_data():
         return safe_jsonify({
             'Bottlenecks': combined_bottlenecks,
             'Roles': combined_roles,
-            'combined': True,
         })
 
     # Single outcome mode

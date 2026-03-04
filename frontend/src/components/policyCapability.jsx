@@ -1,11 +1,15 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import OutcomeContext from "../OutcomeContext";
 import { Container, Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { OUTCOMES } from "../constants";
 import NoOutcomePrompt from "./noOutcomePrompt";
+import { card } from "../theme";
+import DefinitionBox from "./DefinitionBox";
+import OutcomeBadge from "./OutcomeBadge";
+import SectionLabel from "./SectionLabel";
 
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
@@ -32,12 +36,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
 
         {/* Step instruction text */}
         <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
-          <div style={{
-            borderLeft: '4px solid #2d7aaa',
-            background: 'rgba(45,122,170,0.06)',
-            borderRadius: '0 8px 8px 0',
-            padding: '16px 20px',
-          }}>
+          <div style={card.instruction}>
             <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
               1.3 Map out the context and assess the delivery capability of government and feasibility of policy in relation to public sector results and policy objectives.
             </p>
@@ -64,24 +63,11 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
             <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
               <Card className="w-100 card-capability">
                 <Card.Body className="content-card">
-                  <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    Feasible Policy
-                  </p>
+                  <SectionLabel text="Feasible Policy" style={{ margin: '0 0 6px 0' }} />
                   {feasiblePolicyDef && (
-                    <div style={{
-                      background: '#f5fafd',
-                      border: '1px solid #b8d9ee',
-                      borderRadius: '6px',
-                      padding: '10px 14px',
-                      marginBottom: '12px',
-                    }}>
-                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                      <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{feasiblePolicyDef}</p>
-                    </div>
+                    <DefinitionBox definition={feasiblePolicyDef} style={{ marginBottom: '12px' }} />
                   )}
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
-                    Example
-                  </p>
+                  <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
                   <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                     {policyData["Feasible Policy"]}
                   </p>
@@ -93,24 +79,11 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
             <div className="w-100" style={{ maxWidth: '720px' }}>
               <Card className="w-100 card-capability">
                 <Card.Body className="content-card">
-                  <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    Delivery Capability
-                  </p>
+                  <SectionLabel text="Delivery Capability" style={{ margin: '0 0 6px 0' }} />
                   {deliveryCapabilityDef && (
-                    <div style={{
-                      background: '#f5fafd',
-                      border: '1px solid #b8d9ee',
-                      borderRadius: '6px',
-                      padding: '10px 14px',
-                      marginBottom: '12px',
-                    }}>
-                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                      <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{deliveryCapabilityDef}</p>
-                    </div>
+                    <DefinitionBox definition={deliveryCapabilityDef} style={{ marginBottom: '12px' }} />
                   )}
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
-                    Example
-                  </p>
+                  <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
                   <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                     {policyData["Delivery Capability"]}
                   </p>
@@ -127,31 +100,18 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
             {/* Feasible Policy card */}
             <Card className="w-100 card-capability">
               <Card.Body className="content-card">
-                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Feasible Policy
-                </p>
+                <SectionLabel text="Feasible Policy" style={{ margin: '0 0 6px 0' }} />
                 {feasiblePolicyDef && (
-                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '14px' }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{feasiblePolicyDef}</p>
-                  </div>
+                  <DefinitionBox definition={feasiblePolicyDef} style={{ marginBottom: '14px' }} />
                 )}
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 10px 0' }}>
-                  Examples
-                </p>
+                <SectionLabel text="Examples" style={{ margin: '0 0 10px 0' }} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {SINGLE_OUTCOMES.map(([shortName, fullName]) => {
                     const text = (frameworkData[fullName] || {})['Feasible Policy'];
                     if (!text) return null;
                     return (
                       <div key={shortName}>
-                        <span style={{
-                          display: 'inline-block', fontSize: '10px', fontWeight: '700',
-                          color: '#fff', background: '#2d7aaa', borderRadius: '3px',
-                          padding: '2px 7px', marginBottom: '4px', letterSpacing: '0.04em',
-                        }}>
-                          {shortName}
-                        </span>
+                        <OutcomeBadge label={shortName} style={{ marginBottom: '4px' }} />
                         <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
                       </div>
                     );
@@ -163,31 +123,18 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
             {/* Delivery Capability card */}
             <Card className="w-100 card-capability">
               <Card.Body className="content-card">
-                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Delivery Capability
-                </p>
+                <SectionLabel text="Delivery Capability" style={{ margin: '0 0 6px 0' }} />
                 {deliveryCapabilityDef && (
-                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '14px' }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{deliveryCapabilityDef}</p>
-                  </div>
+                  <DefinitionBox definition={deliveryCapabilityDef} style={{ marginBottom: '14px' }} />
                 )}
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 10px 0' }}>
-                  Examples
-                </p>
+                <SectionLabel text="Examples" style={{ margin: '0 0 10px 0' }} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {SINGLE_OUTCOMES.map(([shortName, fullName]) => {
                     const text = (frameworkData[fullName] || {})['Delivery Capability'];
                     if (!text) return null;
                     return (
                       <div key={shortName}>
-                        <span style={{
-                          display: 'inline-block', fontSize: '10px', fontWeight: '700',
-                          color: '#fff', background: '#2d7aaa', borderRadius: '3px',
-                          padding: '2px 7px', marginBottom: '4px', letterSpacing: '0.04em',
-                        }}>
-                          {shortName}
-                        </span>
+                        <OutcomeBadge label={shortName} style={{ marginBottom: '4px' }} />
                         <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
                       </div>
                     );
@@ -204,8 +151,8 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
 }
 
 PolicyCapability.propTypes = {
-    frameworkData: propTypes.any,
-    taxonomyGeneral: propTypes.any,
-    setSelectedItem: propTypes.func,
+    frameworkData:   PropTypes.any,
+    taxonomyGeneral: PropTypes.any,
+    setSelectedItem: PropTypes.func,
 }
 export default PolicyCapability;

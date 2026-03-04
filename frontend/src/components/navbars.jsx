@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OutcomeContext from '../OutcomeContext';
 import Content from './content';
-import CircleVisual from './circleVisual';
 import ProgressIndicator from './progressIndicator';
 import {ReactComponent as VerticalNavImg} from '../assets/vertical-version1.svg';
 import ClosureTrianglePng from '../assets/closure-triangle.jpg';

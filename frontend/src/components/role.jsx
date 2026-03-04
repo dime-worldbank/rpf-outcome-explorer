@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import ContentText from "./contentText";
 import Accordion from 'react-bootstrap/Accordion';
 import { OUTCOMES } from "../constants";
+import { card } from "../theme";
+import DefinitionBox from "./DefinitionBox";
+import OutcomeBadge from "./OutcomeBadge";
+import SectionLabel from "./SectionLabel";
 
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
@@ -18,12 +22,7 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
 
       {/* Step instruction block */}
       <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
-        <div style={{
-          borderLeft: '4px solid #2d7aaa',
-          background: 'rgba(45,122,170,0.06)',
-          borderRadius: '0 8px 8px 0',
-          padding: '16px 20px',
-        }}>
+        <div style={card.instruction}>
           <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
             2.1 Map out public finance policies and flows and assess the roles of public finance in achieving public sector results.
           </p>
@@ -48,17 +47,12 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
           {/* Selected role card */}
           {role_name && (
             <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
-              <div style={{ background: '#fff', border: '1px solid #b8d9ee', borderRadius: '8px', padding: '14px 18px' }}>
+              <div style={card.base}>
                 <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                   You have selected
                 </p>
                 <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{role_name}</p>
-                <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                  <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
-                    {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
-                  </p>
-                </div>
+                <DefinitionBox definition={rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]} />
               </div>
             </div>
           )}
@@ -69,9 +63,7 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
               <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                   This role contributes to public sector results and outcomes as follows (Click for country examples):
               </p>
-              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
-                Examples
-              </p>
+              <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
               <Accordion className="mb-3">
                 {Object.keys(data).map((roleName, index) => {
                   if (roleName === 'name' || roleName === 'lessons') return null;
@@ -101,15 +93,8 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
 
               {/* Lessons from Outcome-Based Research — at the role level, below the accordion */}
               {data.lessons && data.lessons.length > 0 && (
-                <div className="mb-4" style={{
-                  background: 'rgba(45,122,170,0.06)',
-                  borderLeft: '3px solid #2d7aaa',
-                  borderRadius: '0 6px 6px 0',
-                  padding: '12px 16px',
-                }}>
-                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
-                    The following lessons were learned from the research:
-                  </p>
+                <div className="mb-4" style={card.lesson}>
+                  <SectionLabel text="The following lessons were learned from the research:" style={{ margin: '0 0 8px 0' }} />
                   {data.lessons.map((lesson, li) => (
                     <p key={li} style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: li < data.lessons.length - 1 ? '0 0 8px 0' : 0 }}>
                       {lesson}
@@ -143,17 +128,12 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
             {/* Selected role card — same as single */}
             {roleName && (
               <div className="w-100 mb-3">
-                <div style={{ background: '#fff', border: '1px solid #b8d9ee', borderRadius: '8px', padding: '14px 18px' }}>
+                <div style={card.base}>
                   <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                     You have selected
                   </p>
                   <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{roleName}</p>
-                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
-                      {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
-                    </p>
-                  </div>
+                  <DefinitionBox definition={rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]} />
                 </div>
               </div>
             )}
@@ -163,9 +143,7 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
                 <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                   This role contributes to public sector results and outcomes as follows (Click for country examples):
                 </p>
-                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
-                  Examples
-                </p>
+                <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
                 <Accordion className="mb-3">
                   {allSubKeys.map((roleKey, index) => {
                     // Sub-role name + which outcome owns this key
@@ -186,13 +164,7 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
                       <Accordion.Item eventKey={index.toString()} key={roleKey}>
                         <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                           {ownerOutcome && (
-                            <span style={{
-                              display: 'inline-block', fontSize: '10px', fontWeight: '700',
-                              color: '#fff', background: '#2d7aaa', borderRadius: '3px',
-                              padding: '2px 7px', letterSpacing: '0.04em',
-                            }}>
-                              {ownerOutcome}
-                            </span>
+                            <OutcomeBadge label={ownerOutcome} />
                           )}
                           {subRoleName}
                         </Accordion.Button>
@@ -219,24 +191,11 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
                   });
                   if (allLessons.length === 0) return null;
                   return (
-                    <div className="mb-4" style={{
-                      background: 'rgba(45,122,170,0.06)',
-                      borderLeft: '3px solid #2d7aaa',
-                      borderRadius: '0 6px 6px 0',
-                      padding: '12px 16px',
-                    }}>
-                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 8px 0', letterSpacing: '0.07em' }}>
-                        The following lessons were learned from the research:
-                      </p>
+                    <div className="mb-4" style={card.lesson}>
+                      <SectionLabel text="The following lessons were learned from the research:" style={{ margin: '0 0 8px 0' }} />
                       {allLessons.map(({ lesson, outcomeName }, i) => (
                         <div key={i} style={{ marginBottom: i < allLessons.length - 1 ? '10px' : 0 }}>
-                          <span style={{
-                            display: 'inline-block', fontSize: '10px', fontWeight: '700',
-                            color: '#fff', background: '#2d7aaa', borderRadius: '3px',
-                            padding: '2px 7px', marginBottom: '4px', letterSpacing: '0.04em',
-                          }}>
-                            {outcomeName}
-                          </span>
+                          <OutcomeBadge label={outcomeName} style={{ marginBottom: '4px' }} />
                           <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>{lesson}</p>
                         </div>
                       ))}

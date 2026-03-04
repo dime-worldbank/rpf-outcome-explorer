@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { colors } from '../theme';
 import { useContext, useEffect, useState } from 'react';
 import OutcomePage from './outcomePage';
 import PublicSectorResult from './publicSectorResult';
@@ -73,7 +74,7 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       ref={contentRef}
       className="content"
       style={{
-        background: 'rgb(240, 240, 240)',
+        background: colors.pageBg,
         padding: '0 20px',
         minHeight: '100%',
       }}
@@ -92,9 +93,9 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
 }
 
 Content.propTypes = {
-    selectedItem : PropTypes.object.isRequired,
+    selectedItem:    PropTypes.string.isRequired,
     setSelectedItem: PropTypes.func.isRequired,
-    contentRef: PropTypes.object.isRequired
+    contentRef:      PropTypes.object.isRequired,
 };
 
 export default Content;

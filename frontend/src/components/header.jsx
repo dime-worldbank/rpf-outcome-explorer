@@ -14,6 +14,7 @@ import CombinedImg from '../assets/icon-combined.png';
 import RPF_logo from '../assets/rpf_logo.png';
 import '../custom.scss'
 import {LOGO_URL, OUTCOMES} from '../constants'
+import { colors } from '../theme';
 
 const imageMap = {
   "Education": EducationImg,
