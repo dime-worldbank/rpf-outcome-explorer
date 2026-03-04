@@ -58,6 +58,12 @@ def create_outcome_results():
         data_dict[parent] = data
     return data_dict
 
+def clean_label(value):
+    """Strip trailing whitespace and commas from a string value."""
+    if pd.isna(value):
+        return value
+    return str(value).strip().rstrip(',').strip()
+
 def create_public_sector_challenges():
     """Create a dictionary for public sector challenges from the Excel file."""
     df = read_excel('Public Sector Challenges')
@@ -69,6 +75,7 @@ def create_public_sector_challenges():
     for _, row in df.iterrows():
         if pd.isna(row[parent_title]): continue
         data = {child: row[child] for child in children}
+        data['Challenge Type'] = clean_label(data.get('Challenge Type'))
         data_dict.setdefault(row[parent_title], []).append(data)
     return data_dict
 
@@ -103,6 +110,25 @@ def create_taxonomy_general():
         if pd.isna(term): continue
         result.append({
             'Term': str(term).strip(),
+            'Description': str(description).strip() if not pd.isna(description) else ''
+        })
+    return result
+
+def create_taxonomy_challenges():
+    """Read the taxonomy-challenges sheet and return a list of {Term, Description} objects."""
+    df = read_excel('taxonomy-challenges')
+    if isinstance(df, tuple):
+        return df
+    # Normalize column names (strip whitespace)
+    df.columns = [c.strip() for c in df.columns]
+    result = []
+    for _, row in df.iterrows():
+        # Sheet uses 'Challenge Type' as the term column
+        term = row.get('Challenge Type') or row.get('Term')
+        description = row.get('Description')
+        if pd.isna(term): continue
+        result.append({
+            'Term': clean_label(term),
             'Description': str(description).strip() if not pd.isna(description) else ''
         })
     return result
@@ -196,6 +222,7 @@ def get_all_data():
         'taxonomy-roles': create_role_taxonomy('taxonomy-roles'),
         'taxonomy-general': create_taxonomy_general(),
         'taxonomy-bottlenecks': create_taxonomy_bottlenecks(),
+        'taxonomy-challenges': create_taxonomy_challenges(),
     }
     return safe_jsonify(data)
 

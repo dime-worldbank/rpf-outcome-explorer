@@ -10,7 +10,7 @@ import NoOutcomePrompt from "./noOutcomePrompt";
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
 
-function PublicSectorChallenge({ challengeData, setSelectedItem }) {
+function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGeneral, setSelectedItem }) {
   const { outcome } = useContext(OutcomeContext);
   const isCombined = outcome === COMBINED_KEY;
   const outcome_name = OUTCOMES[outcome];
@@ -41,6 +41,22 @@ function PublicSectorChallenge({ challengeData, setSelectedItem }) {
         </div>
       </div>
 
+      {/* Challenge definition box — combined only; single shows it inside the card */}
+      {isCombined && (() => {
+        const challengeDef = taxonomyGeneral?.find(r => r['Term'] === 'Public Sector Challenges')?.['Description'];
+        return challengeDef ? (
+          <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
+            <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              Public Sector Challenges
+            </p>
+            <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+              <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{challengeDef}</p>
+            </div>
+          </div>
+        ) : null;
+      })()}
+
       {/* Intro sentence — singular or plural depending on mode */}
       <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
         {isCombined
@@ -49,23 +65,38 @@ function PublicSectorChallenge({ challengeData, setSelectedItem }) {
       </p>
 
       {/* Single outcome content card */}
-      {!isCombined && (
-        <div className="w-100" style={{ maxWidth: '720px' }}>
-          <Card className="w-100 card-result">
-            <Card.Body className="content-card">
-              <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
-                {allChallenges && allChallenges.map((challenge, index) => (
-                  <li key={index} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
-                    <strong style={{ color: '#0d2d4a' }}>{challenge['Public Sector Challenge']}</strong>
-                    <br />
-                    {challenge["Description"]}
-                  </li>
-                ))}
-              </ul>
-            </Card.Body>
-          </Card>
-        </div>
-      )}
+      {!isCombined && (() => {
+        const challengeDef = taxonomyGeneral?.find(r => r['Term'] === 'Public Sector Challenges')?.['Description'];
+        return (
+          <div className="w-100" style={{ maxWidth: '720px' }}>
+            <Card className="w-100 card-result">
+              <Card.Body className="content-card">
+                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  Public Sector Challenges
+                </p>
+                {challengeDef && (
+                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '12px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{challengeDef}</p>
+                  </div>
+                )}
+                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                  Examples
+                </p>
+                <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
+                  {allChallenges && allChallenges.map((challenge, index) => (
+                    <li key={index} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
+                      <strong style={{ color: '#0d2d4a' }}>{challenge['Public Sector Challenge']}</strong>
+                      <br />
+                      {challenge["Description"]}
+                    </li>
+                  ))}
+                </ul>
+              </Card.Body>
+            </Card>
+          </div>
+        );
+      })()}
 
       {/* Combined view: accordion grouped by Challenge Type, each item labelled with outcome */}
       {isCombined && (() => {
@@ -79,15 +110,29 @@ function PublicSectorChallenge({ challengeData, setSelectedItem }) {
           });
         });
 
+        const getDefinition = (term) =>
+          taxonomyChallenges?.find(r => r['Term'] === term)?.['Description'] || '';
+
         return (
           <div className="w-100" style={{ maxWidth: '720px' }}>
             <Accordion>
-              {Object.entries(byType).map(([type, challenges], idx) => (
+              {Object.entries(byType).map(([type, challenges], idx) => {
+                const typeDef = getDefinition(type);
+                return (
                 <Accordion.Item eventKey={idx.toString()} key={type}>
                   <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a' }}>
                     {type}
                   </Accordion.Button>
                   <Accordion.Body style={{ padding: '12px 16px' }}>
+                    {typeDef && (
+                      <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '14px' }}>
+                        <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                        <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{typeDef}</p>
+                      </div>
+                    )}
+                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                      Examples
+                    </p>
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
                       {challenges.map((challenge, i) => (
                         <li key={i} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
@@ -107,7 +152,8 @@ function PublicSectorChallenge({ challengeData, setSelectedItem }) {
                     </ul>
                   </Accordion.Body>
                 </Accordion.Item>
-              ))}
+                );
+              })}
             </Accordion>
           </div>
         );
@@ -119,6 +165,8 @@ function PublicSectorChallenge({ challengeData, setSelectedItem }) {
 
 PublicSectorChallenge.propTypes = {
   challengeData: PropTypes.any,
+  taxonomyChallenges: PropTypes.any,
+  taxonomyGeneral: PropTypes.any,
   setSelectedItem: PropTypes.func,
 };
 

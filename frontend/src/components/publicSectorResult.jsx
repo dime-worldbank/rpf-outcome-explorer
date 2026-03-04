@@ -10,11 +10,14 @@ import NoOutcomePrompt from "./noOutcomePrompt";
 const COMBINED_KEY = 'Outcome Combined';
 const SINGLE_OUTCOMES = Object.entries(OUTCOMES).filter(([k]) => k !== COMBINED_KEY);
 
-function PublicSectorResult({resultData, setSelectedItem}) {
+function PublicSectorResult({resultData, taxonomyGeneral, setSelectedItem}) {
     const { outcome } = useContext(OutcomeContext);
     const isCombined = outcome === COMBINED_KEY;
     const outcome_name = OUTCOMES[outcome];
     const publicSectorResult = (outcome_name && resultData[outcome_name]) || undefined;
+
+    const publicSectorResultsDef = taxonomyGeneral
+        ?.find(r => r['Term'] === 'Public Sector Results')?.['Description'] || '';
 
     if (!outcome) return <NoOutcomePrompt setSelectedItem={setSelectedItem} />;
 
@@ -38,6 +41,19 @@ function PublicSectorResult({resultData, setSelectedItem}) {
           </div>
         </div>
 
+        {/* Definition box — combined view only; single view shows it inside the card */}
+        {isCombined && publicSectorResultsDef && (
+          <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
+            <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              Public Sector Results
+            </p>
+            <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+              <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{publicSectorResultsDef}</p>
+            </div>
+          </div>
+        )}
+
         {/* Intro sentence — singular or plural depending on mode */}
         <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
           {isCombined
@@ -50,8 +66,17 @@ function PublicSectorResult({resultData, setSelectedItem}) {
           <div className="w-100" style={{ maxWidth: '720px' }}>
             <Card className="w-100 card-result">
               <Card.Body className="content-card">
-                <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '12px' }}>
-                  The <strong style={{ color: '#0d2d4a' }}>public sector results</strong> which countries aim to deliver to achieve the outcome are:
+                <p style={{ fontSize: '13px', fontWeight: '700', color: '#0d2d4a', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  Public Sector Results
+                </p>
+                {publicSectorResultsDef && (
+                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px', marginBottom: '12px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{publicSectorResultsDef}</p>
+                  </div>
+                )}
+                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
+                  Example
                 </p>
                 <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '0' }}>
                   {publicSectorResult && publicSectorResult['Public Sector Results']}
@@ -73,6 +98,9 @@ function PublicSectorResult({resultData, setSelectedItem}) {
                       {shortName}
                     </Accordion.Button>
                     <Accordion.Body style={{ padding: '12px 16px' }}>
+                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
+                        Example
+                      </p>
                       <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                         {outcomeResult?.['Public Sector Results'] || 'No data available.'}
                       </p>
@@ -89,6 +117,7 @@ function PublicSectorResult({resultData, setSelectedItem}) {
 }
 PublicSectorResult.propTypes = {
     resultData: PropTypes.any,
+    taxonomyGeneral: PropTypes.any,
     setSelectedItem: PropTypes.func,
 }
 

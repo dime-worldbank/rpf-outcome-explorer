@@ -192,7 +192,7 @@ function OutcomePage({frameworkData}) {
                   All Outcomes Combined
                 </h5>
                 <p className="mb-0" style={{ fontSize: '13px', color: '#444', lineHeight: 1.5 }}>
-                  Viewing all policy areas together. Subsequent steps will show data grouped by outcome.
+                  Viewing all policy areas together. Subsequent steps will show data across all outcomes.
                 </p>
               </div>
             </div>

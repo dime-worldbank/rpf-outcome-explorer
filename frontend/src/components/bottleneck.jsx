@@ -61,9 +61,12 @@ function Bottlenecks({ selectedItem, bottleneckData, taxonomyBottlenecks, isComb
                 <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                   You have selected
                 </p>
-                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{bottleneck_group}</p>
+                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{bottleneck_group}</p>
                 {bottleneck_description && (
-                  <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>{bottleneck_description}</p>
+                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{bottleneck_description}</p>
+                  </div>
                 )}
               </div>
             </div>
@@ -74,6 +77,9 @@ function Bottlenecks({ selectedItem, bottleneckData, taxonomyBottlenecks, isComb
             <div className="w-100" style={{ maxWidth: '720px' }} key={selectedItem}>
               <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                 Within this, the following bottlenecks contribute to public sector challenges and constrain the achievement of public sector results. (Click for country examples.)
+              </p>
+              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                Examples
               </p>
               <Accordion className="mb-3">
                 {Object.keys(data).map((bottleneckName, index) => {
@@ -161,9 +167,12 @@ function Bottlenecks({ selectedItem, bottleneckData, taxonomyBottlenecks, isComb
                   <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                     You have selected
                   </p>
-                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{combined_bottleneck_group}</p>
+                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{combined_bottleneck_group}</p>
                   {bottleneck_description && (
-                    <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>{bottleneck_description}</p>
+                    <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+                      <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                      <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{bottleneck_description}</p>
+                    </div>
                   )}
                 </div>
               </div>
@@ -173,6 +182,9 @@ function Bottlenecks({ selectedItem, bottleneckData, taxonomyBottlenecks, isComb
               <>
                 <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                   Within this, the following bottlenecks contribute to public sector challenges and constrain the achievement of public sector results. (Click for country examples.)
+                </p>
+                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                  Examples
                 </p>
                 <Accordion className="mb-3">
                   {allSubKeys.map((btlKey, index) => {

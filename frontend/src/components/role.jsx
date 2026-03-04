@@ -48,19 +48,17 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
           {/* Selected role card */}
           {role_name && (
             <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
-              <div style={{
-                background: '#fff',
-                border: '1px solid #b8d9ee',
-                borderRadius: '8px',
-                padding: '14px 18px',
-              }}>
+              <div style={{ background: '#fff', border: '1px solid #b8d9ee', borderRadius: '8px', padding: '14px 18px' }}>
                 <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                   You have selected
                 </p>
-                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{role_name}</p>
-                <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
-                  {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
-                </p>
+                <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{role_name}</p>
+                <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+                  <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                  <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
+                    {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -70,6 +68,9 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
             <div className="w-100" style={{ maxWidth: '720px' }}>
               <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                   This role contributes to public sector results and outcomes as follows (Click for country examples):
+              </p>
+              <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                Examples
               </p>
               <Accordion className="mb-3">
                 {Object.keys(data).map((roleName, index) => {
@@ -146,10 +147,13 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
                   <p style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.08em', color: '#2d7aaa', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                     You have selected
                   </p>
-                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 8px 0' }}>{roleName}</p>
-                  <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
-                    {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
-                  </p>
+                  <p style={{ fontSize: '14px', fontWeight: '700', color: '#0d2d4a', margin: '0 0 10px 0' }}>{roleName}</p>
+                  <div style={{ background: '#f5fafd', border: '1px solid #b8d9ee', borderRadius: '6px', padding: '10px 14px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>Definition</p>
+                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
+                      {rolesDescription?.[selectedItem]?.["Role Description: Public Finance"]}
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
@@ -158,6 +162,9 @@ function Roles({ selectedItem, rolesData, rolesDescription, isCombined }) {
               <>
                 <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, marginBottom: '10px' }}>
                   This role contributes to public sector results and outcomes as follows (Click for country examples):
+                </p>
+                <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 8px 0' }}>
+                  Examples
                 </p>
                 <Accordion className="mb-3">
                   {allSubKeys.map((roleKey, index) => {

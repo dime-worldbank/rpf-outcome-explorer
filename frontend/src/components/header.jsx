@@ -10,9 +10,10 @@ import RenewableEnergyImg from '../assets/icon-energy.png';
 import UniversalHealthCareImg from '../assets/icon-health.png';
 import RevenueImg from '../assets/icon-revenue.png';
 import WaterImg from '../assets/icon-water.png';
+import CombinedImg from '../assets/icon-combined.png';
 import RPF_logo from '../assets/rpf_logo.png';
 import '../custom.scss'
-import {LOGO_URL} from '../constants'
+import {LOGO_URL, OUTCOMES} from '../constants'
 
 const imageMap = {
   "Education": EducationImg,
@@ -21,6 +22,7 @@ const imageMap = {
   "The Energy Transition": RenewableEnergyImg,
   "Healthy Lives": UniversalHealthCareImg,
   "Revenue": RevenueImg,
+  "Outcome Combined": CombinedImg,
   // "Water": WaterImg
 };
 
@@ -48,12 +50,15 @@ function Header() {
         >
           {outcome ? (
             <div className="d-flex align-items-center">
-              <div
-                className="bg-white rounded-circle overflow-hidden me-2"
-                style={{ width: '36px', height: '36px', padding: '3px', flexShrink: 0 }}
-              >
-                <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
-              </div>
+              {/* Outcome icon */}
+              {imageMap[outcome] && (
+                <div
+                  className="bg-white rounded-circle overflow-hidden me-2"
+                  style={{ width: '36px', height: '36px', padding: '3px', flexShrink: 0 }}
+                >
+                  <Image src={imageMap[outcome]} alt={outcome} fluid className="w-100" />
+                </div>
+              )}
               <Dropdown>
                 <Dropdown.Toggle
                   variant="secondary"
@@ -64,8 +69,23 @@ function Header() {
                   <span className="text-white fw-bold fs-5">{outcome}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu style={{ minWidth: '300px', overflowY: 'auto' }}>
-                  {Object.keys(imageMap).map((key) => (
-                    <Dropdown.Item key={key} onClick={() => setOutcome(key)} className="d-flex">
+                  {Object.keys(OUTCOMES).map((key) => (
+                    <Dropdown.Item key={key} onClick={() => setOutcome(key)} className="d-flex align-items-center gap-2">
+                      {imageMap[key] ? (
+                        <div
+                          className="bg-white rounded-circle overflow-hidden"
+                          style={{ width: '24px', height: '24px', padding: '2px', flexShrink: 0 }}
+                        >
+                          <Image src={imageMap[key]} alt={key} fluid className="w-100" />
+                        </div>
+                      ) : (
+                        <div
+                          className="rounded-circle d-flex align-items-center justify-content-center"
+                          style={{ width: '24px', height: '24px', background: '#2d7aaa', flexShrink: 0 }}
+                        >
+                          <FaLayerGroup size={12} color="white" />
+                        </div>
+                      )}
                       <span>{key}</span>
                     </Dropdown.Item>
                   ))}
