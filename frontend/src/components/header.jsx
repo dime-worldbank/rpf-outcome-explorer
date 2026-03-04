@@ -71,19 +71,12 @@ function Header() {
                 <Dropdown.Menu style={{ minWidth: '300px', overflowY: 'auto' }}>
                   {Object.keys(OUTCOMES).map((key) => (
                     <Dropdown.Item key={key} onClick={() => setOutcome(key)} className="d-flex align-items-center gap-2">
-                      {imageMap[key] ? (
+                      {imageMap[key] && (
                         <div
                           className="bg-white rounded-circle overflow-hidden"
                           style={{ width: '24px', height: '24px', padding: '2px', flexShrink: 0 }}
                         >
                           <Image src={imageMap[key]} alt={key} fluid className="w-100" />
-                        </div>
-                      ) : (
-                        <div
-                          className="rounded-circle d-flex align-items-center justify-content-center"
-                          style={{ width: '24px', height: '24px', background: '#2d7aaa', flexShrink: 0 }}
-                        >
-                          <FaLayerGroup size={12} color="white" />
                         </div>
                       )}
                       <span>{key}</span>
