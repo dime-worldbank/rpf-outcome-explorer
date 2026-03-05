@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { colors } from '../theme';
 import { useContext, useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import OutcomePage from './outcomePage';
 import PublicSectorResult from './publicSectorResult';
 import PublicSectorChallenge from './publicSectorChallenge';
@@ -90,7 +91,7 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
           backgroundColor: 'rgba(255,255,255,0.7)',
           zIndex: 10,
         }}>
-          <div className="fetch-spinner" />
+          <Spinner animation="border" style={{ color: '#1a6fa8', width: '40px', height: '40px', borderWidth: '4px' }} />
         </div>
       )}
       {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}

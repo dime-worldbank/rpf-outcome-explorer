@@ -18,21 +18,22 @@ function HomePage() {
     >
       <Row
         className="g-3 align-items-stretch flex-grow-1"
-        style={{width: '100%', minHeight: 0 }}
+        style={{ width: '100%', minHeight: 0, height: 0 }}
       >
 
         {/* Left: framework diagram */}
-        <Col xs={12} md={4} className="d-none d-md-flex justify-content-center align-items-center">
+        <Col xs={12} md={4} className="d-none d-md-flex justify-content-center align-items-center"
+          style={{ minHeight: 0, height: '100%', overflow: 'hidden' }}>
           <Image
             src={frameworkImg}
             alt="Outcome-led PFM framework"
             fluid
-            style={{ width: '100%', objectFit: 'contain' }}
+            style={{ maxHeight: '100%', width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
           />
         </Col>
 
         {/* Right: intro content — flex column so card scrolls and button stays pinned */}
-        <Col xs={12} md={8} className="d-flex flex-column" style={{ minHeight: 0, gap: '8px' }}>
+        <Col xs={12} md={8} className="d-flex flex-column" style={{ minHeight: 0, height: '100%', gap: '8px' }}>
 
           {/* Title block — fixed, never scrolls away */}
           <div style={{
@@ -42,10 +43,10 @@ function HomePage() {
             borderRadius: '0 8px 8px 0',
             padding: '12px 18px',
           }}>
-            <p style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: '700', color: '#0d2d4a', lineHeight: 1.3 }}>
+            <p style={{ margin: '0 0 4px 0', fontSize: 'clamp(17px, 1.4vw, 24px)', fontWeight: '700', color: '#0d2d4a', lineHeight: 1.3 }}>
               Welcome to the Outcome Explorer
             </p>
-            <p style={{ margin: 0, fontSize: '13px', color: '#2d7aaa', fontWeight: '600', lineHeight: 1.5 }}>
+            <p style={{ margin: 0, fontSize: 'clamp(12px, 1vw, 16px)', color: '#2d7aaa', fontWeight: '600', lineHeight: 1.5 }}>
               Outcome-Led PFM Reform — A five-step diagnostic framework
             </p>
           </div>
@@ -60,10 +61,10 @@ function HomePage() {
             borderRadius: '8px',
             padding: '12px 16px',
           }}>
-            <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
+            <p style={{ fontSize: 'clamp(10px, 0.75vw, 13px)', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
               About this tool
             </p>
-            <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.6, margin: '0 0 8px 0' }}>
+            <p style={{ fontSize: 'clamp(13px, 0.95vw, 16px)', color: '#1a3a52', lineHeight: 1.6, margin: '0 0 8px 0' }}>
               The five-step process for outcome-led PFM reform is designed to support PFM reforms
               that more effectively advance development outcomes and public policy objectives. The aim
               is to provide a practical method for governments and other reform stakeholders to
@@ -76,11 +77,11 @@ function HomePage() {
               <Image
                 src={fivestepImg}
                 alt="Five-step process diagram"
-                style={{ width: '50%', objectFit: 'contain' }}
+                style={{ width: 'clamp(30%, 45%, 60%)', height: 'auto', objectFit: 'contain' }}
               />
             </div>
 
-            <p style={{ fontSize: '13px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: 'clamp(13px, 0.95vw, 16px)', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
               This Outcome-Led PFM Reform Explorer takes you through the first two of the five
               steps — the process of reform diagnosis by identifying reform priorities based on an
               Outcome-Led Analytical approach. It allows you to explore the taxonomy of roles of
@@ -96,7 +97,7 @@ function HomePage() {
             className="d-flex align-items-center justify-content-between"
             style={{ flexShrink: 0, paddingBottom: '4px' }}
           >
-            <p style={{ fontSize: '12px', color: '#888', margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 'clamp(11px, 0.8vw, 14px)', color: '#888', margin: 0, lineHeight: 1.5 }}>
               Disclaimer: The information presented here is preliminary and illustrative.
               Feedback welcome —{' '}
               <a href={FEEDBACK_URL} style={{ color: '#2d7aaa' }}>share it here</a>.
@@ -109,7 +110,7 @@ function HomePage() {
                 border: 'none',
                 borderRadius: '6px',
                 padding: '10px 28px',
-                fontSize: '14px',
+                fontSize: 'clamp(13px, 1vw, 16px)',
                 fontWeight: '600',
                 letterSpacing: '0.05em',
                 cursor: 'pointer',
