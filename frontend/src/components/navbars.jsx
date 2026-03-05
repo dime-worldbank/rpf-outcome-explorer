@@ -106,7 +106,17 @@ function VerticalNavbarPermanent() {
       if (existingOverlay) {
         existingOverlay.querySelectorAll('g[id]').forEach(g => {
           if (!g.id.startsWith('role_') && !g.id.startsWith('bottleneck_')) return;
-          g.style.opacity = g.id === selectedItem ? '1' : '0.35';
+          const isActive = g.id === selectedItem;
+          g.style.opacity = isActive ? '1' : '0.35';
+          const mainPath = g.querySelector('path');
+          if (mainPath) {
+            mainPath.style.fill = isActive
+              ? (g.id.startsWith('role_') ? '#d64c64' : '#3a80ac')
+              : '';
+          }
+          g.querySelectorAll('text, tspan').forEach(t => {
+            t.style.fill = isActive ? '#ffffff' : '';
+          });
         });
       }
 
@@ -159,7 +169,17 @@ function VerticalNavbarPermanent() {
             // Apply initial highlight for the active sub-step
             nestedSvg.querySelectorAll('g[id]').forEach(g => {
               if (!g.id.startsWith('role_') && !g.id.startsWith('bottleneck_')) return;
-              g.style.opacity = g.id === selectedItem ? '1' : '0.35';
+              const isActive = g.id === selectedItem;
+              g.style.opacity = isActive ? '1' : '0.35';
+              const mainPath = g.querySelector('path');
+              if (mainPath) {
+                mainPath.style.fill = isActive
+                  ? (g.id.startsWith('role_') ? '#d64c64' : '#3a80ac')
+                  : '';
+              }
+              g.querySelectorAll('text, tspan').forEach(t => {
+                t.style.fill = isActive ? '#ffffff' : '';
+              });
             });
 
             // Make role_* / bottleneck_* groups clickable

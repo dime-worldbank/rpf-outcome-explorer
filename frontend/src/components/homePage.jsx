@@ -4,7 +4,7 @@ import { Container, Image, Row, Col } from 'react-bootstrap';
 import OutcomeContext from '../OutcomeContext';
 import { FEEDBACK_URL } from '../constants';
 
-import frameworkImg from '../assets/vertical.svg';
+import frameworkImg from '../assets/diagram-ver.png';
 import fivestepImg from '../assets/framwork.png';
 
 function HomePage() {
@@ -18,7 +18,7 @@ function HomePage() {
     >
       <Row
         className="g-3 align-items-stretch flex-grow-1"
-        style={{ maxWidth: '1100px', margin: '0 auto', width: '100%', minHeight: 0 }}
+        style={{width: '100%', minHeight: 0 }}
       >
 
         {/* Left: framework diagram */}
