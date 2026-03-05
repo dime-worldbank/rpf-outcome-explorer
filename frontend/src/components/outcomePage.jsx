@@ -4,6 +4,7 @@ import OutcomeContext from '../OutcomeContext';
 import { useContext } from 'react';
 import { Container, Card, Image, Row, Col } from 'react-bootstrap';
 import { card } from '../theme';
+import OutcomeIconGrid from './OutcomeIconGrid';
 
 import { OUTCOMES } from '../constants';
 import EducationImg from '../assets/icon-education.png';
@@ -38,7 +39,7 @@ const outcomeList = [
   { title: COMBINED_KEY, icon: OutcomeCombinedImg },
 ];
 
-function OutcomePage({frameworkData}) {
+function OutcomePage({frameworkData, setSelectedItem}) {
   const { outcome, setOutcome } = useContext(OutcomeContext);
   const isCombined = outcome === COMBINED_KEY;
   const outcome_name = OUTCOMES[outcome];
@@ -71,101 +72,14 @@ function OutcomePage({frameworkData}) {
 
       {/* Prompt text */}
       <h4 className="mb-3 fw-semibold text-center" style={{ fontSize: '16px', color: '#2c3e50' }}>
-        {outcome ? 'Development Outcome' : 'Select a Development Outcome to get started'}
+        Select a Development Outcome to get started
       </h4>
 
       {/* Icon selection panel — always visible */}
-      <Row className="justify-content-center g-2 w-100" style={{ maxWidth: '720px' }}>
-        {outcomeList.map(({ title, icon }) => {
-          const isSelected = outcome === title;
-          return (
-            <Col key={title} xs={6} sm={4} md={2} className="d-flex justify-content-center">
-              <div
-                onClick={() => setOutcome(title)}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                  padding: '10px 8px',
-                  borderRadius: '10px',
-                  border: isSelected ? '2px solid #2d7aaa' : '2px solid transparent',
-                  background: isSelected ? 'rgba(45,122,170,0.10)' : 'transparent',
-                  transition: 'border-color 0.2s ease, background 0.2s ease',
-                  width: '100%',
-                }}
-                onMouseEnter={e => {
-                  if (!isSelected) {
-                    e.currentTarget.style.borderColor = '#2d7aaa';
-                    e.currentTarget.style.background = 'rgba(45,122,170,0.05)';
-                  }
-                }}
-                onMouseLeave={e => {
-                  if (!isSelected) {
-                    e.currentTarget.style.borderColor = 'transparent';
-                    e.currentTarget.style.background = 'transparent';
-                  }
-                }}
-              >
-                <Image
-                  src={icon}
-                  alt={title}
-                  style={{
-                    width: '64px',
-                    height: '64px',
-                    objectFit: 'contain',
-                    marginBottom: '6px',
-                    opacity: outcome && !isSelected ? 0.45 : 1,
-                    transition: 'opacity 0.2s ease',
-                  }}
-                />
-                <span style={{
-                  fontSize: '11px',
-                  fontWeight: isSelected ? '700' : '500',
-                  textAlign: 'center',
-                  color: isSelected ? '#1a5f8a' : '#555',
-                  lineHeight: 1.3,
-                }}>
-                  {title}
-                </span>
-              </div>
-            </Col>
-          );
-        })}
-      </Row>
-
-      {/* Detail panel — visible only when an outcome is selected */}
-      <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '8px 0 4px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
-        {isCombined
-          ? 'To illustrate, the following development outcomes, which governments often pursue, were selected for investigation:'
-          : 'To illustrate, the following development outcome, which governments often pursue, was selected for investigation:'}
-      </p>
-      {outcome && !isCombined && (
-        <div className="w-100 mt-4" style={{ maxWidth: '720px' }}>
-          <Card className="w-100 card-outcome">
-            <Card.Body className="d-flex align-items-start gap-4 content-card">
-              <div style={{ flexShrink: 0, width: '100px', height: '105px' }}>
-                <Image
-                  src={imageMap[outcome]}
-                  alt={outcome}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                />
-              </div>
-              <div className="flex-grow-1">
-                <h5 className="fw-bold mb-2" style={{ fontSize: '16px', color: '#0d2d4a' }}>
-                  {outcome}
-                </h5>
-                <p className="mb-1" style={{ fontSize: '13px', color: '#444', lineHeight: 1.6 }}>
-                  In {outcome}, the countries typically pursue the following development outcome:
-                </p>
-                <p className="mb-0" style={{ fontSize: '13px', fontWeight: '600', color: '#1a3a52', lineHeight: 1.6 }}>
-                  {developmentOutcome}
-                </p>
-              </div>
-            </Card.Body>
-          </Card>
-        </div>
-      )}
+      <OutcomeIconGrid
+        outcome={outcome}
+        onSelect={(title) => { setOutcome(title); setSelectedItem('results'); }}
+      />
 
       {/* Combined detail panel — visible when Outcome Combined is selected */}
       {isCombined && (
@@ -228,7 +142,8 @@ function OutcomePage({frameworkData}) {
   );
 }
 OutcomePage.propTypes = {
-  frameworkData: PropTypes.object.isRequired
+  frameworkData: PropTypes.object.isRequired,
+  setSelectedItem: PropTypes.func.isRequired,
 };
 
 export default OutcomePage;

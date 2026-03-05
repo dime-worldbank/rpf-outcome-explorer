@@ -11,9 +11,11 @@
       }
 
       .bcls-3, .bcls-4 {
-        font-family: Arial-BoldMT;
+        font-family: Arial-BoldMT, Arial;
         font-size: 25px;
-        font-weight: 500;
+        font-weight: 700;
+        user-select: none;
+        pointer-events: none;
       }
 
       .bcls-3, .bcls-5 {
@@ -37,9 +39,11 @@
       }
 
       .bcls-5 {
-        font-family: Arial-BoldMT;
+        font-family: Arial-BoldMT, Arial;
         font-size: 26.77px;
         font-weight: 700;
+        user-select: none;
+        pointer-events: none;
       }
 
       .bcls-9 {
@@ -101,7 +105,7 @@
     </g>
     <g id="bottleneck_7" class="bcls-12">
       <path class="bcls-8" d="M457.79,477.31l10.21-9.31-.64,13.8c-7.42,159.55,57,313.7,174.96,420.48-119.66,48.07-247.83,43.18-358.14-3.93-7.91-158.92,55.54-313.47,173.6-421.05Z"/>
-      <text class="bcls-3" transform="translate(403.42 670.58)"><tspan x="0" y="0">7.</tspan><tspan x="-48.16" y="29">Resource</tspan><tspan x="-75.84" y="58">management</tspan><tspan x="-75.5" y="87">and oversight</tspan><tspan x="-61.62" y="116">institutions</tspan><tspan x="-59.06" y="145">discourage</tspan><tspan x="-71.6" y="174">performance</tspan></text>
+      <text class="bcls-3" transform="translate(403.42 670.58)"><tspan x="0" y="0">7.</tspan><tspan x="-48.16" y="29">Resource</tspan><tspan x="-75.84" y="58">management</tspan><tspan x="-75.5" y="87">and oversight</tspan><tspan x="-61.62" y="116">systems</tspan><tspan x="-59.06" y="145">discourage</tspan><tspan x="-71.6" y="174">performance</tspan></text>
     </g>
     <g id="bottleneck_8" class="bcls-12">
       <path class="bcls-11" d="M454.2,467.36h0c5.09.24,7.36,6.51,3.59,9.95h0c-118.06,107.57-181.51,262.13-173.6,421.05-107.83-46.04-198.59-132.38-247.61-249.01-.98-2.34-1.91-4.68-2.85-7.02,106.78-117.96,260.93-182.38,420.48-174.96Z"/>

@@ -5,10 +5,10 @@ const STEPPER_ORDER = ['outcome', 'results', 'policy', 'challenges', 'role', 'bo
 const STEPPER_FIRST_ITEM = { role: 'role_A', bottleneck: 'bottleneck_1' };
 
 const GROUP1_STEPS = [
-  { id: 'outcome',    num: '1.1', label: 'Select outcome' },
-  { id: 'results',    num: '1.2', label: 'Public sector results' },
-  { id: 'policy',     num: '1.3', label: 'Map context & delivery capability' },
-  { id: 'challenges', num: '1.4', label: 'Public sector challenges' },
+  { id: 'outcome',    num: '1.1', label: 'Select policy areas' },
+  { id: 'results',    num: '1.2', label: 'Identify outcomes and public sector results' },
+  { id: 'policy',     num: '1.3', label: 'Understand the context' },
+  { id: 'challenges', num: '1.4', label: 'Identify key challenges' },
 ];
 
 const GROUP2_STEPS = [

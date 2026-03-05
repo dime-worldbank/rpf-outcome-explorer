@@ -14,6 +14,20 @@ const anonymizeCountry = (text) => {
 
 const isBlank = (val) => !val || val.trim() === '' || val.trim().toLowerCase() === 'nan';
 
+// Splits text into parts, wrapping any URLs in <a> tags
+const URL_REGEX = /(https?:\/\/[^\s,;)]+)/g;
+function linkify(text) {
+    if (!text) return null;
+    const parts = text.split(URL_REGEX);
+    return parts.map((part, i) => {
+        const isUrl = /^https?:\/\//.test(part);
+        return isUrl
+            ? <a key={i} href={part} target="_blank" rel="noopener noreferrer"
+                style={{ color: '#2d7aaa', wordBreak: 'break-all' }}>{part}</a>
+            : part;
+    });
+}
+
 function ContentText({example, exampleRef, source, bottleneckName, lessons}) {
     let number = null;
     if (bottleneckName) {
@@ -27,7 +41,8 @@ function ContentText({example, exampleRef, source, bottleneckName, lessons}) {
                     {anonymizeCountry(example)}
                     {!isBlank(exampleRef) && (
                         <span style={{ fontStyle: 'italic', fontSize: '12px', color: '#666', overflowWrap: 'anywhere' }}>
-                            <br/>Reference: {anonymizeCountry(exampleRef)}<br/>Source: {anonymizeCountry(source)}
+                            <br/>Reference: {linkify(anonymizeCountry(exampleRef))}
+                            {!isBlank(source) && <><br/>Source: {linkify(anonymizeCountry(source))}</>}
                         </span>
                     )}
                     {number && (
