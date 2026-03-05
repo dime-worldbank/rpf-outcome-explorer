@@ -17,52 +17,52 @@ const COMBINED_KEY = 'Outcome Combined';
 
 function Content({selectedItem, setSelectedItem, contentRef}) {
     const { outcome } = useContext(OutcomeContext);
-      const [data, setData] = useState({});
-  
-      useEffect(() => {
+    const [data, setData] = useState({});
+    const [frameworkData, setFrameworkData] = useState({});
+    const [loadingData, setLoadingData] = useState(false);
+    const [loadingFramework, setLoadingFramework] = useState(true);
+
+    useEffect(() => {
       async function fetchData() {
-      try {
-        const url = new URL(`${BASE_URL}/api/data`);
-        const filter_value = outcome === COMBINED_KEY ? '__all__' : OUTCOMES[outcome];
-        const params = {filter: filter_value}
-        url.search = new URLSearchParams(params).toString();
+        setLoadingData(true);
+        try {
+          const url = new URL(`${BASE_URL}/api/data`);
+          const filter_value = outcome === COMBINED_KEY ? '__all__' : OUTCOMES[outcome];
+          const params = {filter: filter_value};
+          url.search = new URLSearchParams(params).toString();
 
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const result = await response.json();
+          setData(result);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setLoadingData(false);
         }
-        const result = await response.json();
-        setData(result);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
       }
-    }
+      fetchData();
+    }, [outcome]);
 
-    fetchData();
-  }, [outcome]);
-
-  const [frameworkData, setFrameworkData] = useState({});
-
-  useEffect(() => {
-  async function fetchData() {
-  try {
-    const url = new URL(`${BASE_URL}/api/framework`);
-
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const result = await response.json();
-    setFrameworkData(result);
-
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+    useEffect(() => {
+      async function fetchData() {
+        setLoadingFramework(true);
+        try {
+          const url = new URL(`${BASE_URL}/api/framework`);
+          const response = await fetch(url);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const result = await response.json();
+          setFrameworkData(result);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setLoadingFramework(false);
+        }
       }
-
       fetchData();
     }, []);
+
+    const isLoading = loadingData || loadingFramework;
 
   const bottleneckData = data?.['Bottlenecks']
   const rolesData = data?.['Roles'];
@@ -77,8 +77,22 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
         background: colors.pageBg,
         padding: '0 20px',
         minHeight: '100%',
+        position: 'relative',
       }}
     >
+      {isLoading && (
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'rgba(255,255,255,0.7)',
+          zIndex: 10,
+        }}>
+          <div className="fetch-spinner" />
+        </div>
+      )}
       {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
       {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} taxonomyChallenges={frameworkData['taxonomy-challenges']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
       {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']} setSelectedItem={setSelectedItem}/>}

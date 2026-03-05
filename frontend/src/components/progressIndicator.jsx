@@ -17,26 +17,16 @@ const GROUP2_STEPS = [
   { id: 'closure',    num: '2.3', label: 'Agree on reform teams' },
 ];
 
-// Reddish palette for phase headers
-const PHASE_RED       = '#a93226';
-const PHASE_RED_BG    = '#fdf0ef';
-const PHASE_RED_BORDER = '#e8b4b0';
+// Phase header palette — red accent on neutral background
+const PHASE_RED        = '#a93226';
+const PHASE_HEADER_BG  = '#f5f5f5';
+const PHASE_BORDER     = '#ddd';
 
 // Default bluish palette for sub-steps
 const STEP_BLUE_ACTIVE   = '#1a6fa8';
 const STEP_BLUE_INACTIVE = '#4d9fd2';
 const STEP_ACTIVE_BG     = '#e6f2fa';
 
-// Per-step active colors drawn from the wheel SVGs
-const STEP_ACTIVE_COLORS = {
-  outcome:    { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG },
-  results:    { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG },
-  policy:     { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG },
-  challenges: { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG },
-  role:       { color: '#d64c64', bg: 'rgba(214,76,100,0.10)' }, // darkest red/pink from roles wheel
-  bottleneck: { color: '#3a80ac', bg: 'rgba(58,128,172,0.10)' }, // darkest blue from bottleneck wheel
-  closure:    { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG },
-};
 
 function isStepActive(stepId, selectedItem) {
   if (stepId === 'role')       return selectedItem.startsWith('role');
@@ -50,8 +40,8 @@ function handleNavigate(stepId, setSelectedItem) {
   setSelectedItem(stepId);
 }
 
-function StepItem({ step, active, setSelectedItem, activeColor, activeBg }) {
-  const color = active ? activeColor : STEP_BLUE_INACTIVE;
+function StepItem({ step, active, setSelectedItem }) {
+  const color = active ? STEP_BLUE_ACTIVE : STEP_BLUE_INACTIVE;
   return (
     <div
       onClick={() => handleNavigate(step.id, setSelectedItem)}
@@ -59,7 +49,7 @@ function StepItem({ step, active, setSelectedItem, activeColor, activeBg }) {
         flex: 1,
         cursor: 'pointer',
         borderRadius: '6px',
-        backgroundColor: active ? activeBg : 'transparent',
+        backgroundColor: active ? STEP_ACTIVE_BG : 'transparent',
         padding: '5px 6px',
         transition: 'background 0.15s',
       }}
@@ -67,7 +57,7 @@ function StepItem({ step, active, setSelectedItem, activeColor, activeBg }) {
       {/* Step number pill */}
       <div style={{
         display: 'inline-block',
-        backgroundColor: active ? activeColor : 'transparent',
+        backgroundColor: active ? STEP_BLUE_ACTIVE : 'transparent',
         color: active ? 'white' : STEP_BLUE_INACTIVE,
         border: `1.5px solid ${color}`,
         borderRadius: '4px',
@@ -82,7 +72,7 @@ function StepItem({ step, active, setSelectedItem, activeColor, activeBg }) {
       {/* Step label */}
       <div style={{
         fontSize: '0.68rem',
-        color: active ? activeColor : '#777',
+        color: active ? STEP_BLUE_ACTIVE : '#777',
         lineHeight: 1.3,
         fontWeight: active ? '600' : '400',
       }}>
@@ -98,14 +88,14 @@ function StepGroup({ phaseNum, phaseLabel, steps, selectedItem, setSelectedItem 
       flex: 1,
       borderRadius: '8px',
       overflow: 'hidden',
-      border: `1px solid ${PHASE_RED_BORDER}`,
+      border: `1px solid ${PHASE_BORDER}`,
       boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
       backgroundColor: 'white',
     }}>
-      {/* Reddish phase header */}
+      {/* Phase header — red circle accent, neutral background */}
       <div style={{
-        backgroundColor: PHASE_RED_BG,
-        borderBottom: `1px solid ${PHASE_RED_BORDER}`,
+        backgroundColor: PHASE_HEADER_BG,
+        borderBottom: `1px solid ${PHASE_BORDER}`,
         padding: '5px 10px',
         display: 'flex',
         alignItems: 'flex-start',
@@ -128,7 +118,7 @@ function StepGroup({ phaseNum, phaseLabel, steps, selectedItem, setSelectedItem 
           {phaseNum}
         </span>
         <span style={{
-          color: PHASE_RED,
+          color: '#222',
           fontSize: '0.7rem',
           fontWeight: '600',
           lineHeight: 1.3,
@@ -144,19 +134,14 @@ function StepGroup({ phaseNum, phaseLabel, steps, selectedItem, setSelectedItem 
         display: 'flex',
         gap: '2px',
       }}>
-        {steps.map(step => {
-          const palette = STEP_ACTIVE_COLORS[step.id] || { color: STEP_BLUE_ACTIVE, bg: STEP_ACTIVE_BG };
-          return (
-            <StepItem
-              key={step.id}
-              step={step}
-              active={isStepActive(step.id, selectedItem)}
-              setSelectedItem={setSelectedItem}
-              activeColor={palette.color}
-              activeBg={palette.bg}
-            />
-          );
-        })}
+        {steps.map(step => (
+          <StepItem
+            key={step.id}
+            step={step}
+            active={isStepActive(step.id, selectedItem)}
+            setSelectedItem={setSelectedItem}
+          />
+        ))}
       </div>
     </div>
   );
