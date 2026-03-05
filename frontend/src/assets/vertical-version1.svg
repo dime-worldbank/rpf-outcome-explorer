@@ -12,7 +12,7 @@ Contribute
 
 
 592.11k → 589.27k 99.52%
-<svg id="outcome-explorer-slide1" width="750" height="1334" fill-rule="evenodd" stroke-linejoin="round" stroke-width="28.222" preserveAspectRatio="xMidYMid" viewBox="0 0 19050 33867"><defs><style>text, tspan { user-select: none; pointer-events: none; }</style></defs>
+<svg id="outcome-explorer-slide1" width="750" height='100%' fill-rule="evenodd" stroke-linejoin="round" stroke-width="28.222" preserveAspectRatio="xMidYMid" viewBox="0 0 19050 28500"><defs><style>text, tspan { user-select: none; pointer-events: none; }</style></defs>
   <defs>
     <font id="EmbeddedFont_1" horiz-adv-x="2048">
       <font-face ascent="1879" descent="476" font-family="Arial-BoldMT, Arial" font-style="normal" font-weight="normal" units-per-em="2048"/>
@@ -161,19 +161,6 @@ Contribute
     <path id="bullet-char-template-8226" d="M346 457c-73 0-137 26-191 78-54 51-81 114-81 188 0 73 27 136 81 188s118 78 191 78 134-26 185-79c51-51 77-114 77-187 0-75-25-137-76-188q-75-78-186-78" transform="scale(.00049 -.00049)"/>
     <path id="bullet-char-template-8211" d="M-4 459h1139v147H-4z" transform="scale(.00049 -.00049)"/>
     <path id="bullet-char-template-61548" d="M173 740c0 163 58 303 173 419 116 115 255 173 419 173 163 0 302-58 418-173 116-116 174-256 174-419s-58-303-174-418c-116-116-255-174-418-174-164 0-303 58-419 174-115 115-173 255-173 418" transform="scale(.00049 -.00049)"/>
-  </defs>
-  <defs>
-    <g id="id2" class="Master_Slide">
-      <path id="bg-id2" fill="rgb(255,255,255)" d="M9512 33853H-13V-13h19049v33866z" class="Background"/>
-      <g id="bo-id2" class="BackgroundObjects">
-        <g class="com.sun.star.drawing.CustomShape">
-          <g id="id12">
-            <path fill="none" d="M16325 33267h2619v852h-2619z" class="BoundingBox"/>
-            <text class="SVGTextShape"><tspan class="TextParagraph"><tspan x="16325" y="33620" class="TextPosition"><tspan fill="rgb(0,0,0)" fill-opacity="0.498039215686275" font-family="Arial-BoldMT, Arial" font-size="353px" font-weight="400" lengthAdjust="spacingAndGlyphs" style="white-space:pre" textLength="1988">Official Use </tspan></tspan><tspan y="34044" class="TextPosition"><tspan fill="rgb(0,0,0)" fill-opacity="0.498039215686275" font-family="Arial-BoldMT, Arial" font-size="353px" font-weight="400" lengthAdjust="spacingAndGlyphs" style="white-space:pre" textLength="805">Only</tspan></tspan></tspan></text>
-          </g>
-        </g>
-      </g>
-    </g>
   </defs>
   <g id="development-outcomes" class="component" data-label="Development Outcomes">
     <g class="Graphic">

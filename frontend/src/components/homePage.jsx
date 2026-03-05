@@ -76,7 +76,7 @@ function HomePage() {
               <Image
                 src={fivestepImg}
                 alt="Five-step process diagram"
-                style={{ width: '70%', objectFit: 'contain' }}
+                style={{ width: '50%', objectFit: 'contain' }}
               />
             </div>
 
