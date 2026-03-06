@@ -35,22 +35,22 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
       <Container className="d-flex flex-column align-items-center py-4">
 
         {/* Step instruction text */}
-        <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
+        <div className="w-100 mb-4">
           <div style={card.instruction}>
-            <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
+            <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: 'var(--fs-lg)', fontWeight: '700', lineHeight: 1.5 }}>
               1.3 Map out the context and assess the delivery capability of government and feasibility of policy in relation to public sector results and policy objectives.
             </p>
-            <p style={{ margin: 0, marginBottom: '12px', color: '#1a3a52', fontSize: '14px', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, marginBottom: '12px', color: '#1a3a52', fontSize: 'var(--fs-md)', lineHeight: 1.7 }}>
               First, understand how the government is set up to pursue the selected outcome. Set out the main features of the relevant public sector policies (whether sector-specific or cross-sectoral), and sector institutions, including the public and private sector delivery modalities and systems (for example, direct provision vs. funding and regulation, decentralization arrangements, digital systems etc.), and the organizations involved at all levels of government and outside it.
             </p>
-            <p style={{ margin: 0, color: '#1a3a52', fontSize: '14px', lineHeight: 1.7 }}>
+            <p style={{ margin: 0, color: '#1a3a52', fontSize: 'var(--fs-md)', lineHeight: 1.7 }}>
               Then review the feasibility of achieving a policy's stated objectives, from a technical, political and financial perspective. Assess the capability of the government to deliver policy and achieve results. Here the role of government and delivery models are important.
             </p>
           </div>
         </div>
 
         {/* Intro sentence — outcome name or plural depending on mode */}
-        <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
+        <p style={{ fontSize: 'var(--fs-base)', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', textAlign: 'left' }}>
           {isCombined
             ? 'For example, the features of feasible policy and institutional capability for each of these outcomes include:'
             : `For example, the features of feasible policy and institutional capability for ${outcome_name} include:`}
@@ -60,7 +60,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
         {!isCombined && (
           <>
             {/* Feasible Policy group */}
-            <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
+            <div className="w-100 mb-3">
               <Card className="w-100 card-capability">
                 <Card.Body className="content-card">
                   <SectionLabel text="Feasible Policy" style={{ margin: '0 0 6px 0' }} />
@@ -68,7 +68,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
                     <DefinitionBox definition={feasiblePolicyDef} style={{ marginBottom: '12px' }} />
                   )}
                   <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
-                  <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
+                  <p style={{ fontSize: 'var(--fs-base)', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                     {policyData["Feasible Policy"]}
                   </p>
                 </Card.Body>
@@ -76,7 +76,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
             </div>
 
             {/* Delivery Capability group */}
-            <div className="w-100" style={{ maxWidth: '720px' }}>
+            <div className="w-100">
               <Card className="w-100 card-capability">
                 <Card.Body className="content-card">
                   <SectionLabel text="Delivery Capability" style={{ margin: '0 0 6px 0' }} />
@@ -84,7 +84,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
                     <DefinitionBox definition={deliveryCapabilityDef} style={{ marginBottom: '12px' }} />
                   )}
                   <SectionLabel text="Example" style={{ margin: '0 0 6px 0' }} />
-                  <p style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
+                  <p style={{ fontSize: 'var(--fs-base)', lineHeight: 1.8, color: '#1a3a52', margin: 0 }}>
                     {policyData["Delivery Capability"]}
                   </p>
                 </Card.Body>
@@ -95,7 +95,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
 
         {/* Combined view: two separate cards, each listing all outcomes with chip labels */}
         {isCombined && (
-          <div className="w-100 d-flex flex-column gap-3" style={{ maxWidth: '720px' }}>
+          <div className="w-100 d-flex flex-column gap-3">
 
             {/* Feasible Policy card */}
             <Card className="w-100 card-capability">
@@ -112,7 +112,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
                     return (
                       <div key={shortName}>
                         <OutcomeBadge label={shortName} style={{ marginBottom: '4px' }} />
-                        <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
+                        <p style={{ fontSize: 'var(--fs-base)', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
                       </div>
                     );
                   })}
@@ -135,7 +135,7 @@ function PolicyCapability({frameworkData, taxonomyGeneral, setSelectedItem}) {
                     return (
                       <div key={shortName}>
                         <OutcomeBadge label={shortName} style={{ marginBottom: '4px' }} />
-                        <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
+                        <p style={{ fontSize: 'var(--fs-base)', lineHeight: 1.7, color: '#1a3a52', margin: 0 }}>{text}</p>
                       </div>
                     );
                   })}

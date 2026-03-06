@@ -28,7 +28,7 @@ const outcomeList = [
  */
 function OutcomeIconGrid({ outcome, onSelect }) {
   return (
-    <Row className="justify-content-center g-2 w-100" style={{ maxWidth: '720px' }}>
+    <Row className="justify-content-center g-2 w-100">
       {outcomeList.map(({ title, icon }) => {
         const isSelected = outcome === title;
         return (
@@ -40,7 +40,7 @@ function OutcomeIconGrid({ outcome, onSelect }) {
                 flexDirection: 'column',
                 alignItems: 'center',
                 cursor: 'pointer',
-                padding: '10px 8px',
+                padding: 'clamp(8px, 0.8vw, 18px) clamp(6px, 0.6vw, 14px)',
                 borderRadius: '10px',
                 border: isSelected ? '2px solid #2d7aaa' : '2px solid transparent',
                 background: isSelected ? 'rgba(45,122,170,0.10)' : 'transparent',
@@ -64,16 +64,16 @@ function OutcomeIconGrid({ outcome, onSelect }) {
                 src={icon}
                 alt={title}
                 style={{
-                  width: '56px',
-                  height: '56px',
+                  width: 'clamp(44px, 4.5vw, 80px)',
+                  height: 'clamp(44px, 4.5vw, 80px)',
                   objectFit: 'contain',
-                  marginBottom: '6px',
+                  marginBottom: 'clamp(4px, 0.5vw, 10px)',
                   opacity: outcome && !isSelected ? 0.45 : 1,
                   transition: 'opacity 0.2s ease',
                 }}
               />
               <span style={{
-                fontSize: '11px',
+                fontSize: 'clamp(11px, 0.9vw, 15px)',
                 fontWeight: isSelected ? '700' : '500',
                 textAlign: 'center',
                 color: isSelected ? '#1a5f8a' : '#555',

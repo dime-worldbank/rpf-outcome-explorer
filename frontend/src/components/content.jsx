@@ -76,8 +76,9 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
       className="content"
       style={{
         background: colors.pageBg,
-        padding: '0 20px',
-        minHeight: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
         position: 'relative',
       }}
     >
@@ -94,15 +95,22 @@ function Content({selectedItem, setSelectedItem, contentRef}) {
           <Spinner animation="border" style={{ color: '#1a6fa8', width: '40px', height: '40px', borderWidth: '4px' }} />
         </div>
       )}
-      {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
-      {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} taxonomyChallenges={frameworkData['taxonomy-challenges']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
-      {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']} setSelectedItem={setSelectedItem}/>}
-      {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
-      {selectedItem.startsWith('bottleneck') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData} taxonomyBottlenecks={frameworkData?.['taxonomy-bottlenecks'] || {}} isCombined={isCombined}/>)}
-      {selectedItem.startsWith('role') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} isCombined={isCombined}/>)}
-      {selectedItem === 'closure' && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : <Closure />)}
 
-      <ArrowNav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+      {/* Scrollable page content */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0 20px' }}>
+        {selectedItem === 'results' && frameworkData && frameworkData['outcome-results'] && <PublicSectorResult resultData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
+        {selectedItem === 'challenges' && frameworkData && frameworkData['Public Sector Challenges'] && <PublicSectorChallenge challengeData={frameworkData['Public Sector Challenges']} taxonomyChallenges={frameworkData['taxonomy-challenges']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
+        {selectedItem === 'outcome' && frameworkData && frameworkData['outcome-results'] &&<OutcomePage frameworkData={frameworkData['outcome-results']} setSelectedItem={setSelectedItem}/>}
+        {selectedItem === 'policy' && frameworkData && frameworkData['outcome-results'] && <PolicyCapability frameworkData={frameworkData['outcome-results']} taxonomyGeneral={frameworkData['taxonomy-general']} setSelectedItem={setSelectedItem} />}
+        {selectedItem.startsWith('bottleneck') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : bottleneckData && <Bottlenecks selectedItem={selectedItem} bottleneckData={bottleneckData} taxonomyBottlenecks={frameworkData?.['taxonomy-bottlenecks'] || {}} isCombined={isCombined}/>)}
+        {selectedItem.startsWith('role') && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : frameworkData && rolesData && <Roles selectedItem={selectedItem} rolesData={rolesData} rolesDescription={frameworkData['taxonomy-roles']} isCombined={isCombined}/>)}
+        {selectedItem === 'closure' && (!outcome ? <NoOutcomePrompt setSelectedItem={setSelectedItem} /> : <Closure />)}
+      </div>
+
+      {/* ArrowNav — always pinned at the bottom */}
+      <div style={{ flexShrink: 0, padding: '0 20px', background: colors.pageBg }}>
+        <ArrowNav selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+      </div>
     </div>
   );
 }

@@ -21,10 +21,10 @@ function NoOutcomePrompt({ setSelectedItem }) {
       }}>
         ←
       </div>
-      <p style={{ fontSize: '15px', fontWeight: '600', color: '#0d2d4a', marginBottom: '8px' }}>
+      <p style={{ fontSize: 'var(--fs-lg)', fontWeight: '600', color: '#0d2d4a', marginBottom: '8px' }}>
         No policy area selected yet
       </p>
-      <p style={{ fontSize: '13px', color: '#555', lineHeight: 1.6, maxWidth: '340px', marginBottom: '20px' }}>
+      <p style={{ fontSize: 'var(--fs-base)', color: '#555', lineHeight: 1.6, maxWidth: '340px', marginBottom: '20px' }}>
         Please go back to step 1.1 and select a policy area before continuing.
       </p>
       <button
@@ -35,7 +35,7 @@ function NoOutcomePrompt({ setSelectedItem }) {
           border: 'none',
           borderRadius: '6px',
           padding: '8px 20px',
-          fontSize: '13px',
+          fontSize: 'var(--fs-base)',
           fontWeight: '600',
           cursor: 'pointer',
         }}

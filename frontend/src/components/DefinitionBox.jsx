@@ -11,7 +11,7 @@ function DefinitionBox({ definition, style }) {
   return (
     <div style={{ ...card.definition, ...style }}>
       <p style={{ ...typography.label, margin: '0 0 4px 0' }}>Definition</p>
-      <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{definition}</p>
+      <p style={{ fontSize: 'var(--fs-sm)', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>{definition}</p>
     </div>
   );
 }

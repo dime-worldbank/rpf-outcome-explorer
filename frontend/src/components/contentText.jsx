@@ -37,16 +37,16 @@ function ContentText({example, exampleRef, source, bottleneckName, lessons}) {
     return (
         <div className="content-text" style={{ marginBottom: '12px' }}>
             {!isBlank(example) && (
-                <p style={{ fontSize: '13px', lineHeight: 1.8, marginBottom: '4px', color: '#1a3a52' }}>
+                <p style={{ fontSize: 'var(--fs-base)', lineHeight: 1.8, marginBottom: '4px', color: '#1a3a52' }}>
                     {anonymizeCountry(example)}
                     {!isBlank(exampleRef) && (
-                        <span style={{ fontStyle: 'italic', fontSize: '12px', color: '#666', overflowWrap: 'anywhere' }}>
+                        <span style={{ fontStyle: 'italic', fontSize: 'var(--fs-sm)', color: '#666', overflowWrap: 'anywhere' }}>
                             <br/>Reference: {linkify(anonymizeCountry(exampleRef))}
                             {!isBlank(source) && <><br/>Source: {linkify(anonymizeCountry(source))}</>}
                         </span>
                     )}
                     {number && (
-                        <span style={{ fontStyle: 'italic', fontSize: '12px', color: '#666', overflowWrap: 'anywhere' }}>
+                        <span style={{ fontStyle: 'italic', fontSize: 'var(--fs-sm)', color: '#666', overflowWrap: 'anywhere' }}>
                             <br/>Bottleneck Reference: {number}
                         </span>
                     )}
@@ -57,13 +57,13 @@ function ContentText({example, exampleRef, source, bottleneckName, lessons}) {
                     background: 'rgba(45,122,170,0.06)',
                     borderLeft: '3px solid #2d7aaa',
                     borderRadius: '0 6px 6px 0',
-                    padding: '8px 12px',
+                    padding: 'clamp(6px, 0.5vw, 12px) clamp(8px, 0.7vw, 16px)',
                     marginTop: '6px',
                 }}>
-                    <p style={{ fontSize: '11px', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>
+                    <p style={{ fontSize: 'var(--fs-sm)', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 4px 0' }}>
                         Lessons from Outcome-Based Research
                     </p>
-                    <p style={{ fontSize: '12px', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
+                    <p style={{ fontSize: 'var(--fs-sm)', color: '#1a3a52', lineHeight: 1.7, margin: 0 }}>
                         {lessons}
                     </p>
                 </div>

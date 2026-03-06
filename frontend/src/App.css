@@ -88,3 +88,23 @@ p {
   transition: all 0.2s ease;
 }
 
+/* Always-visible scrollbars for all scrollable areas */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e8f0f7;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a8c8e0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d7aaa;
+}
+

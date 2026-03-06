@@ -222,7 +222,7 @@ function VerticalNavbarPermanent() {
         </Col>
 
         {/* Content Column */}
-        <Col xs={12} md={8} lg={8} style={{ height: '100%', overflowY: 'auto' }}>
+        <Col xs={12} md={8} lg={8} style={{ height: '100%', overflow: 'hidden' }}>
           <Content contentRef={contentRef} outcome={outcome} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
         </Col>
       </Row>

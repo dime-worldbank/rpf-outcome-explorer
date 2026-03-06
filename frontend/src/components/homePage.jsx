@@ -14,7 +14,7 @@ function HomePage() {
     <Container
       fluid
       className="home-page d-flex flex-column"
-      style={{ flex: 1, minHeight: 0, overflow: 'hidden', background: 'rgb(240, 240, 240)', padding: '14px 24px' }}
+      style={{ flex: 1, minHeight: 0, overflow: 'hidden', background: 'rgb(240, 240, 240)', padding: 'clamp(12px, 2vh, 40px) clamp(16px, 2vw, 48px)' }}
     >
       <Row
         className="g-3 align-items-stretch flex-grow-1"
@@ -32,8 +32,8 @@ function HomePage() {
           />
         </Col>
 
-        {/* Right: intro content — flex column so card scrolls and button stays pinned */}
-        <Col xs={12} md={8} className="d-flex flex-column" style={{ minHeight: 0, height: '100%', gap: '8px' }}>
+        {/* Right: intro content — base font scales with viewport; all children use em */}
+        <Col xs={12} md={8} className="d-flex flex-column" style={{ minHeight: 0, height: '100%', gap: 'clamp(8px, 1vh, 20px)', fontSize: 'clamp(13px, min(1.4vw, 2.2vh), 24px)' }}>
 
           {/* Title block — fixed, never scrolls away */}
           <div style={{
@@ -41,12 +41,12 @@ function HomePage() {
             borderLeft: '4px solid #2d7aaa',
             background: 'rgba(45,122,170,0.06)',
             borderRadius: '0 8px 8px 0',
-            padding: '12px 18px',
+            padding: 'clamp(10px, 1.5vh, 24px) clamp(12px, 1.2vw, 28px)',
           }}>
-            <p style={{ margin: '0 0 4px 0', fontSize: 'clamp(17px, 1.4vw, 24px)', fontWeight: '700', color: '#0d2d4a', lineHeight: 1.3 }}>
+            <p style={{ margin: '0 0 0.2em 0', fontSize: '1.35em', fontWeight: '700', color: '#0d2d4a', lineHeight: 1.3 }}>
               Welcome to the Outcome Explorer
             </p>
-            <p style={{ margin: 0, fontSize: 'clamp(12px, 1vw, 16px)', color: '#2d7aaa', fontWeight: '600', lineHeight: 1.5 }}>
+            <p style={{ margin: 0, fontSize: '0.9em', color: '#2d7aaa', fontWeight: '600', lineHeight: 1.5 }}>
               Outcome-Led PFM Reform — A five-step diagnostic framework
             </p>
           </div>
@@ -59,12 +59,12 @@ function HomePage() {
             background: '#fff',
             border: '1px solid #b8d9ee',
             borderRadius: '8px',
-            padding: '12px 16px',
+            padding: 'clamp(12px, 2vh, 36px) clamp(14px, 1.5vw, 36px)',
           }}>
-            <p style={{ fontSize: 'clamp(10px, 0.75vw, 13px)', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 6px 0' }}>
+            <p style={{ fontSize: '0.72em', fontWeight: '700', color: '#2d7aaa', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 0.7em 0' }}>
               About this tool
             </p>
-            <p style={{ fontSize: 'clamp(13px, 0.95vw, 16px)', color: '#1a3a52', lineHeight: 1.6, margin: '0 0 8px 0' }}>
+            <p style={{ fontSize: '0.9em', color: '#1a3a52', lineHeight: 1.75, margin: '0 0 1em 0' }}>
               The five-step process for outcome-led PFM reform is designed to support PFM reforms
               that more effectively advance development outcomes and public policy objectives. The aim
               is to provide a practical method for governments and other reform stakeholders to
@@ -73,7 +73,7 @@ function HomePage() {
               effectively.
             </p>
 
-            <div className="d-flex justify-content-center" style={{ margin: '4px 0 10px 0' }}>
+            <div className="d-flex justify-content-center" style={{ margin: '0.5em 0 1em 0' }}>
               <Image
                 src={fivestepImg}
                 alt="Five-step process diagram"
@@ -81,7 +81,7 @@ function HomePage() {
               />
             </div>
 
-            <p style={{ fontSize: 'clamp(13px, 0.95vw, 16px)', color: '#1a3a52', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: '0.9em', color: '#1a3a52', lineHeight: 1.75, margin: 0 }}>
               This Outcome-Led PFM Reform Explorer takes you through the first two of the five
               steps — the process of reform diagnosis by identifying reform priorities based on an
               Outcome-Led Analytical approach. It allows you to explore the taxonomy of roles of
@@ -97,7 +97,7 @@ function HomePage() {
             className="d-flex align-items-center justify-content-between"
             style={{ flexShrink: 0, paddingBottom: '4px' }}
           >
-            <p style={{ fontSize: 'clamp(11px, 0.8vw, 14px)', color: '#888', margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.78em', color: '#888', margin: 0, lineHeight: 1.5 }}>
               Disclaimer: The information presented here is preliminary and illustrative.
               Feedback welcome —{' '}
               <a href={FEEDBACK_URL} style={{ color: '#2d7aaa' }}>share it here</a>.
@@ -109,13 +109,13 @@ function HomePage() {
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: '6px',
-                padding: '10px 28px',
-                fontSize: 'clamp(13px, 1vw, 16px)',
+                padding: '0.6em 1.8em',
+                fontSize: '0.9em',
                 fontWeight: '600',
                 letterSpacing: '0.05em',
                 cursor: 'pointer',
                 flexShrink: 0,
-                marginLeft: '16px',
+                marginLeft: '1em',
                 boxShadow: '0 2px 8px rgba(45,122,170,0.35)',
                 transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
               }}

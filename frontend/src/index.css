@@ -1,3 +1,12 @@
+:root {
+  --fs-xs:   clamp(10px, 0.72vw, 13px);  /* badges, tiny labels */
+  --fs-sm:   clamp(11px, 0.80vw, 14px);  /* section labels, captions */
+  --fs-base: clamp(13px, 0.95vw, 16px);  /* body text */
+  --fs-md:   clamp(14px, 1.00vw, 17px);  /* body medium */
+  --fs-lg:   clamp(15px, 1.10vw, 18px);  /* headings */
+  --fs-xl:   clamp(16px, 1.20vw, 20px);  /* card titles */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

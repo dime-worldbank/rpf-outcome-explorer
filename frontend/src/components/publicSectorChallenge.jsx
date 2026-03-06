@@ -26,15 +26,15 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
     <Container className="d-flex flex-column align-items-center py-4">
 
       {/* Step instruction text */}
-      <div className="w-100 mb-4" style={{ maxWidth: '720px' }}>
+      <div className="w-100 mb-4">
         <div style={card.instruction}>
-          <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: '15px', fontWeight: '700', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, marginBottom: '12px', color: '#0d2d4a', fontSize: 'var(--fs-lg)', fontWeight: '700', lineHeight: 1.5 }}>
             1.4 Set out the existing (or potential) public sector challenges.
           </p>
-          <p style={{ margin: 0, marginBottom: '12px', color: '#1a3a52', fontSize: '14px', lineHeight: 1.7 }}>
+          <p style={{ margin: 0, marginBottom: '12px', color: '#1a3a52', fontSize: 'var(--fs-md)', lineHeight: 1.7 }}>
             Next identify the main challenges in achieving the public sector results identified. This is best done in consultation with the leading public sector organizations in the sectors concerned with delivering them.
           </p>
-          <p style={{ margin: 0, color: '#1a3a52', fontSize: '14px', lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: '#1a3a52', fontSize: 'var(--fs-md)', lineHeight: 1.7 }}>
             The identification of these problems should start at the point of delivery, because that is where the consequences are felt most acutely. The point of delivery may be a school, medical facility, a tax office, or a utility provider. Seeking the perspective of service users and beneficiaries as well as frontline staff is important. It should then move upwards to the organizations which are responsible for the direct management and oversight of delivery functions – for example local authorities or deconcentrated units. It can then finally move to central ministries, departments and agencies and legislatures, where policy related challenges may be identified.
           </p>
         </div>
@@ -44,7 +44,7 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
       {isCombined && (() => {
         const challengeDef = taxonomyGeneral?.find(r => r['Term'] === 'Public Sector Challenges')?.['Description'];
         return challengeDef ? (
-          <div className="w-100 mb-3" style={{ maxWidth: '720px' }}>
+          <div className="w-100 mb-3">
             <SectionLabel text="Public Sector Challenges" style={{ margin: '0 0 6px 0' }} />
             <DefinitionBox definition={challengeDef} />
           </div>
@@ -52,7 +52,7 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
       })()}
 
       {/* Intro sentence — singular or plural depending on mode */}
-      <p style={{ fontSize: '13px', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', maxWidth: '720px', textAlign: 'left' }}>
+      <p style={{ fontSize: 'var(--fs-base)', color: '#444', lineHeight: 1.7, margin: '0 0 16px 0', width: '100%', textAlign: 'left' }}>
         {isCombined
           ? 'To illustrate, public sector challenges for each of these policy areas commonly faced by governments include:'
           : `To illustrate, public sector challenges for ${outcome_name} commonly faced by governments include:`}
@@ -62,7 +62,7 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
       {!isCombined && (() => {
         const challengeDef = taxonomyGeneral?.find(r => r['Term'] === 'Public Sector Challenges')?.['Description'];
         return (
-          <div className="w-100" style={{ maxWidth: '720px' }}>
+          <div className="w-100">
             <Card className="w-100 card-result">
               <Card.Body className="content-card">
                 <SectionLabel text="Public Sector Challenges" style={{ margin: '0 0 6px 0' }} />
@@ -72,7 +72,7 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
                 <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
                 <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
                   {allChallenges && allChallenges.map((challenge, index) => (
-                    <li key={index} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
+                    <li key={index} style={{ fontSize: 'var(--fs-base)', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
                       <strong style={{ color: '#0d2d4a' }}>{challenge['Public Sector Challenge']}</strong>
                       <br />
                       {challenge["Description"]}
@@ -101,23 +101,23 @@ function PublicSectorChallenge({ challengeData, taxonomyChallenges, taxonomyGene
           taxonomyChallenges?.find(r => r['Term'] === term)?.['Description'] || '';
 
         return (
-          <div className="w-100" style={{ maxWidth: '720px' }}>
+          <div className="w-100">
             <Accordion>
               {Object.entries(byType).map(([type, challenges], idx) => {
                 const typeDef = getDefinition(type);
                 return (
                 <Accordion.Item eventKey={idx.toString()} key={type}>
-                  <Accordion.Button style={{ fontSize: '13px', fontWeight: '600', color: '#0d2d4a' }}>
+                  <Accordion.Button style={{ fontSize: 'var(--fs-base)', fontWeight: '600', color: '#0d2d4a' }}>
                     {type}
                   </Accordion.Button>
-                  <Accordion.Body style={{ padding: '12px 16px' }}>
+                  <Accordion.Body style={{ padding: 'clamp(8px, 0.7vw, 14px) clamp(10px, 0.9vw, 18px)' }}>
                     {typeDef && (
                       <DefinitionBox definition={typeDef} style={{ marginBottom: '14px' }} />
                     )}
                     <SectionLabel text="Examples" style={{ margin: '0 0 8px 0' }} />
                     <ul style={{ listStyleType: 'disc', paddingLeft: '20px', margin: 0 }}>
                       {challenges.map((challenge, i) => (
-                        <li key={i} style={{ fontSize: '13px', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
+                        <li key={i} style={{ fontSize: 'var(--fs-base)', lineHeight: 1.8, color: '#1a3a52', marginBottom: '12px' }}>
                           <OutcomeBadge label={challenge._outcomeName} style={{ marginBottom: '4px' }} />
                           <br />
                           <strong style={{ color: '#0d2d4a' }}>{challenge['Public Sector Challenge']}</strong>
