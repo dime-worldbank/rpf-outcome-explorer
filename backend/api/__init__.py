@@ -10,7 +10,10 @@ def create_app():
     # Configure Flask to serve static files from the build/static folder
     # and templates (including index.html) from the build folder.
     app = Flask(__name__, static_folder=os.path.join(REACT_BUILD_DIR, 'static'), template_folder=REACT_BUILD_DIR)
-    
+
+    # Disable Flask's built-in file caching so send_from_directory never returns 304
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
     # Enable CORS for local development
     CORS(app, origins=[BASE_URL, 'http://localhost:3000'])
 
@@ -18,6 +21,15 @@ def create_app():
     # This must be done before the catch-all route to ensure API requests are prioritized.
     from .routes import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
+
+    # Force no-caching on all /api responses so the browser never serves stale data
+    @app.after_request
+    def add_no_cache_headers(response):
+        if request.path.startswith('/api/'):
+            response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+            response.headers['Pragma'] = 'no-cache'
+            response.headers['Expires'] = '0'
+        return response
 
     # 2. Add an explicit route for manifest.json and favicon.ico.
     @app.route('/manifest.json')
@@ -31,18 +43,23 @@ def create_app():
         return send_from_directory(os.path.join(app.template_folder, 'static', 'media'), filename)
 
     # 4. Add a generic route for other static assets (CSS, JS).
+    #    Hashed filenames (e.g. main.abc123.js) are safe to cache long-term.
     @app.route('/static/<path:filename>')
     def serve_static(filename):
         return send_from_directory(os.path.join(app.template_folder, 'static'), filename)
 
     # 5. Define the catch-all route for the React app.
-    # This route will only be hit if no other routes (like the API or static routes) match.
+    #    index.html must never be cached so new deployments are always picked up.
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')
     def serve(path):
         if path != "" and os.path.exists(os.path.join(app.template_folder, path)):
             return send_from_directory(app.template_folder, path)
         else:
-            return send_from_directory(app.template_folder, 'index.html')
+            response = send_from_directory(app.template_folder, 'index.html')
+            response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+            response.headers['Pragma'] = 'no-cache'
+            response.headers['Expires'] = '0'
+            return response
 
     return app
