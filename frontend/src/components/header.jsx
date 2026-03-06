@@ -46,8 +46,15 @@ function Header() {
 
         {/* Centred title or outcome dropdown */}
         <div
-          className="position-absolute start-50 translate-middle-x d-flex justify-content-center align-items-center"
-          style={{ pointerEvents: 'auto' , position:'sticky'}}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            pointerEvents: 'auto',
+          }}
         >
           {outcome ? (
             <div className="d-flex align-items-center">
@@ -69,7 +76,7 @@ function Header() {
                 >
                   <span className="text-white fw-bold fs-5">{outcome}</span>
                 </Dropdown.Toggle>
-                <Dropdown.Menu style={{ minWidth: '300px', overflowY: 'auto' }}>
+                <Dropdown.Menu popperConfig={{ strategy: 'fixed' }} style={{ minWidth: '300px', overflowY: 'auto' }}>
                   {Object.keys(OUTCOMES).map((key) => (
                     <Dropdown.Item key={key} onClick={() => setOutcome(key)} className="d-flex align-items-center gap-2">
                       {imageMap[key] && (

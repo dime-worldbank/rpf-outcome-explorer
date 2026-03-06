@@ -4,8 +4,8 @@ export const OUTCOMES = {
     'Gender-Based Violence': 'Eliminating Gender-Based Violence',
     'The Energy Transition': 'Accelerating the Transition to Renewable Energy',
     'Healthy Lives': 'Achieving Universal Health Coverage',
+    "Revenue" : "Mobilizing Revenue in Support of Policy Objectives",
     'Outcome Combined': 'Achieving Combined Outcomes',
-    "Revenue" : "Mobilizing Revenue in Support of Policy Objectives"
 }
 
 export const LOGO_URL = 'https://www.worldbank.org/en/programs/reimagining-public-finance'
