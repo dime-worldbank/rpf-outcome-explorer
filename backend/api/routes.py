@@ -135,7 +135,7 @@ def create_taxonomy_challenges():
 
 # --- Core processing helpers ---
 
-def build_bottlenecks_for_outcome(filter_value, bottleneck_examples, bottleneck_lessons):
+def build_bottlenecks_for_outcome(filter_value, bottleneck_examples, bottleneck_lessons, use_generic=False):
     """Build bottleneck data dict for a single outcome filter value."""
     filtered = bottleneck_examples[bottleneck_examples['Policy Area'] == filter_value].dropna(subset=["PFM Bottleneck", "Sub-Bottleneck"])
     data_dict = {}
@@ -152,8 +152,12 @@ def build_bottlenecks_for_outcome(filter_value, bottleneck_examples, bottleneck_
         if parent_key not in data_dict:
             data_dict[parent_key] = {"name": parent_name, "lessons": []}
         if child_key not in data_dict[parent_key]:
-            outcome_bottleneck = re.sub(r'^[\d.]+\s+', '', grandchild_name)
-            data_dict[parent_key][child_key] = {"name": outcome_bottleneck}
+            # Use generic Sub-Bottleneck for combined view, outcome-specific for single outcome view
+            if use_generic:
+                display_name = child_name
+            else:
+                display_name = re.sub(r'^[\d.]+\s+', '', grandchild_name)
+            data_dict[parent_key][child_key] = {"name": display_name}
         if grandchild_name not in data_dict[parent_key][child_key]:
             data_dict[parent_key][child_key][grandchild_name] = []
         data_dict[parent_key][child_key][grandchild_name].append({**nested})
@@ -249,7 +253,7 @@ def get_example_data():
         combined_bottlenecks = {}
         combined_roles = {}
         for outcome in outcomes:
-            combined_bottlenecks[outcome] = build_bottlenecks_for_outcome(outcome, bottleneck_examples, bottleneck_lessons)
+            combined_bottlenecks[outcome] = build_bottlenecks_for_outcome(outcome, bottleneck_examples, bottleneck_lessons, use_generic=True)
             combined_roles[outcome] = build_roles_for_outcome(outcome, roles_examples, roles_lessons)
         return safe_jsonify({
             'Bottlenecks': combined_bottlenecks,

@@ -45,8 +45,8 @@ function VerticalNavbarPermanent() {
 
   // Step → SVG component IDs to highlight in the main diagram
   const STEP_HIGHLIGHTS = {
-    outcome:    ['development-outcomes'],
-    results:    ['public-sector-results'],
+    outcome:    [],
+    results:    ['development-outcomes', 'public-sector-results'],
     challenges: ['challenges'],
     policy:     ['public-policy', 'fiscal-policy-pfm', 'institutions'],
     role:       ['left-question'],
